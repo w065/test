@@ -1884,7 +1884,7 @@ static uint32_t extend_table_simple_2(uint32_t *tbl, uint32_t **end, int bit) {
             *tbl-- = *(*end)--;
         }
     }
-    return end;
+    return **end; // 2023-05-27
 }
 
 int extend_table_simple(uint32_t *data, int tbl, int end, int bit){
@@ -4775,7 +4775,7 @@ void *XModemTickProcess(void)
         #endif
 		XModemTick();
 		if(XmodeFlag==0)
-			return ;
+			return NULL;
 	}
 }
 
@@ -5090,7 +5090,7 @@ void *readUartPM3(void)
             if(shutdowmread)
             {
                 shutdowmread=0;
-                return;
+                return NULL;
             }
         }while(!rsize);
 
