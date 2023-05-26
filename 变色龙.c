@@ -5225,12 +5225,14 @@ int main(int argc,char *argv[])
 
     start:
 
-    printf("%s",argv[1]);
-    if (argv[1] == NULL) {
-        printf("ERROR!\n");
-    }
+    // printf("%s",argv[1]);
+    // if (argv[1] == NULL) {
+    //     printf("ERROR!\n");
+    // }
+    // sp1 = uart_open(argv[1]);
 
-    sp1 = uart_open(argv[1]);
+    sp1 = uart_open("tcp:localhost:4321");
+
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
     }
