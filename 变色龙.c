@@ -5238,6 +5238,8 @@ int main(int argc,char *argv[])
         printf("串口打开成功\n");
     }
 
+    getc(stdin); //吃掉输入的回车
+
     printf(SCREEN_CLEAR); //清屏
 
     //调用线程读串口
