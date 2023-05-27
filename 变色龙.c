@@ -5230,12 +5230,18 @@ int main(int argc,char *argv[])
 
     start:
 
+    #ifdef __ANDROID__
+    for (int i = 0; i < argc; i++) {
+        printf("arg%d:%s\r\n", i, argv[i]);
+    }
+    return 0;
+    #else
     printf("%s",argv[1]);
     if (argv[1] == NULL) {
         printf("ERROR!\n");
     }
-
     sp1 = uart_open(argv[1]);
+    #endif
 
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
