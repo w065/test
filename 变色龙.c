@@ -178,7 +178,7 @@ serial_port uart_open(const char* pcPortName)
     char *portstr;
 
     // Set time-out to 300 miliseconds only for TCP port
-    timeout.tv_usec = 300000;
+    timeout.tv_usec = 800000;  // TCP延迟太高，我们将超时时间设的长一点
 
 if (colon) {
       portstr = colon + 1;
@@ -5122,12 +5122,13 @@ void *readUartPM3(void* arg)
                         {
                             if(color)
                             {
-                                colorLen=strlen("\x1b[92m");  //绿色
-                                memcpy(buf+j*2,"\x1b[92m",colorLen);
+                                // colorLen=strlen("\x1b[92m");  //绿色
+                                // memcpy(buf+j*2,"\x1b[92m",colorLen);
+                                strcat(buf,"\x1b[92m");
                                 color=0;
                             }
                         }
-                        memcpy(buf+j*2+colorLen,"█",2);
+                        strcat(buf,"█");//memcpy(buf+j*2+colorLen,"█",2);
                     }
                     color=1,colorLen=0;
                     printf(_YELLOW_BR_("\r[+] %s [%02d%%] "),buf,receive*100/66);
@@ -5152,9 +5153,9 @@ void *readUartPM3(void* arg)
                         for(int j = 0; j < 50; j++)
                         {
                             if(j < rate) //输出num个">"
-                                memcpy(buf+j*2,"█",2);
+                                strcat(buf,"█");//memcpy(buf+j*2,"█",2);
                             else
-                                memcpy(buf+j*2,"─",2);
+                                strcat(buf,"─");//memcpy(buf+j*2,"─",2);
                         }
                         printf(_YELLOW_BR_("\r[+] 空间使用率: %s▏[%02d%%] "),buf,BlockAddress*100/(uint32_t)(RECEIVE_BUF_SIZE-20));
                         printf("%d/%d byte",BlockAddress,RECEIVE_BUF_SIZE-20);
@@ -5227,6 +5228,7 @@ int main(int argc,char *argv[])
     
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
+        return 0;
     }
     else {
         printf("串口打开成功\n");
@@ -5268,6 +5270,7 @@ int main(int argc,char *argv[])
     
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
+        return 0;
     }
     else {
         printf("串口打开成功\n");
@@ -5277,7 +5280,7 @@ int main(int argc,char *argv[])
     
     getc(stdin); //吃掉输入的回车
 
-    //printf(SCREEN_CLEAR); //清屏
+    printf(SCREEN_CLEAR); //清屏
 
     //调用线程读串口
     pthread_t thread;
