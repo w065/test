@@ -5215,6 +5215,38 @@ int main(int argc,char *argv[])
 
 #else
 
+    start:
+
+    #ifdef __ANDROID__
+
+    printf("%s",argv[1]);
+    if (argv[1] == NULL) {
+        printf("ERROR!\n");
+    }
+    sp1 = uart_open(argv[1]);
+    
+    if(sp1 == INVALID_SERIAL_PORT) {
+        printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
+    }
+    else {
+        printf("串口打开成功\n");
+    }
+
+    printf("警告!变色龙WIN32命令行终端应用，未经发布的测试版本！\r\n详情可访问 https://www.PM3_SE_hub.com");
+    char mcu;
+    printf("设备选择 - 您使用的是STM32设备吗?\r\n\r\nY: 选择STM32开始\r\nN: 以官方AVR版本开始");
+    scanf("%s",&mcu);
+    if(mcu == 'Y')
+    {
+        mcu=stm32;
+    }
+    else if(mcu == 'N')
+    {
+        mcu=avr;
+    }
+    
+    #else
+
     printf("警告!变色龙WIN32命令行终端应用，未经发布的测试版本！\r\n详情可访问 https://www.PM3_SE_hub.com");
     char mcu;
     printf("设备选择 - 您使用的是STM32设备吗?\r\n\r\nY: 选择STM32开始\r\nN: 以官方AVR版本开始");
@@ -5228,21 +5260,12 @@ int main(int argc,char *argv[])
         mcu=avr;
     }
 
-    start:
-
-    #ifdef __ANDROID__
-    for (int i = 0; i < argc; i++) {
-        printf("arg%d:%s\r\n", i, argv[i]);
-    }
-    return 0;
-    #else
     printf("%s",argv[1]);
     if (argv[1] == NULL) {
         printf("ERROR!\n");
     }
     sp1 = uart_open(argv[1]);
-    #endif
-
+    
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
     }
@@ -5250,6 +5273,8 @@ int main(int argc,char *argv[])
         printf("串口打开成功\n");
     }
 
+    #endif
+    
     getc(stdin); //吃掉输入的回车
 
     //printf(SCREEN_CLEAR); //清屏
