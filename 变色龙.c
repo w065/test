@@ -5234,9 +5234,8 @@ int main(int argc,char *argv[])
     if (argv[1] == NULL) {
         printf("ERROR!\n");
     }
-    sp1 = uart_open(argv[1]);
 
-    //sp1 = uart_open("tcp:localhost:4321");
+    sp1 = uart_open(argv[1]);
 
     if(sp1 == INVALID_SERIAL_PORT) {
         printf("串口打开失败，重新插拔设备可能会解决问题\n\n");
@@ -5247,7 +5246,7 @@ int main(int argc,char *argv[])
 
     getc(stdin); //吃掉输入的回车
 
-    printf(SCREEN_CLEAR); //清屏
+    //printf(SCREEN_CLEAR); //清屏
 
     //调用线程读串口
     pthread_t thread;
