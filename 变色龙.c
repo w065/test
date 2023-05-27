@@ -491,7 +491,7 @@ uint32_t uart_get_speed(const serial_port sp) {
 
 
 
-serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
+serial_port sp1;    /*!!!!!!!!!!!!!!!×¢Òâ!!!!!!!!!!!!!!!!!!!!*/
 
 
 #endif
@@ -502,15 +502,15 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 /*                                         PM3 UART STRART                                            */
 /******************************************************************************************************/
 
-// //è¯»è¶…æ—¶
+// //¶Á³¬Ê±
 // # define UART_USB_CLIENT_RX_TIMEOUT_MS  /*20*/1
 
 // #define PM3_SUCCESS             0
 
-// // è¾“å…¥è¾“å‡ºé”™è¯¯  å®¢æˆ·ç«¯å¸§æ¥æ”¶é”™è¯¯
+// // ÊäÈëÊä³ö´íÎó  ¿Í»§¶ËÖ¡½ÓÊÕ´íÎó
 // #define PM3_EIO                -8
 
-// // é€šç”¨TTYé”™è¯¯
+// // Í¨ÓÃTTY´íÎó
 // #define PM3_ENOTTY            -14
 
 
@@ -520,19 +520,19 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //  */
 // typedef void *serial_port;
 
-// /* å¦‚æœæŒ‡å®šçš„ä¸²è¡Œç«¯å£æ— æ•ˆï¼Œåˆ™ç”±uart_openè¿”å›ã€‚
+// /* Èç¹ûÖ¸¶¨µÄ´®ĞĞ¶Ë¿ÚÎŞĞ§£¬ÔòÓÉuart_open·µ»Ø¡£
 //  */
 // #define INVALID_SERIAL_PORT (void*)(~1)
 
-// /* å¦‚æœæŒ‡å®šçš„ä¸²è¡Œç«¯å£æ­£è¢«å¦ä¸€ä¸ªè¿›ç¨‹ä½¿ç”¨ï¼Œåˆ™ç”±uart_openè¿”å›ã€‚
+// /* Èç¹ûÖ¸¶¨µÄ´®ĞĞ¶Ë¿ÚÕı±»ÁíÒ»¸ö½ø³ÌÊ¹ÓÃ£¬ÔòÓÉuart_open·µ»Ø¡£
 //  */
 // #define CLAIMED_SERIAL_PORT (void*)(~2)
 
 
 // typedef struct {
-//     HANDLE hPort;     // ä¸²è¡Œç«¯å£å¥æŸ„
-//     DCB dcb;          // è®¾å¤‡æ§åˆ¶è®¾ç½®
-//     COMMTIMEOUTS ct;  // ä¸²è¡Œç«¯å£è¶…æ—¶é…ç½®
+//     HANDLE hPort;     // ´®ĞĞ¶Ë¿Ú¾ä±ú
+//     DCB dcb;          // Éè±¸¿ØÖÆÉèÖÃ
+//     COMMTIMEOUTS ct;  // ´®ĞĞ¶Ë¿Ú³¬Ê±ÅäÖÃ
 // } serial_port_windows_t;
 
 
@@ -540,12 +540,12 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 // bool newtimeout_pending = false;
 
 
-// /* è®¾ç½®ä¸²è¡Œç«¯å£çš„å½“å‰é€Ÿåº¦ï¼ˆä»¥æ³¢ç‰¹ä¸ºå•ä½ï¼‰ã€‚
+// /* ÉèÖÃ´®ĞĞ¶Ë¿ÚµÄµ±Ç°ËÙ¶È£¨ÒÔ²¨ÌØÎªµ¥Î»£©¡£
 //  */
 // bool uart_set_speed(serial_port sp, const uint32_t uiPortSpeed) {
 //     serial_port_windows_t *spw;
 
-//     // è®¾ç½®ç«¯å£é€Ÿåº¦ï¼ˆè¾“å…¥å’Œè¾“å‡ºï¼‰
+//     // ÉèÖÃ¶Ë¿ÚËÙ¶È£¨ÊäÈëºÍÊä³ö£©
 //     switch (uiPortSpeed) {
 //         case 9600:
 //         case 19200:
@@ -570,7 +570,7 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //     return result;
 // }
 
-// /* è·å–ä¸²è¡Œç«¯å£çš„å½“å‰é€Ÿåº¦ï¼ˆæ³¢ç‰¹ï¼‰ã€‚
+// /* »ñÈ¡´®ĞĞ¶Ë¿ÚµÄµ±Ç°ËÙ¶È£¨²¨ÌØ£©¡£
 //  */
 // uint32_t uart_get_speed(const serial_port sp) {
 //     const serial_port_windows_t *spw = (serial_port_windows_t *)sp;
@@ -580,7 +580,7 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //     return 0;
 // }
 
-// /* é‡æ–°é…ç½®è¶…æ—¶
+// /* ÖØĞÂÅäÖÃ³¬Ê±
 //  */
 // int uart_reconfigure_timeouts(uint32_t value) {
 //     newtimeout_value = value;
@@ -611,23 +611,23 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 // }
 
 
-// /* ç»™å®šç”¨æˆ·æŒ‡å®šçš„ç«¯å£åï¼Œè¿æ¥åˆ°è¯¥ç«¯å£å¹¶è¿”å›ç”¨äºå°†æ¥å¼•ç”¨è¯¥ç«¯å£çš„ç»“æ„ã€‚
+// /* ¸ø¶¨ÓÃ»§Ö¸¶¨µÄ¶Ë¿ÚÃû£¬Á¬½Óµ½¸Ã¶Ë¿Ú²¢·µ»ØÓÃÓÚ½«À´ÒıÓÃ¸Ã¶Ë¿ÚµÄ½á¹¹¡£
 //  *
-//  * å‡ºç°é”™è¯¯æ—¶ï¼Œæ­¤æ–¹æ³•è¿”å›INVALID_SERIAL_PORTæˆ–CLAIMD_SERIAL_PORTã€‚
+//  * ³öÏÖ´íÎóÊ±£¬´Ë·½·¨·µ»ØINVALID_SERIAL_PORT»òCLAIMD_SERIAL_PORT¡£
 //  */
 // serial_port uart_open(const char *pcPortName, uint32_t speed) {
 //     char acPortName[255] = {0};
 //     serial_port_windows_t *sp = calloc(sizeof(serial_port_windows_t), sizeof(uint8_t));
 
 //     if (sp == 0) {
-//         printf("UARTæ— æ³•åˆ†é…å†…å­˜\n");
+//         printf("UARTÎŞ·¨·ÖÅäÄÚ´æ\n");
 //         return INVALID_SERIAL_PORT;
 //     }
-//     // å°†è¾“å…¥çš„ "com?" è½¬æ¢ä¸º "\\.\COM?" æ ¼å¼
+//     // ½«ÊäÈëµÄ "com?" ×ª»»Îª "\\.\COM?" ¸ñÊ½
 //     snprintf(acPortName, sizeof(acPortName), "\\\\.\\%s", pcPortName);
 //     _strupr(acPortName);
 
-//     // å°è¯•æ‰“å¼€ä¸²è¡Œç«¯å£
+//     // ³¢ÊÔ´ò¿ª´®ĞĞ¶Ë¿Ú
 //     // r/w,  none-share comport, no security, existing, no overlapping, no templates
 //     sp->hPort = CreateFileA(acPortName, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 //     if (sp->hPort == INVALID_HANDLE_VALUE) {
@@ -635,20 +635,20 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //         return INVALID_SERIAL_PORT;
 //     }
 
-//     // å‡†å¤‡è®¾å¤‡æ§åˆ¶
-//     // è¿™æ— å…³ç´§è¦ï¼Œå› ä¸ºPM3è®¾å¤‡å¿½ç•¥äº†ä»¥ä¸‹CDCå‘½ä»¤ï¼šusb_CDC.cä¸­çš„set_line_coding
+//     // ×¼±¸Éè±¸¿ØÖÆ
+//     // ÕâÎŞ¹Ø½ôÒª£¬ÒòÎªPM3Éè±¸ºöÂÔÁËÒÔÏÂCDCÃüÁî£ºusb_CDC.cÖĞµÄset_line_coding
 //     memset(&sp->dcb, 0, sizeof(DCB));
 //     sp->dcb.DCBlength = sizeof(DCB);
 //     if (!BuildCommDCBA("baud=115200 parity=N data=8 stop=1", &sp->dcb)) {
 //         uart_close(sp);
-//         printf("UARTé”™è¯¯cdcè®¾ç½®\n");
+//         printf("UART´íÎócdcÉèÖÃ\n");
 //         return INVALID_SERIAL_PORT;
 //     }
 
-//     // æ›´æ–°æ´»åŠ¨ä¸²è¡Œç«¯å£
+//     // ¸üĞÂ»î¶¯´®ĞĞ¶Ë¿Ú
 //     if (!SetCommState(sp->hPort, &sp->dcb)) {
 //         uart_close(sp);
-//         printf("è®¾ç½®é€šä¿¡çŠ¶æ€æ—¶UARTå‘ç”Ÿé”™è¯¯\n");
+//         printf("ÉèÖÃÍ¨ĞÅ×´Ì¬Ê±UART·¢Éú´íÎó\n");
 //         return INVALID_SERIAL_PORT;
 //     }
 
@@ -656,18 +656,18 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //     uart_reconfigure_timeouts_polling(sp);
 
 //     if (!uart_set_speed(sp, speed)) {
-//         // è‡ªåŠ¨å°è¯•å›é€€
+//         // ×Ô¶¯³¢ÊÔ»ØÍË
 //         speed = 115200;
 //         if (!uart_set_speed(sp, speed)) {
 //             uart_close(sp);
-//             printf("è®¾ç½®æ³¢ç‰¹ç‡æ—¶UARTå‘ç”Ÿé”™è¯¯\n");
+//             printf("ÉèÖÃ²¨ÌØÂÊÊ±UART·¢Éú´íÎó\n");
 //             return INVALID_SERIAL_PORT;
 //         }
 //     }
 //     return sp;
 // }
 
-// /* å…³é—­ç»™å®šç«¯å£ã€‚
+// /* ¹Ø±Õ¸ø¶¨¶Ë¿Ú¡£
 //  */
 // void uart_close(const serial_port sp) {
 //     if (((serial_port_windows_t *)sp)->hPort != INVALID_HANDLE_VALUE)
@@ -675,15 +675,15 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //     free(sp);
 // }
 
-// /* ä»ç»™å®šä¸²è¡Œç«¯å£è¯»å–é•¿è¾¾30msã€‚
-//  *   pbtRx: æŒ‡å‘è¦å†™å…¥çš„è¿”å›æ•°æ®çš„ç¼“å†²åŒºçš„æŒ‡é’ˆã€‚
-//  *   pszMaxRxLen: è¦è¯»å–çš„æœ€å¤§æ•°æ®å¤§å°ã€‚
-//  *   pszRxLen: å®é™…è¯»å–çš„å­—èŠ‚æ•°ã€‚
+// /* ´Ó¸ø¶¨´®ĞĞ¶Ë¿Ú¶ÁÈ¡³¤´ï30ms¡£
+//  *   pbtRx: Ö¸ÏòÒªĞ´ÈëµÄ·µ»ØÊı¾İµÄ»º³åÇøµÄÖ¸Õë¡£
+//  *   pszMaxRxLen: Òª¶ÁÈ¡µÄ×î´óÊı¾İ´óĞ¡¡£
+//  *   pszRxLen: Êµ¼Ê¶ÁÈ¡µÄ×Ö½ÚÊı¡£
 //  *
-//  * å¦‚æœè¯»å–åˆ°äº†æ•°æ®ï¼Œå³ä½¿å°äºpszMaxRxLenï¼Œä¹Ÿè¿”å›TRUEã€‚
+//  * Èç¹û¶ÁÈ¡µ½ÁËÊı¾İ£¬¼´Ê¹Ğ¡ÓÚpszMaxRxLen£¬Ò²·µ»ØTRUE¡£
 //  *
-//  * å¦‚æœè¯»å–è®¾å¤‡æ—¶å‡ºé”™ï¼Œåˆ™è¿”å›FALSEã€‚
-//  * è¯·æ³¨æ„ï¼Œç›¸åº”çš„å®ç°å¯èƒ½å·²ç»å®Œæˆäº†å¯¹ç¼“å†²åŒºçš„éƒ¨åˆ†è¯»å–ï¼Œå› æ­¤åº”æ£€æŸ¥pszRxLenä»¥æŸ¥çœ‹æ˜¯å¦è¯»å–åˆ°äº†æ•°æ®
+//  * Èç¹û¶ÁÈ¡Éè±¸Ê±³ö´í£¬Ôò·µ»ØFALSE¡£
+//  * Çë×¢Òâ£¬ÏàÓ¦µÄÊµÏÖ¿ÉÄÜÒÑ¾­Íê³ÉÁË¶Ô»º³åÇøµÄ²¿·Ö¶ÁÈ¡£¬Òò´ËÓ¦¼ì²épszRxLenÒÔ²é¿´ÊÇ·ñ¶ÁÈ¡µ½ÁËÊı¾İ
 //  */
 // int uart_receive(const serial_port sp, uint8_t *pbtRx, uint32_t pszMaxRxLen, uint32_t *pszRxLen) {
 //     uart_reconfigure_timeouts_polling(sp);
@@ -700,9 +700,9 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 //     return PM3_ENOTTY;
 // }
 
-// /* å°†ç¼“å†²åŒºå‘é€åˆ°ç»™å®šçš„ä¸²è¡Œç«¯å£ã€‚
-//  *   pbtTx: æŒ‡å‘åŒ…å«è¦å‘é€çš„æ•°æ®çš„ç¼“å†²åŒºçš„æŒ‡é’ˆã€‚
-//  *   len: è¦å‘é€çš„æ•°æ®é‡ã€‚
+// /* ½«»º³åÇø·¢ËÍµ½¸ø¶¨µÄ´®ĞĞ¶Ë¿Ú¡£
+//  *   pbtTx: Ö¸Ïò°üº¬Òª·¢ËÍµÄÊı¾İµÄ»º³åÇøµÄÖ¸Õë¡£
+//  *   len: Òª·¢ËÍµÄÊı¾İÁ¿¡£
 //  */
 // int uart_send(const serial_port sp, const uint8_t *p_tx, const uint32_t len) {
 //     DWORD txlen = 0;
@@ -718,7 +718,7 @@ serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
 // }
 
 
-// serial_port sp1;    /*!!!!!!!!!!!!!!!æ³¨æ„!!!!!!!!!!!!!!!!!!!!*/
+// serial_port sp1;    /*!!!!!!!!!!!!!!!×¢Òâ!!!!!!!!!!!!!!!!!!!!*/
 
 
 
@@ -1686,7 +1686,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 
 //     int argc;
 
-//     printf("é”®å…¥5:ä¸€æ¬¡æ€§æ¢å¤ç§˜é’¥\né”®å…¥7:ä»ä¸¤æ¬¡ä¼šè¯ä¸­æ¢å¤ç§˜é’¥\n");
+//     printf("¼üÈë5:Ò»´ÎĞÔ»Ö¸´ÃØÔ¿\n¼üÈë7:´ÓÁ½´Î»á»°ÖĞ»Ö¸´ÃØÔ¿\n");
 //     scanf("%d",&argc);
 
 //     if (argc == 7) {
@@ -1704,15 +1704,15 @@ static void __attribute__((constructor)) fill_lut(void) {
 
 //         printf("\n");
 //         printf("-----------------------------------------------------\n");
-//         printf("MIFARE Classicå¯†é’¥æ¢å¤-åŸºäº32ä½å¯†é’¥æµ ç‰ˆæœ¬v2\n");
-//         printf("ä»…ä»ä¸¤ä¸ª32ä½è¯»å–å™¨èº«ä»½éªŒè¯ç­”æ¡ˆæ¢å¤å¯†é’¥\n");
-//         printf("è¿™ä¸ªç‰ˆæœ¬å®ç°äº†Moebiusä¸¤ç§ä¸åŒçš„nonceè§£å†³æ–¹æ¡ˆ(å¦‚è¶…çº§å¡)\n");
+//         printf("MIFARE ClassicÃÜÔ¿»Ö¸´-»ùÓÚ32Î»ÃÜÔ¿Á÷ °æ±¾v2\n");
+//         printf("½ö´ÓÁ½¸ö32Î»¶ÁÈ¡Æ÷Éí·İÑéÖ¤´ğ°¸»Ö¸´ÃÜÔ¿\n");
+//         printf("Õâ¸ö°æ±¾ÊµÏÖÁËMoebiusÁ½ÖÖ²»Í¬µÄnonce½â¾ö·½°¸(Èç³¬¼¶¿¨)\n");
 //         printf("-----------------------------------------------------\n\n");
-//         printf("é”®å…¥: <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n");
+//         printf("¼üÈë: <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n");
     
 //         scanf("%x %x %x %x %x %x %x", &uid, &nt0, &nr0_enc, &ar0_enc, &nt1, &nr1_enc, &ar1_enc);
 
-//         printf("\næ­£åœ¨ä»ä»¥ä¸‹ç»™å®šçš„æ•°æ®ä¸­æ¢å¤çš„å¯†é’¥:\n");
+//         printf("\nÕıÔÚ´ÓÒÔÏÂ¸ø¶¨µÄÊı¾İÖĞ»Ö¸´µÄÃÜÔ¿:\n");
 //         printf("    uid: %08x\n", uid);
 //         printf("   nt_0: %08x\n", nt0);
 //         printf(" {nr_0}: %08x\n", nr0_enc);
@@ -1730,7 +1730,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 //         printf(" nt'': %08x\n", prng_successor(p64, 32));
 
 //         // Extract the keystream from the messages
-//         printf("\nç”¨äºç”Ÿæˆ{ar}å’Œ{at}çš„å¯†é’¥æµ:\n");
+//         printf("\nÓÃÓÚÉú³É{ar}ºÍ{at}µÄÃÜÔ¿Á÷:\n");
 //         ks2 = ar0_enc ^ p64;
 //         printf("  ks2: %08x\n", ks2);
 
@@ -1745,7 +1745,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 //             crypto1_word(t, uid ^ nt1, 0);
 //             crypto1_word(t, nr1_enc, 1);
 //             if (ar1_enc == (crypto1_word(t, 0, 0) ^ p64b)) {
-//                 printf("\næ‰¾åˆ°ç§˜é’¥: [%012" PRIx64 "]", key);
+//                 printf("\nÕÒµ½ÃØÔ¿: [%012" PRIx64 "]", key);
 //                 break;
 //             }
 //         }
@@ -1765,14 +1765,14 @@ static void __attribute__((constructor)) fill_lut(void) {
 
 //         printf("\n");
 //         printf("-----------------------------------------------------\n");
-//         printf("MIFARE Classicå¯†é’¥æ¢å¤-åŸºäº64ä½å¯†é’¥æµ\n");
-//         printf("ä»…ä»ä¸€æ¬¡å®Œæ•´èº«ä»½éªŒè¯ä¸­æ¢å¤å¯†é’¥!\n");
+//         printf("MIFARE ClassicÃÜÔ¿»Ö¸´-»ùÓÚ64Î»ÃÜÔ¿Á÷\n");
+//         printf("½ö´ÓÒ»´ÎÍêÕûÉí·İÑéÖ¤ÖĞ»Ö¸´ÃÜÔ¿!\n");
 //         printf("-----------------------------------------------------\n\n");
-//         printf("é”®å…¥: <uid> <nt> <{nr}> <{ar}> <{at}>\n\n");
+//         printf("¼üÈë: <uid> <nt> <{nr}> <{ar}> <{at}>\n\n");
 
 //         scanf("%x %x %x %x %x", &uid, &nt, &nr_enc, &ar_enc, &at_enc);
 
-//         printf("\næ­£åœ¨ä»ä»¥ä¸‹ç»™å®šçš„æ•°æ®ä¸­æ¢å¤çš„å¯†é’¥:\n");
+//         printf("\nÕıÔÚ´ÓÒÔÏÂ¸ø¶¨µÄÊı¾İÖĞ»Ö¸´µÄÃÜÔ¿:\n");
 
 //         printf("  uid: %08x\n", uid);
 //         printf("   nt: %08x\n", nt);
@@ -1787,7 +1787,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 //         printf(" nt'': %08x\n", prng_successor(p64, 32));
 
 //         // Extract the keystream from the messages
-//         printf("\nç”¨äºç”Ÿæˆ{ar}å’Œ{at}çš„å¯†é’¥æµ:\n");
+//         printf("\nÓÃÓÚÉú³É{ar}ºÍ{at}µÄÃÜÔ¿Á÷:\n");
 //         ks2 = ar_enc ^ p64;
 //         ks3 = at_enc ^ prng_successor(p64, 32);
 //         printf("  ks2: %08x\n", ks2);
@@ -1800,7 +1800,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 //         lfsr_rollback_word(revstate, nr_enc, 1);
 //         lfsr_rollback_word(revstate, uid ^ nt, 0);
 //         crypto1_get_lfsr(revstate, &key);
-//         printf("\næ‰¾åˆ°ç§˜é’¥: [%012" PRIx64 "]", key);
+//         printf("\nÕÒµ½ÃØÔ¿: [%012" PRIx64 "]", key);
 //         crypto1_destroy(revstate);
 //         return 0;
 //     }
@@ -1814,7 +1814,7 @@ static void __attribute__((constructor)) fill_lut(void) {
 
 
 /******************************************************************************************************/
-/*                                          ä¿„ç½—æ–¯ FMKEY Start                                         */
+/*                                          ¶íÂŞË¹ FMKEY Start                                         */
 /******************************************************************************************************/
 
 
@@ -2257,7 +2257,7 @@ int crypto1_word(Crypto1State *s, int t, int in, int is_encrypted)
 }
 
 /******************************************************************************************************/
-/*                                          ä¿„ç½—æ–¯ FMKEY END                                           */
+/*                                          ¶íÂŞË¹ FMKEY END                                           */
 /******************************************************************************************************/
 
 
@@ -2304,10 +2304,10 @@ int crypto1_word(Crypto1State *s, int t, int in, int is_encrypted)
 
 /*************************************************************************************************************************/
 
-// #define _KEY_FLOW_NUM 20 //è®¾ç½®æœ€å¤§çš„å¯†æµè®°å½•æ¬¡æ•°ï¼Œ2çš„å€æ•°ï¼Œ2ä¸ªæ•°æ®ä¸€ä¸ªç§˜é’¥
+// #define _KEY_FLOW_NUM 20 //ÉèÖÃ×î´óµÄÃÜÁ÷¼ÇÂ¼´ÎÊı£¬2µÄ±¶Êı£¬2¸öÊı¾İÒ»¸öÃØÔ¿
 
 // uint64_t UID = 0xAABBCCDD;
-// uint8_t buffer[128];  //æ¥å—åˆ°çš„æ•°æ®
+// uint8_t buffer[128];  //½ÓÊÜµ½µÄÊı¾İ
 
 // typedef struct
 // {
@@ -2372,7 +2372,7 @@ int ByteArrayToInt(uint8_t *b, int n) {
 //     return true;
 // }
 
-// CryptoKey Crk[_KEY_FLOW_NUM/2];  //å…·ä½“åº”å–å†³äºjcrkçš„æ¬¡æ•°,å°‘å…µ2022/9/2
+// CryptoKey Crk[_KEY_FLOW_NUM/2];  //¾ßÌåÓ¦È¡¾öÓÚjcrkµÄ´ÎÊı,ÉÙ±ø2022/9/2
 // int jcrk = 0;
 // void CulcKeys()
 // {
@@ -2415,12 +2415,12 @@ int ByteArrayToInt(uint8_t *b, int n) {
 // {
     
 //     /************************************************/
-//     printf("\r\nè¾“å…¥ä¾¦æµ‹æ¬¡æ•°,å›è½¦ç¡®è®¤\r\n");
+//     printf("\r\nÊäÈëÕì²â´ÎÊı,»Ø³µÈ·ÈÏ\r\n");
 //     scanf("%d",&nSniff);
 //     /************************************************/
 
 //     /************************************************/
-//     printf("\r\nè¾“å…¥8ä½UIDå·(4 Byte),å›è½¦ç¡®è®¤\r\n");
+//     printf("\r\nÊäÈë8Î»UIDºÅ(4 Byte),»Ø³µÈ·ÈÏ\r\n");
 //     scanf("%x %x %x %x",\
 //     buffer+0,buffer+1,buffer+2,buffer+3,buffer+4);
 //     UID=ByteArrayToInt(buffer,0);
@@ -2429,7 +2429,7 @@ int ByteArrayToInt(uint8_t *b, int n) {
 //     for(int i=0;i<nSniff;i++)
 //     {
 //         /************************************************/
-//         printf("\r\nç¬¬%dæ¬¡ä¾¦æµ‹æ•°æ®,å…±%dæ¬¡,è¾“å…¥14ä½æ•°æ®,ç©ºæ ¼éš”å¼€å›è½¦èµ°èµ·!\r\n",i+1,nSniff);
+//         printf("\r\nµÚ%d´ÎÕì²âÊı¾İ,¹²%d´Î,ÊäÈë14Î»Êı¾İ,¿Õ¸ñ¸ô¿ª»Ø³µ×ßÆğ!\r\n",i+1,nSniff);
 //         scanf("%x %x %x %x %x %x %x %x %x %x %x %x %x %x",\
 //         buffer+ 5,buffer+ 6,buffer+ 7,buffer+ 8,buffer+ 9,\
 //         buffer+10,buffer+11,buffer+12,buffer+13,buffer+14,buffer+15,buffer+16,buffer+17,buffer+18\
@@ -2439,13 +2439,13 @@ int ByteArrayToInt(uint8_t *b, int n) {
 //         getsniff(i);
 //     }
     
-//     printf("\r\nè¯·ç¨å....\r\n");
+//     printf("\r\nÇëÉÔºó....\r\n");
 //     CulcKeys();
 
-//     printf("\r\nè§£æè®°å½•: %dä¸ªç§˜é’¥---------------------------------------------",jcrk);
+//     printf("\r\n½âÎö¼ÇÂ¼: %d¸öÃØÔ¿---------------------------------------------",jcrk);
 //     uint8_t* StrKeyAB[2] = {"KeyA", "KeyB"};
 //     for(int i=0;i<jcrk;i++)
-//         printf("\r\nè¯»å¤´éªŒè¯åœ°å€(å—):%02d ç§˜é’¥ç±»å‹:%s æˆªè·çš„ç§˜é’¥(%d) = %012llX",Crk[i].block,StrKeyAB[Crk[i].AB],i, Crk[i].key );
+//         printf("\r\n¶ÁÍ·ÑéÖ¤µØÖ·(¿é):%02d ÃØÔ¿ÀàĞÍ:%s ½Ø»ñµÄÃØÔ¿(%d) = %012llX",Crk[i].block,StrKeyAB[Crk[i].AB],i, Crk[i].key );
 
 //     memset(buffer,0,128);
 
@@ -2461,12 +2461,12 @@ int ByteArrayToInt(uint8_t *b, int n) {
 /******************************************************************************************************/
 
 /*
- * å˜è‰²é¾™ç§»æ¤å·¥ç¨‹
- * ä¸²å£ç»ˆç«¯è½¯ä»¶
- * WindowsAPIä¸²å£ç¼–ç¨‹ï¼Œå¦è¯·å‚é˜…ï¼šhttps://www.cnblogs.com/milanleon/p/4244267.html
- * æºè‡ªåˆ›å»ºçš„åˆ†æ”¯ï¼šhttps://blog.csdn.net/qq_44829047/article/details/106448325
- * å¤šçº¿ç¨‹æ•°æ®å¤„ç†ï¼Œå¦è¯·å‚é˜…ï¼šhttps://blog.csdn.net/yizhizainulii/article/details/124297432
- * æºè‡ªåˆ›å»ºçš„åˆ†æ”¯ï¼šhttps://blog.csdn.net/yizhizainulii/article/details/124297432
+ * ±äÉ«ÁúÒÆÖ²¹¤³Ì
+ * ´®¿ÚÖÕ¶ËÈí¼ş
+ * WindowsAPI´®¿Ú±à³Ì£¬ÁíÇë²ÎÔÄ£ºhttps://www.cnblogs.com/milanleon/p/4244267.html
+ * Ô´×Ô´´½¨µÄ·ÖÖ§£ºhttps://blog.csdn.net/qq_44829047/article/details/106448325
+ * ¶àÏß³ÌÊı¾İ´¦Àí£¬ÁíÇë²ÎÔÄ£ºhttps://blog.csdn.net/yizhizainulii/article/details/124297432
+ * Ô´×Ô´´½¨µÄ·ÖÖ§£ºhttps://blog.csdn.net/yizhizainulii/article/details/124297432
  */
 
 #define SCREEN_CLEAR  "\033[2J\033[3J\033[1;1H"
@@ -2494,23 +2494,26 @@ int ByteArrayToInt(uint8_t *b, int n) {
 
 
 
+/* ------------------------------------------------------ */
+/*                           ±àÒë                          */
+/* ------------------------------------------------------ */
+#define UNUSED(X) (void)X      /* ÓÃÒÔÏû³ıgcc/g++¾¯¸æ */
+/* ------------------------------------------------------ */
 
 
+//Ê×ÏÈÖ´ĞĞlogProcessAuthÒÔ³õÊ¼»¯×ÊÔ´
 
+uint8_t autoMfkey32src[256][18]={0}; //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼
+uint8_t autoMfkey32srcNum=0;         //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
 
-//é¦–å…ˆæ‰§è¡ŒlogProcessAuthä»¥åˆå§‹åŒ–èµ„æº
-
-uint8_t autoMfkey32src[256][18]={0}; //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•
-uint8_t autoMfkey32srcNum=0;         //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
-
-//æ‰“å°åˆå§‹åŒ–èµ„æº
+//´òÓ¡³õÊ¼»¯×ÊÔ´
 void autoMfkey32srcPrint()
 {
-    printf("\r\n-----------------ç”¨äºmfkey32v2ç§˜é’¥æ¢å¤çš„å¯†æµæ—¥å¿—-----------------\r\n");
+    printf("\r\n-----------------ÓÃÓÚmfkey32v2ÃØÔ¿»Ö¸´µÄÃÜÁ÷ÈÕÖ¾-----------------\r\n");
     
     for(uint8_t i=0;i<autoMfkey32srcNum;i++)
     {
-        printf("æ¡ç›®:%03d | ",i);
+        printf("ÌõÄ¿:%03d | ",i);
         for(int j =0;j<18;j++)
             printf("%02X ",autoMfkey32src[i][j]);
         printf("\r\n");
@@ -2552,8 +2555,8 @@ NULLLLLLLLLLLLLLLLL------offset[3] = xxx
 
 */
 
-uint8_t kardClassNumber=1; //å¡ç‰‡æ•°é‡
-uint8_t offset[256]={0};   //è®°å½•å¯†æµè¡¨å¡å·æ›´æ”¹çš„åç§»åœ°å€,æœ€å¤š256ä¸ªåç§»åœ°å€
+uint8_t kardClassNumber=1; //¿¨Æ¬ÊıÁ¿
+uint8_t offset[256]={0};   //¼ÇÂ¼ÃÜÁ÷±í¿¨ºÅ¸ü¸ÄµÄÆ«ÒÆµØÖ·,×î¶à256¸öÆ«ÒÆµØÖ·
 void kardClass()
 {
     int a,b;
@@ -2570,49 +2573,49 @@ void kardClass()
         }
     }
 
-    offset[kardClassNumber]=autoMfkey32srcNum+1;//ç»“æŸåœ°å€
+    offset[kardClassNumber]=autoMfkey32srcNum+1;//½áÊøµØÖ·
 
-    printf("å…±å­˜åœ¨%då¼ å¡ç‰‡è®°å½•\r\n",kardClassNumber);
+    printf("¹²´æÔÚ%dÕÅ¿¨Æ¬¼ÇÂ¼\r\n",kardClassNumber);
     for(int i=0;i<kardClassNumber;i++)
-        printf("æ£€æµ‹åˆ°åˆ‡æ¢å¡ç‰‡çš„æ¡ç›®%d\r\n",offset[i]);
+        printf("¼ì²âµ½ÇĞ»»¿¨Æ¬µÄÌõÄ¿%d\r\n",offset[i]);
 }
 
 uint8_t secKey[16][128][15]={0};
-uint16_t cardStreamNum; //æ•´å¡å¯†æµæ•°é‡
+uint16_t cardStreamNum; //Õû¿¨ÃÜÁ÷ÊıÁ¿
 
 void autoMfkey32cardSecArrangement(uint8_t cardStart,uint8_t cardEnd)
 {
     memset(secKey,0,sizeof(secKey));
     cardStreamNum=0;
 
-    //printf("\r\nå¼€å§‹å¯†æµè½¬å‚¨\r\n");
+    //printf("\r\n¿ªÊ¼ÃÜÁ÷×ª´¢\r\n");
     for(uint8_t block=0;block<16;block++)
     {
         uint8_t stream=0;
-        //éå†æ•´å¡å¯†æµ è½¬å‚¨
+        //±éÀúÕû¿¨ÃÜÁ÷ ×ª´¢
         for(int offset=cardStart;offset<cardEnd;offset++)
         {
-            if(autoMfkey32src[offset][0] && autoMfkey32src[offset][1]/4==block)  //å­˜åœ¨æ•°æ®çš„å‰æä¸‹,åˆ¤æ–­è¿™ä¸ªå¯†é’¥æµéªŒè¯çš„åœ°å€æ˜¯ä¸æ˜¯0...15
+            if(autoMfkey32src[offset][0] && autoMfkey32src[offset][1]/4==block)  //´æÔÚÊı¾İµÄÇ°ÌáÏÂ,ÅĞ¶ÏÕâ¸öÃÜÔ¿Á÷ÑéÖ¤µÄµØÖ·ÊÇ²»ÊÇ0...15
             {
-                //printf("è½¬å‚¨åˆ°æ‰‡åŒº:%02d\r\n",block);
-                secKey[block][stream][0]=1; //æ•°æ®å­˜åœ¨æ ‡å¿—
-                memcpy(secKey[block][stream]+1,autoMfkey32src[offset]+6,12); //å¤åˆ¶12ä¸ªå­—èŠ‚è¿›å»
+                //printf("×ª´¢µ½ÉÈÇø:%02d\r\n",block);
+                secKey[block][stream][0]=1; //Êı¾İ´æÔÚ±êÖ¾
+                memcpy(secKey[block][stream]+1,autoMfkey32src[offset]+6,12); //¸´ÖÆ12¸ö×Ö½Ú½øÈ¥
                 stream++;
             }
         }
     }
 
     int uid=ByteArrayToInt(autoMfkey32src[cardStart],2);
-    printf("\r\nå¡å·:%08X [æ‰‡åŒºå¯†æµæ•°æ®è¡¨]\r\n",uid);
+    printf("\r\n¿¨ºÅ:%08X [ÉÈÇøÃÜÁ÷Êı¾İ±í]\r\n",uid);
     for(uint8_t block=0;block<16;block++)
     {
-        printf("æ‰‡åŒº%02d--------------------------------------\r\n",block);
+        printf("ÉÈÇø%02d--------------------------------------\r\n",block);
         for(uint8_t stream=0;stream<128;stream++)
         {
-            if(secKey[block][stream][0]==1) //æ•°æ®å­˜åœ¨
+            if(secKey[block][stream][0]==1) //Êı¾İ´æÔÚ
             {
-                printf("å¯†æµ%03d: ",stream);
-                secKey[block][0][0]=stream+1; //æ›´æ–°æ‰‡åŒºå¯†æµæ•°é‡
+                printf("ÃÜÁ÷%03d: ",stream);
+                secKey[block][0][0]=stream+1; //¸üĞÂÉÈÇøÃÜÁ÷ÊıÁ¿
                 for(uint8_t data=1;data<13;data++)
                 {
                     printf("%02X ",secKey[block][stream][data]);
@@ -2620,7 +2623,7 @@ void autoMfkey32cardSecArrangement(uint8_t cardStart,uint8_t cardEnd)
                 printf("\r\n");
             }
         }
-        cardStreamNum+=secKey[block][0][0];      //æ›´æ–°æ•´å¡å¯†æµæ•°é‡
+        cardStreamNum+=secKey[block][0][0];      //¸üĞÂÕû¿¨ÃÜÁ÷ÊıÁ¿
     }
 }
 
@@ -2659,7 +2662,7 @@ void autoMfkey32cardSecArrangement(uint8_t cardStart,uint8_t cardEnd)
 //         crypto1_word(t, uid ^ nt1, 0);
 //         crypto1_word(t, nr1_enc, 1);
 //         if (ar1_enc == (crypto1_word(t, 0, 0) ^ p64b)) {
-//             printf("[+] æ‰¾åˆ°ç§˜é’¥: [" _GREEN_BR_("%012" PRIx64 ) "]\r\n", key);
+//             printf("[+] ÕÒµ½ÃØÔ¿: [" _GREEN_BR_("%012" PRIx64 ) "]\r\n", key);
 //             return 1;
 //         }
 //     }
@@ -2707,7 +2710,7 @@ bool  mfKey32v2(uint32_t UID ,uint8_t *one ,uint8_t *two,Crypto1State *statelist
         crypto1_word(s, t, nr1_enc, 1);
         if (ar1_enc == (crypto1_word(s, t, 0, 0) ^ prng_successor(nt1, 64))){
             stop = clock();
-            printf("\r[+] è€—æ—¶:%4d ms æ‰¾åˆ°ç§˜é’¥: [ " _GREEN_BR_("%012" PRIx64 ) " ]      \r\n",stop - start,key);
+            printf("\r[+] ºÄÊ±:%4d ms ÕÒµ½ÃØÔ¿: [ " _GREEN_BR_("%012" PRIx64 ) " ]      \r\n",stop - start,key);
             return true;
         }
     }
@@ -2721,7 +2724,7 @@ int mfkey(void) {
 
     int argc;
 
-    printf("é”®å…¥5:ä¸€æ¬¡æ€§æ¢å¤ç§˜é’¥\né”®å…¥7:ä»ä¸¤æ¬¡ä¼šè¯ä¸­æ¢å¤ç§˜é’¥\n");
+    printf("¼üÈë5:Ò»´ÎĞÔ»Ö¸´ÃØÔ¿\n¼üÈë7:´ÓÁ½´Î»á»°ÖĞ»Ö¸´ÃØÔ¿\n");
     scanf("%d",&argc);
 
     if (argc == 7) {
@@ -2744,15 +2747,15 @@ int mfkey(void) {
 
         printf("\n");
         printf("-----------------------------------------------------\n");
-        printf("MIFARE Classicå¯†é’¥æ¢å¤-åŸºäº32ä½å¯†é’¥æµ ç‰ˆæœ¬v2\n");
-        printf("ä»…ä»ä¸¤ä¸ª32ä½è¯»å–å™¨èº«ä»½éªŒè¯ç­”æ¡ˆæ¢å¤å¯†é’¥\n");
-        printf("è¿™ä¸ªç‰ˆæœ¬å®ç°äº†Moebiusä¸¤ç§ä¸åŒçš„nonceè§£å†³æ–¹æ¡ˆ(å¦‚è¶…çº§å¡)\n");
+        printf("MIFARE ClassicÃÜÔ¿»Ö¸´-»ùÓÚ32Î»ÃÜÔ¿Á÷ °æ±¾v2\n");
+        printf("½ö´ÓÁ½¸ö32Î»¶ÁÈ¡Æ÷Éí·İÑéÖ¤´ğ°¸»Ö¸´ÃÜÔ¿\n");
+        printf("Õâ¸ö°æ±¾ÊµÏÖÁËMoebiusÁ½ÖÖ²»Í¬µÄnonce½â¾ö·½°¸(Èç³¬¼¶¿¨)\n");
         printf("-----------------------------------------------------\n\n");
-        printf("é”®å…¥: <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n");
+        printf("¼üÈë: <uid> <nt> <nr_0> <ar_0> <nt1> <nr_1> <ar_1>\n\n");
     
         scanf("%x %x %x %x %x %x %x", &uid, &nt0, &nr0_enc, &ar0_enc, &nt1, &nr1_enc, &ar1_enc);
 
-        printf("\næ­£åœ¨ä»ä»¥ä¸‹ç»™å®šçš„æ•°æ®ä¸­æ¢å¤çš„å¯†é’¥:\n");
+        printf("\nÕıÔÚ´ÓÒÔÏÂ¸ø¶¨µÄÊı¾İÖĞ»Ö¸´µÄÃÜÔ¿:\n");
         printf("    uid: %08x\n", uid);
         printf("   nt_0: %08x\n", nt0);
         printf(" {nr_0}: %08x\n", nr0_enc);
@@ -2770,7 +2773,7 @@ int mfkey(void) {
         printf(" nt'': %08x\n", prng_successor(p64, 32));
 
         // Extract the keystream from the messages
-        printf("\nç”¨äºç”Ÿæˆ{ar}å’Œ{at}çš„å¯†é’¥æµ:\n");
+        printf("\nÓÃÓÚÉú³É{ar}ºÍ{at}µÄÃÜÔ¿Á÷:\n");
         ks2 = ar0_enc ^ p64;
         printf("  ks2: %08x\n", ks2);
 
@@ -2785,7 +2788,7 @@ int mfkey(void) {
             crypto1_word(s, t, uid ^ nt1, 0);
             crypto1_word(s, t, nr1_enc, 1);
             if (ar1_enc == (crypto1_word(s, t, 0, 0) ^ p64b)) {
-                printf("\næ‰¾åˆ°ç§˜é’¥: [%012" PRIx64 "]", key);
+                printf("\nÕÒµ½ÃØÔ¿: [%012" PRIx64 "]", key);
                 break;
             }
         }
@@ -2809,14 +2812,14 @@ int mfkey(void) {
 
         printf("\n");
         printf("-----------------------------------------------------\n");
-        printf("MIFARE Classicå¯†é’¥æ¢å¤-åŸºäº64ä½å¯†é’¥æµ\n");
-        printf("ä»…ä»ä¸€æ¬¡å®Œæ•´èº«ä»½éªŒè¯ä¸­æ¢å¤å¯†é’¥!\n");
+        printf("MIFARE ClassicÃÜÔ¿»Ö¸´-»ùÓÚ64Î»ÃÜÔ¿Á÷\n");
+        printf("½ö´ÓÒ»´ÎÍêÕûÉí·İÑéÖ¤ÖĞ»Ö¸´ÃÜÔ¿!\n");
         printf("-----------------------------------------------------\n\n");
-        printf("é”®å…¥: <uid> <nt> <{nr}> <{ar}> <{at}>\n\n");
+        printf("¼üÈë: <uid> <nt> <{nr}> <{ar}> <{at}>\n\n");
 
         scanf("%x %x %x %x %x", &uid, &nt, &nr_enc, &ar_enc, &at_enc);
 
-        printf("\næ­£åœ¨ä»ä»¥ä¸‹ç»™å®šçš„æ•°æ®ä¸­æ¢å¤çš„å¯†é’¥:\n");
+        printf("\nÕıÔÚ´ÓÒÔÏÂ¸ø¶¨µÄÊı¾İÖĞ»Ö¸´µÄÃÜÔ¿:\n");
 
         printf("  uid: %08x\n", uid);
         printf("   nt: %08x\n", nt);
@@ -2831,7 +2834,7 @@ int mfkey(void) {
         printf(" nt'': %08x\n", prng_successor(p64, 32));
 
         // Extract the keystream from the messages
-        printf("\nç”¨äºç”Ÿæˆ{ar}å’Œ{at}çš„å¯†é’¥æµ:\n");
+        printf("\nÓÃÓÚÉú³É{ar}ºÍ{at}µÄÃÜÔ¿Á÷:\n");
         ks2 = ar_enc ^ p64;
         ks3 = at_enc ^ prng_successor(p64, 32);
         printf("  ks2: %08x\n", ks2);
@@ -2844,7 +2847,7 @@ int mfkey(void) {
         lfsr_rollback_word(revstate, 0, nr_enc, 1);
         lfsr_rollback_word(revstate, 0, uid ^ nt, 0);
         key = crypto1_get_lfsr(revstate, 0, key);
-        printf("\næ‰¾åˆ°ç§˜é’¥: [%012" PRIx64 "]", key);
+        printf("\nÕÒµ½ÃØÔ¿: [%012" PRIx64 "]", key);
         free(revstate);
 
         return 0;
@@ -2862,23 +2865,23 @@ int mfkey(void) {
 // DWORD WINAPI  ThreadFunc(LPVOID p)
 // {
 //     int n = *(int*)p;
-//     Sleep(1000*n);  //ç¬¬ n ä¸ªçº¿ç¨‹ç¡çœ  n ç§’
-//     printf("æˆ‘æ˜¯ï¼Œ pid = %d çš„å­çº¿ç¨‹\t", GetCurrentThreadId());   //è¾“å‡ºå­çº¿ç¨‹pid
-//     printf(" pid = %d çš„å­çº¿ç¨‹é€€å‡º\n\n", GetCurrentThreadId());   //å»¶æ—¶10såè¾“å‡º
+//     Sleep(1000*n);  //µÚ n ¸öÏß³ÌË¯Ãß n Ãë
+//     printf("ÎÒÊÇ£¬ pid = %d µÄ×ÓÏß³Ì\t", GetCurrentThreadId());   //Êä³ö×ÓÏß³Ìpid
+//     printf(" pid = %d µÄ×ÓÏß³ÌÍË³ö\n\n", GetCurrentThreadId());   //ÑÓÊ±10sºóÊä³ö
  
 //     return 0;
 // }
  
 // int main()
 // {
-//     printf("æˆ‘æ˜¯ä¸»çº¿ç¨‹ï¼Œ pid = %d\n", GetCurrentThreadId());  //è¾“å‡ºä¸»çº¿ç¨‹pid
+//     printf("ÎÒÊÇÖ÷Ïß³Ì£¬ pid = %d\n", GetCurrentThreadId());  //Êä³öÖ÷Ïß³Ìpid
 //     HANDLE hThread[THREAD_NUM];
 //     for (int i = 0; i < THREAD_NUM; i++)
 //     {
-//         hThread[i] = CreateThread(NULL, 0, ThreadFunc, &i, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+//         hThread[i] = CreateThread(NULL, 0, ThreadFunc, &i, 0, NULL); // ´´½¨Ïß³Ì
 //     }
     
-//     WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //ä¸€ç›´ç­‰å¾…ï¼Œç›´åˆ°æ‰€æœ‰å­çº¿ç¨‹å…¨éƒ¨è¿”å›
+//     WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //Ò»Ö±µÈ´ı£¬Ö±µ½ËùÓĞ×ÓÏß³ÌÈ«²¿·µ»Ø
 //     return 0;
 // }
  
@@ -2902,10 +2905,10 @@ typedef struct ArgList
 // {
 //     // ArgList_t *argList_t=(ArgList_t*)p;
 
-//     // if(mfKey32(argList_t->UID,argList_t->one+1,argList_t->two+1)) //æ¯”å¯¹æˆåŠŸ
+//     // if(mfKey32(argList_t->UID,argList_t->one+1,argList_t->two+1)) //±È¶Ô³É¹¦
 //     // {
-//     //     argList_t->one[13]=1; //å·²å¤„ç†
-//     //     argList_t->two[13]=1; //å·²å¤„ç†
+//     //     argList_t->one[13]=1; //ÒÑ´¦Àí
+//     //     argList_t->two[13]=1; //ÒÑ´¦Àí
 //     //     argList_t->status=1;
 //     // }
 
@@ -2914,10 +2917,10 @@ typedef struct ArgList
 //     /***********************************/
 
 //     ArgList_t *argList_t=(ArgList_t*)p;
-//     if(mfKey32v2(argList_t->UID,argList_t->one+1,argList_t->two+1,argList_t->statelist,argList_t->odd,argList_t->even)) //æ¯”å¯¹æˆåŠŸ
+//     if(mfKey32v2(argList_t->UID,argList_t->one+1,argList_t->two+1,argList_t->statelist,argList_t->odd,argList_t->even)) //±È¶Ô³É¹¦
 //     {
-//         argList_t->one[13]=1; //å·²å¤„ç†
-//         argList_t->two[13]=1; //å·²å¤„ç†
+//         argList_t->one[13]=1; //ÒÑ´¦Àí
+//         argList_t->two[13]=1; //ÒÑ´¦Àí
 //         argList_t->status=1;
 //     }
 
@@ -2934,33 +2937,33 @@ uint8_t scheduleNum;
 
 //     uint8_t block=argList_t->block;
 
-//     for(uint8_t a=argList_t->a;a<128;a++)  //å‰çº§æŒ‡é’ˆ
+//     for(uint8_t a=argList_t->a;a<128;a++)  //Ç°¼¶Ö¸Õë
 //     {
-//         if(secKey[block][a][0] && !secKey[block][a][13])  //å­˜åœ¨æœªå¤„ç†çš„æ•°æ®
+//         if(secKey[block][a][0] && !secKey[block][a][13])  //´æÔÚÎ´´¦ÀíµÄÊı¾İ
 //         {
-//             uint8_t b=a+1;//åçº§æŒ‡é’ˆ
+//             uint8_t b=a+1;//ºó¼¶Ö¸Õë
 
-//             secKey[block][a][13]++;     //ç„å®š
-//             secKey[block][b][13]++;     //ç„å®š
-//             if(secKey[block][a][13]==1) //åˆ¤æ–­æœ‰æ²¡æœ‰è¢«å…¶ä»–çº¿ç¨‹ç„å®š,å…ˆåˆ°å…ˆå¾—
+//             secKey[block][a][13]++;     //Ãé¶¨
+//             secKey[block][b][13]++;     //Ãé¶¨
+//             if(secKey[block][a][13]==1) //ÅĞ¶ÏÓĞÃ»ÓĞ±»ÆäËûÏß³ÌÃé¶¨,ÏÈµ½ÏÈµÃ
 //             {
-//                 if(secKey[block][b][0])  //å­˜åœ¨æœªå¤„ç†çš„æ•°æ®
+//                 if(secKey[block][b][0])  //´æÔÚÎ´´¦ÀíµÄÊı¾İ
 //                 {
 
 
 //                     /*************************************************************************************************************************/
 //                     if(mfKey32v2(argList_t->UID,secKey[block][a]+1,secKey[block][b]+1,argList_t->statelist,argList_t->odd,argList_t->even))
 //                     {
-//                         secKey[block][a][13]=2; //å·²å¤„ç†
-//                         secKey[block][b][13]=2; //å·²å¤„ç†
+//                         secKey[block][a][13]=2; //ÒÑ´¦Àí
+//                         secKey[block][b][13]=2; //ÒÑ´¦Àí
 
 //                         secKeyFindSuccess=1;
 //                         keyFindSuccessNum++;
 //                     }
 //                     else
 //                     {
-//                         secKey[block][a][13]=3; //é”™è¯¯æ•°æ®
-//                         secKey[block][b][13]=0; //ç»§ç»­ä½¿ç”¨
+//                         secKey[block][a][13]=3; //´íÎóÊı¾İ
+//                         secKey[block][b][13]=0; //¼ÌĞøÊ¹ÓÃ
 //                     }
 //                     /*************************************************************************************************************************/
 
@@ -2974,7 +2977,7 @@ uint8_t scheduleNum;
 //                     uint16_t cardScheduleNum=0;
 //                     for(uint8_t i=0;i<block;i++)
 //                     {
-//                         cardScheduleNum+=secKey[i][0][0];//ä¹‹å‰æ‰‡åŒºçš„å¯†æµæ€»æ•°
+//                         cardScheduleNum+=secKey[i][0][0];//Ö®Ç°ÉÈÇøµÄÃÜÁ÷×ÜÊı
 //                     }
 //                     if(a>scheduleNum)
 //                     {
@@ -2982,36 +2985,36 @@ uint8_t scheduleNum;
 //                     }
 //                     cardScheduleNum+=scheduleNum;
 //                     //printf("\r %03d %03d %03d",scheduleNum,cardScheduleNum,cardStreamNum);
-//                     //printf("\r[%c] è¿›åº¦: %02d %% å½“å‰æ‰‡åŒºè¿›åº¦: %02d %%",state[ing++],cardScheduleNum*100/cardStreamNum,scheduleNum*100/secKey[block][0][0]);
+//                     //printf("\r[%c] ½ø¶È: %02d %% µ±Ç°ÉÈÇø½ø¶È: %02d %%",state[ing++],cardScheduleNum*100/cardStreamNum,scheduleNum*100/secKey[block][0][0]);
 
 //                     char buf[128]={0};
 //                     double num = ((double)cardScheduleNum/(double)cardStreamNum)*34;
 
 //                     // for(int i = 0; i < 33; i++)
 //                     // {
-//                     //     if(i < num) //è¾“å‡ºnumä¸ª">"
-//                     //         memcpy(buf+i*2,"â–ˆ",2);
+//                     //     if(i < num) //Êä³önum¸ö">"
+//                     //         memcpy(buf+i*2,"¨€",2);
 //                     //     else
-//                     //         memcpy(buf+i*2,"â”€",2);
+//                     //         memcpy(buf+i*2,"©¤",2);
 //                     // }
-//                     // printf(_YELLOW_BR_("\r[%c] %sâ–[%02d%%]"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
+//                     // printf(_YELLOW_BR_("\r[%c] %s¨‡[%02d%%]"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
 
 //                     static uint8_t color=1,colorLen=0;
 //                     for(int i = 0; i < 34; i++)
 //                     {
-//                         if(i >= num) //é¢œè‰²åˆ†ç•Œå¤„
+//                         if(i >= num) //ÑÕÉ«·Ö½ç´¦
 //                         {
 //                             if(color)
 //                             {
-//                                 colorLen=strlen(AEND);  //ç™½è‰²
+//                                 colorLen=strlen(AEND);  //°×É«
 //                                 memcpy(buf+i*2,AEND,colorLen);
 //                                 color=0;
 //                             }
-//                             memcpy(buf+i*2+colorLen,"â–“",2);
+//                             memcpy(buf+i*2+colorLen,"¨ˆ",2);
 //                         }
 //                         else
 //                         {
-//                             memcpy(buf+i*2+colorLen,"â–ˆ",2);
+//                             memcpy(buf+i*2+colorLen,"¨€",2);
 //                         }
                         
 //                     }
@@ -3027,29 +3030,29 @@ uint8_t scheduleNum;
 
 
 
-uint8_t decryptionLevel=1; //è§£å¯†çº§åˆ« 0å¿«é€Ÿè§£ 1æ™®é€šè§£ 2å®Œå…¨è§£æ
+uint8_t decryptionLevel=1; //½âÃÜ¼¶±ğ 0¿ìËÙ½â 1ÆÕÍ¨½â 2ÍêÈ«½âÎö
 
 void autoMfkey32Fast()
 {
-    // autoMfkey32srcPrint();//å¯†æµç¼“å­˜æ‰“å°,ä»…åšæ‰“å°...
-    // kardClass();          //æ¢æˆè·å–å¡ç‰‡æ•°é‡åŠåç§»åœ°å€
+    // autoMfkey32srcPrint();//ÃÜÁ÷»º´æ´òÓ¡,½ö×ö´òÓ¡...
+    // kardClass();          //»»³É»ñÈ¡¿¨Æ¬ÊıÁ¿¼°Æ«ÒÆµØÖ·
 
     // clock_t start,stop;
-    // start = clock();        /*  å¼€å§‹è®¡æ—¶  */
+    // start = clock();        /*  ¿ªÊ¼¼ÆÊ±  */
 
     // keyFindSuccessNum=0;
 
     // for(uint8_t card=0;card<kardClassNumber;card++)
     // {
-    //     printf(_YELLOW_BR_("\r\n[+] å¼€å§‹è§£ç®—ç¬¬%då¼ å¡ç‰‡ç§˜é’¥,å…±%då¼ .\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] å¹¶å‘è§£å¯† è¯·æ³¨æ„è®¡ç®—æœºæ•£çƒ­."));
-    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //è·å–å·²æ•´ç†çš„å¯†æµè¡¨
+    //     printf(_YELLOW_BR_("\r\n[+] ¿ªÊ¼½âËãµÚ%dÕÅ¿¨Æ¬ÃØÔ¿,¹²%dÕÅ.\r\n"),card+1,kardClassNumber);
+    //     printf(_RED_BR_("[!] ²¢·¢½âÃÜ Çë×¢Òâ¼ÆËã»úÉ¢ÈÈ."));
+    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //»ñÈ¡ÒÑÕûÀíµÄÃÜÁ÷±í
 
     //     uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
-    //     printf(_YELLOW_BR_("\r\n[+] å¹¶å‘è§£å¯†å¼€å§‹.ç¬¬%då¼ ,å…±%då¼ .\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] è¯·æ³¨æ„è®¡ç®—æœºæ•£çƒ­."));
+    //     printf(_YELLOW_BR_("\r\n[+] ²¢·¢½âÃÜ¿ªÊ¼.µÚ%dÕÅ,¹²%dÕÅ.\r\n"),card+1,kardClassNumber);
+    //     printf(_RED_BR_("[!] Çë×¢Òâ¼ÆËã»úÉ¢ÈÈ."));
     //     printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
-    //     printf(_YELLOW_BR_("[+] æ­£åœ¨è§£ç®—ç§˜é’¥...\r\n"));
+    //     printf(_YELLOW_BR_("[+] ÕıÔÚ½âËãÃØÔ¿...\r\n"));
 
 
     //     Crypto1State *statelist =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
@@ -3076,15 +3079,15 @@ void autoMfkey32Fast()
 
         
 
-    //     for(uint8_t block=0;block<16;block++)  //16ä¸ªæ‰‡åŒºé€æ¬¡æ¢å¤
+    //     for(uint8_t block=0;block<16;block++)  //16¸öÉÈÇøÖğ´Î»Ö¸´
     //     {
-    //         printf(_WHITE_BR_("\ræ‰‡åŒº%02d-------------------------------------\r\n"),block);
+    //         printf(_WHITE_BR_("\rÉÈÇø%02d-------------------------------------\r\n"),block);
 
-    //         if(!secKey[block][0][0]) //æ­¤æ‰‡åŒºä¸å­˜åœ¨æ•°æ®
+    //         if(!secKey[block][0][0]) //´ËÉÈÇø²»´æÔÚÊı¾İ
     //         {
-    //             printf(_RED_BR_("[!] ä¸å­˜åœ¨å¯†æµæ•°æ®.\r\n"));
+    //             printf(_RED_BR_("[!] ²»´æÔÚÃÜÁ÷Êı¾İ.\r\n"));
     //         }
-    //         else  //æ­¤æ‰‡åŒºå­˜åœ¨æ•°æ®
+    //         else  //´ËÉÈÇø´æÔÚÊı¾İ
     //         {
     //             secKeyFindSuccess=0;
     //             scheduleNum=0;
@@ -3096,7 +3099,7 @@ void autoMfkey32Fast()
     //             argList_t.even=even;
     //             argList_t.block=block;
     //             argList_t.a=0;
-    //             hThread[0] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[0] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t, 0, NULL); // ´´½¨Ïß³Ì
 
     //             ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
     //             argList_t1.UID=uid;
@@ -3105,7 +3108,7 @@ void autoMfkey32Fast()
     //             argList_t1.even=even1;
     //             argList_t1.block=block;
     //             argList_t1.a=2;
-    //             hThread[1] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t1, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[1] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t1, 0, NULL); // ´´½¨Ïß³Ì
 
     //             ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
     //             argList_t2.UID=uid;
@@ -3114,7 +3117,7 @@ void autoMfkey32Fast()
     //             argList_t2.even=even2;
     //             argList_t2.block=block;
     //             argList_t2.a=4;
-    //             hThread[2] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t2, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[2] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t2, 0, NULL); // ´´½¨Ïß³Ì
 
     //             ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
     //             argList_t3.UID=uid;
@@ -3123,7 +3126,7 @@ void autoMfkey32Fast()
     //             argList_t3.even=even3;
     //             argList_t3.block=block;
     //             argList_t3.a=6;
-    //             hThread[3] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t3, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[3] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t3, 0, NULL); // ´´½¨Ïß³Ì
 
     //             ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
     //             argList_t4.UID=uid;
@@ -3132,7 +3135,7 @@ void autoMfkey32Fast()
     //             argList_t4.even=even4;
     //             argList_t4.block=block;
     //             argList_t4.a=8;
-    //             hThread[4] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t4, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[4] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t4, 0, NULL); // ´´½¨Ïß³Ì
 
     //             ArgList_t argList_t5={0,NULL,NULL,0,NULL,NULL,NULL};
     //             argList_t5.UID=uid;
@@ -3141,15 +3144,15 @@ void autoMfkey32Fast()
     //             argList_t5.even=even5;
     //             argList_t5.block=block;
     //             argList_t5.a=10;
-    //             hThread[5] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t5, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //             hThread[5] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t5, 0, NULL); // ´´½¨Ïß³Ì
 
-    //             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //ä¸€ç›´ç­‰å¾…ï¼Œç›´åˆ°æ‰€æœ‰å­çº¿ç¨‹å…¨éƒ¨è¿”å›
+    //             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //Ò»Ö±µÈ´ı£¬Ö±µ½ËùÓĞ×ÓÏß³ÌÈ«²¿·µ»Ø
 
     //             if(!secKeyFindSuccess)
-    //                 printf(_RED_BR_("\r[!] æœªæ‰¾åˆ°ç§˜é’¥.                             \r\n"));
+    //                 printf(_RED_BR_("\r[!] Î´ÕÒµ½ÃØÔ¿.                             \r\n"));
     //         }
     //     }
-    //     printf("\r%*s",43," ");//è¾“å‡º43ä¸ªç©ºæ ¼
+    //     printf("\r%*s",43," ");//Êä³ö43¸ö¿Õ¸ñ
         
     //     free(statelist);
     //     free(odd);
@@ -3171,40 +3174,40 @@ void autoMfkey32Fast()
     //     free(even5);
     // }
 
-    // stop = clock();     /*  åœæ­¢è®¡æ—¶  */
+    // stop = clock();     /*  Í£Ö¹¼ÆÊ±  */
 
-    // printf("\r\nè¿è¡Œæ—¶é—´: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("å…±è§£å¾—%dä¸ªç§˜é’¥æ•°æ®\r\n",keyFindSuccessNum);
-    // printf(_YELLOW_BR_("æ—¥å¿—æ–‡ä»¶å¯†æµæ•°æ®å·²è§£ç®—ç»“æŸ.\r\n"));
+    // printf("\r\nÔËĞĞÊ±¼ä: %d s\r\n",(stop - start) / CLK_TCK);
+    // printf("¹²½âµÃ%d¸öÃØÔ¿Êı¾İ\r\n",keyFindSuccessNum);
+    // printf(_YELLOW_BR_("ÈÕÖ¾ÎÄ¼şÃÜÁ÷Êı¾İÒÑ½âËã½áÊø.\r\n"));
 
-    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•
-    // // autoMfkey32srcNum=0;                             //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
-    // kardClassNumber=1;                               //å¡ç‰‡æ•°é‡
-    // memset(offset,0,sizeof(offset));                 //è®°å½•å¯†æµè¡¨å¡å·æ›´æ”¹çš„åç§»åœ°å€,æœ€å¤š256ä¸ªåç§»åœ°å€
+    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼
+    // // autoMfkey32srcNum=0;                             //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
+    // kardClassNumber=1;                               //¿¨Æ¬ÊıÁ¿
+    // memset(offset,0,sizeof(offset));                 //¼ÇÂ¼ÃÜÁ÷±í¿¨ºÅ¸ü¸ÄµÄÆ«ÒÆµØÖ·,×î¶à256¸öÆ«ÒÆµØÖ·
     // memset(secKey,0,sizeof(secKey));
 }
 
 void autoMfkey32()
 {
-    // autoMfkey32srcPrint();//å¯†æµç¼“å­˜æ‰“å°,ä»…åšæ‰“å°...
-    // kardClass();          //æ¢æˆè·å–å¡ç‰‡æ•°é‡åŠåç§»åœ°å€
+    // autoMfkey32srcPrint();//ÃÜÁ÷»º´æ´òÓ¡,½ö×ö´òÓ¡...
+    // kardClass();          //»»³É»ñÈ¡¿¨Æ¬ÊıÁ¿¼°Æ«ÒÆµØÖ·
 
     // clock_t start,stop;
-    // start = clock();        /*  å¼€å§‹è®¡æ—¶  */
+    // start = clock();        /*  ¿ªÊ¼¼ÆÊ±  */
 
     // uint16_t keyFindSuccessNum=0;
 
     // for(uint8_t card=0;card<kardClassNumber;card++)
     // {
-    //     printf(_YELLOW_BR_("\r\n[+] å¼€å§‹è§£ç®—ç¬¬%då¼ å¡ç‰‡ç§˜é’¥,å…±%då¼ .\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] å¹¶å‘è§£å¯† è¯·æ³¨æ„è®¡ç®—æœºæ•£çƒ­."));
-    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //è·å–å·²æ•´ç†çš„å¯†æµè¡¨
+    //     printf(_YELLOW_BR_("\r\n[+] ¿ªÊ¼½âËãµÚ%dÕÅ¿¨Æ¬ÃØÔ¿,¹²%dÕÅ.\r\n"),card+1,kardClassNumber);
+    //     printf(_RED_BR_("[!] ²¢·¢½âÃÜ Çë×¢Òâ¼ÆËã»úÉ¢ÈÈ."));
+    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //»ñÈ¡ÒÑÕûÀíµÄÃÜÁ÷±í
 
     //     uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
-    //     printf(_YELLOW_BR_("\r\n[+] å¹¶å‘è§£å¯†å¼€å§‹.ç¬¬%då¼ ,å…±%då¼ .\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] è¯·æ³¨æ„è®¡ç®—æœºæ•£çƒ­."));
+    //     printf(_YELLOW_BR_("\r\n[+] ²¢·¢½âÃÜ¿ªÊ¼.µÚ%dÕÅ,¹²%dÕÅ.\r\n"),card+1,kardClassNumber);
+    //     printf(_RED_BR_("[!] Çë×¢Òâ¼ÆËã»úÉ¢ÈÈ."));
     //     printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
-    //     printf(_YELLOW_BR_("[+] æ­£åœ¨è§£ç®—ç§˜é’¥...\r\n"));
+    //     printf(_YELLOW_BR_("[+] ÕıÔÚ½âËãÃØÔ¿...\r\n"));
 
 
 
@@ -3229,25 +3232,25 @@ void autoMfkey32()
 
     //     uint8_t secKeyFindSuccess;
 
-    //     for(uint8_t block=0;block<16;block++)  //16ä¸ªæ‰‡åŒºé€æ¬¡æ¢å¤
+    //     for(uint8_t block=0;block<16;block++)  //16¸öÉÈÇøÖğ´Î»Ö¸´
     //     {
-    //         printf(_WHITE_BR_("æ‰‡åŒº%02d-------------------------------------\r\n"),block);
+    //         printf(_WHITE_BR_("ÉÈÇø%02d-------------------------------------\r\n"),block);
     //         secKeyFindSuccess=0;
 
-    //         if(!secKey[block][0][0]) //æ­¤æ‰‡åŒºä¸å­˜åœ¨æ•°æ®
+    //         if(!secKey[block][0][0]) //´ËÉÈÇø²»´æÔÚÊı¾İ
     //         {
-    //             printf(_RED_BR_("[!] ä¸å­˜åœ¨å¯†æµæ•°æ®.\r\n"));
+    //             printf(_RED_BR_("[!] ²»´æÔÚÃÜÁ÷Êı¾İ.\r\n"));
     //         }
-    //         else  //æ­¤æ‰‡åŒºå­˜åœ¨æ•°æ®
+    //         else  //´ËÉÈÇø´æÔÚÊı¾İ
     //         {
 
-    //             for(uint8_t a=0;a<128;a++)           //å‰çº§æŒ‡é’ˆ
+    //             for(uint8_t a=0;a<128;a++)           //Ç°¼¶Ö¸Õë
     //             {
-    //                 if(secKey[block][a][0] && !secKey[block][a][13])          //å­˜åœ¨æœªå¤„ç†çš„æ•°æ®
+    //                 if(secKey[block][a][0] && !secKey[block][a][13])          //´æÔÚÎ´´¦ÀíµÄÊı¾İ
     //                 {
-    //                     for(uint8_t b=a+1;b<128;b++) //åçº§æŒ‡é’ˆ
+    //                     for(uint8_t b=a+1;b<128;b++) //ºó¼¶Ö¸Õë
     //                     {
-    //                         if(secKey[block][b][0] && !secKey[block][b][13])  //å­˜åœ¨æœªå¤„ç†çš„æ•°æ®
+    //                         if(secKey[block][b][0] && !secKey[block][b][13])  //´æÔÚÎ´´¦ÀíµÄÊı¾İ
     //                         {
     //                             uint8_t state[4]={'-','\\','|','/'};
     //                             static char ing=0;
@@ -3262,9 +3265,9 @@ void autoMfkey32()
     //                             argList_t.statelist=statelist;
     //                             argList_t.odd=odd;
     //                             argList_t.even=even;
-    //                             hThread[0] = CreateThread(NULL, 0, Mfkey32Process, &argList_t, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //                             hThread[0] = CreateThread(NULL, 0, Mfkey32Process, &argList_t, 0, NULL); // ´´½¨Ïß³Ì
 
-    //                             while(secKey[block][++b][13]);//å­˜åœ¨æœªå¤„ç†çš„æ•°æ®
+    //                             while(secKey[block][++b][13]);//´æÔÚÎ´´¦ÀíµÄÊı¾İ
     //                             printf("(%02d,%02d) ",a,b);
 
     //                             ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
@@ -3274,9 +3277,9 @@ void autoMfkey32()
     //                             argList_t1.statelist=statelist1;
     //                             argList_t1.odd=odd1;
     //                             argList_t1.even=even1;
-    //                             hThread[1] = CreateThread(NULL, 0, Mfkey32Process, &argList_t1, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //                             hThread[1] = CreateThread(NULL, 0, Mfkey32Process, &argList_t1, 0, NULL); // ´´½¨Ïß³Ì
 
-    //                             while(secKey[block][++b][13]);//ä¸‹ä¸€ä¸ªæœªå¤„ç†çš„æ•°æ®
+    //                             while(secKey[block][++b][13]);//ÏÂÒ»¸öÎ´´¦ÀíµÄÊı¾İ
     //                             printf("(%02d,%02d) ",a,b);
 
     //                             ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
@@ -3286,9 +3289,9 @@ void autoMfkey32()
     //                             argList_t2.statelist=statelist2;
     //                             argList_t2.odd=odd2;
     //                             argList_t2.even=even2;
-    //                             hThread[2] = CreateThread(NULL, 0, Mfkey32Process, &argList_t2, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //                             hThread[2] = CreateThread(NULL, 0, Mfkey32Process, &argList_t2, 0, NULL); // ´´½¨Ïß³Ì
 
-    //                             while(secKey[block][++b][13]);//ä¸‹ä¸€ä¸ªæœªå¤„ç†çš„æ•°æ®
+    //                             while(secKey[block][++b][13]);//ÏÂÒ»¸öÎ´´¦ÀíµÄÊı¾İ
     //                             printf("(%02d,%02d) ",a,b);
 
     //                             ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
@@ -3298,9 +3301,9 @@ void autoMfkey32()
     //                             argList_t3.statelist=statelist3;
     //                             argList_t3.odd=odd3;
     //                             argList_t3.even=even3;
-    //                             hThread[3] = CreateThread(NULL, 0, Mfkey32Process, &argList_t3, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //                             hThread[3] = CreateThread(NULL, 0, Mfkey32Process, &argList_t3, 0, NULL); // ´´½¨Ïß³Ì
 
-    //                             while(secKey[block][++b][13]);//ä¸‹ä¸€ä¸ªæœªå¤„ç†çš„æ•°æ®
+    //                             while(secKey[block][++b][13]);//ÏÂÒ»¸öÎ´´¦ÀíµÄÊı¾İ
     //                             printf("(%02d,%02d) ",a,b);
 
     //                             ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
@@ -3310,9 +3313,9 @@ void autoMfkey32()
     //                             argList_t4.statelist=statelist4;
     //                             argList_t4.odd=odd4;
     //                             argList_t4.even=even4;
-    //                             hThread[4] = CreateThread(NULL, 0, Mfkey32Process, &argList_t4, 0, NULL); // åˆ›å»ºçº¿ç¨‹
+    //                             hThread[4] = CreateThread(NULL, 0, Mfkey32Process, &argList_t4, 0, NULL); // ´´½¨Ïß³Ì
                                 
-    //                             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //ä¸€ç›´ç­‰å¾…ï¼Œç›´åˆ°æ‰€æœ‰å­çº¿ç¨‹å…¨éƒ¨è¿”å›
+    //                             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //Ò»Ö±µÈ´ı£¬Ö±µ½ËùÓĞ×ÓÏß³ÌÈ«²¿·µ»Ø
 
     //                             printf("\r");
                                 
@@ -3324,21 +3327,21 @@ void autoMfkey32()
     //                                 break;
     //                             }
 
-    //                             if(decryptionLevel==1) //æ™®é€šè§£
-    //                                 break;//å¯¹æ¯”5ç»„å°±å¼ºåˆ¶é€€å‡º,ä¸å†å¯¹æ¯”
+    //                             if(decryptionLevel==1) //ÆÕÍ¨½â
+    //                                 break;//¶Ô±È5×é¾ÍÇ¿ÖÆÍË³ö,²»ÔÙ¶Ô±È
                                 
-    //                             // if(mfKey32(uid,secKey[block][a]+1,secKey[block][b]+1)) //æ¯”å¯¹æˆåŠŸ
+    //                             // if(mfKey32(uid,secKey[block][a]+1,secKey[block][b]+1)) //±È¶Ô³É¹¦
     //                             // {
-    //                             //     secKey[block][a][13]=1; //å·²å¤„ç†
-    //                             //     secKey[block][b][13]=1; //å·²å¤„ç†
-    //                             //     break;               //ç»“æŸæœ¬æ¬¡å¾ªç¯
+    //                             //     secKey[block][a][13]=1; //ÒÑ´¦Àí
+    //                             //     secKey[block][b][13]=1; //ÒÑ´¦Àí
+    //                             //     break;               //½áÊø±¾´ÎÑ­»·
     //                             // }
     //                         }
     //                     }
     //                 }
     //             }
     //             if(!secKeyFindSuccess)
-    //                 printf(_RED_BR_("[!] æœªæ‰¾åˆ°ç§˜é’¥.\r\n"));
+    //                 printf(_RED_BR_("[!] Î´ÕÒµ½ÃØÔ¿.\r\n"));
     //         }
     //     }
     //     free(statelist);
@@ -3358,25 +3361,25 @@ void autoMfkey32()
     //     free(even4);
     // }
 
-    // stop = clock();     /*  åœæ­¢è®¡æ—¶  */
+    // stop = clock();     /*  Í£Ö¹¼ÆÊ±  */
 
-    // printf("\r\nè¿è¡Œæ—¶é—´: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("å…±è§£å¾—%dä¸ªç§˜é’¥æ•°æ®\r\n",keyFindSuccessNum);
-    // printf(_YELLOW_BR_("æ—¥å¿—æ–‡ä»¶å¯†æµæ•°æ®å·²è§£ç®—ç»“æŸ.\r\n"));
+    // printf("\r\nÔËĞĞÊ±¼ä: %d s\r\n",(stop - start) / CLK_TCK);
+    // printf("¹²½âµÃ%d¸öÃØÔ¿Êı¾İ\r\n",keyFindSuccessNum);
+    // printf(_YELLOW_BR_("ÈÕÖ¾ÎÄ¼şÃÜÁ÷Êı¾İÒÑ½âËã½áÊø.\r\n"));
 
-    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•
-    // // autoMfkey32srcNum=0;                             //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
-    // kardClassNumber=1;                               //å¡ç‰‡æ•°é‡
-    // memset(offset,0,sizeof(offset));                 //è®°å½•å¯†æµè¡¨å¡å·æ›´æ”¹çš„åç§»åœ°å€,æœ€å¤š256ä¸ªåç§»åœ°å€
+    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼
+    // // autoMfkey32srcNum=0;                             //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
+    // kardClassNumber=1;                               //¿¨Æ¬ÊıÁ¿
+    // memset(offset,0,sizeof(offset));                 //¼ÇÂ¼ÃÜÁ÷±í¿¨ºÅ¸ü¸ÄµÄÆ«ÒÆµØÖ·,×î¶à256¸öÆ«ÒÆµØÖ·
     // memset(secKey,0,sizeof(secKey));
 }
 
 
 
-//é¦–å…ˆæ‰§è¡ŒlogProcessAuthä»¥åˆå§‹åŒ–èµ„æº
+//Ê×ÏÈÖ´ĞĞlogProcessAuthÒÔ³õÊ¼»¯×ÊÔ´
 
-uint8_t autoMfkey64src[256][22]={0}; //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•
-uint8_t autoMfkey64srcNum=0;         //æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
+uint8_t autoMfkey64src[256][22]={0}; //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼
+uint8_t autoMfkey64srcNum=0;         //Ö´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
 
 void autoMfkey64()
 {
@@ -3392,7 +3395,7 @@ void autoMfkey64()
     // uint32_t ks3;     // keystream used to encrypt tag response
 
     // clock_t start,stop;
-    // start = clock();        /*  å¼€å§‹è®¡æ—¶  */
+    // start = clock();        /*  ¿ªÊ¼¼ÆÊ±  */
     // printf(AEND);
     // for(uint8_t i=0;i<autoMfkey64srcNum;i++)
     // {
@@ -3414,7 +3417,7 @@ void autoMfkey64()
     //     lfsr_rollback_word(revstate, 0, nr_enc, 1);
     //     lfsr_rollback_word(revstate, 0, uid ^ nt, 0);
     //     key = crypto1_get_lfsr(revstate, 0, key);
-    //     printf("\r[+] UID:%08X æ‰‡åŒº/å—å·:(%02d/%02d) key%c:[" _GREEN_BR_("%012" PRIx64 ) "]\r\n",uid,autoMfkey64src[i][1]/4,autoMfkey64src[i][1],autoMfkey64src[i][0]-31, key);
+    //     printf("\r[+] UID:%08X ÉÈÇø/¿éºÅ:(%02d/%02d) key%c:[" _GREEN_BR_("%012" PRIx64 ) "]\r\n",uid,autoMfkey64src[i][1]/4,autoMfkey64src[i][1],autoMfkey64src[i][0]-31, key);
         
     //     /***************************************************************/
     //     uint8_t state[4]={'-','\\','|','/'};
@@ -3428,30 +3431,30 @@ void autoMfkey64()
     //     static uint8_t color=1,colorLen=0;
     //     for(int i = 0; i < 44; i++)
     //     {
-    //         if(i >= num) //é¢œè‰²åˆ†ç•Œå¤„
+    //         if(i >= num) //ÑÕÉ«·Ö½ç´¦
     //         {
     //             if(color)
     //             {
-    //                 colorLen=strlen(AEND);  //ç™½è‰²
+    //                 colorLen=strlen(AEND);  //°×É«
     //                 memcpy(buf+i*2,AEND,colorLen);
     //                 color=0;
     //             }
-    //             memcpy(buf+i*2+colorLen,"â”€",2);
+    //             memcpy(buf+i*2+colorLen,"©¤",2);
     //         }
     //         else
     //         {
-    //             memcpy(buf+i*2+colorLen,"â–ˆ",2);
+    //             memcpy(buf+i*2+colorLen,"¨€",2);
     //         }
             
     //     }
     //     color=1,colorLen=0;
-    //     printf(_YELLOW_BR_("\r[%c] %sâ–(%02d%%)"),state[ing++],buf,i*100/autoMfkey64srcNum);
+    //     printf(_YELLOW_BR_("\r[%c] %s¨‡(%02d%%)"),state[ing++],buf,i*100/autoMfkey64srcNum);
     // }
-    // stop = clock();     /*  åœæ­¢è®¡æ—¶  */
-    // printf("\r%*s",54," ");//è¾“å‡º54ä¸ªç©ºæ ¼
-    // printf("\r\nè¿è¡Œæ—¶é—´: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("å…±è§£å¾—%dä¸ªç§˜é’¥æ•°æ®\r\n",autoMfkey64srcNum);
-    // printf(_YELLOW_BR_("æ—¥å¿—æ–‡ä»¶å¯†æµæ•°æ®å·²è§£ç®—ç»“æŸ.\r\n"));
+    // stop = clock();     /*  Í£Ö¹¼ÆÊ±  */
+    // printf("\r%*s",54," ");//Êä³ö54¸ö¿Õ¸ñ
+    // printf("\r\nÔËĞĞÊ±¼ä: %d s\r\n",(stop - start) / CLK_TCK);
+    // printf("¹²½âµÃ%d¸öÃØÔ¿Êı¾İ\r\n",autoMfkey64srcNum);
+    // printf(_YELLOW_BR_("ÈÕÖ¾ÎÄ¼şÃÜÁ÷Êı¾İÒÑ½âËã½áÊø.\r\n"));
 
     // free(revstate);
 }
@@ -3602,7 +3605,7 @@ void autoMfkey64()
 #define OUTBUFLEN  512
 
 #ifdef _WIN32
-HANDLE hCom;  //å…¨å±€å˜é‡ï¼Œå…¨å±€å˜é‡ï¼Œç”¨äºçº¿ç¨‹é€šä¿¡
+HANDLE hCom;  //È«¾Ö±äÁ¿£¬È«¾Ö±äÁ¿£¬ÓÃÓÚÏß³ÌÍ¨ĞÅ
 DWORD rsize = 0;
 DWORD wsize = 0;
 #else
@@ -3714,16 +3717,16 @@ char *sprint_hex_ascii(const uint8_t *data, const size_t len) {
         tmp[pos + i]  = ((c < 32) || (c == 127)) ? '.' : c;
         ++i;
 
-		// uint8_t qh = data[i++]; //ä¸­æ–‡å­—ç¬¦å¯¹åº”çš„ç¬¬1ä¸ªå­—èŠ‚
-		// uint8_t ql = data[i++]; //ä¸­æ–‡å­—ç¬¦å¯¹åº”çš„ç¬¬2ä¸ªå­—èŠ‚
+		// uint8_t qh = data[i++]; //ÖĞÎÄ×Ö·û¶ÔÓ¦µÄµÚ1¸ö×Ö½Ú
+		// uint8_t ql = data[i++]; //ÖĞÎÄ×Ö·û¶ÔÓ¦µÄµÚ2¸ö×Ö½Ú
 
-		// /*è‹±æ–‡***********************************************************************************************/
+		// /*Ó¢ÎÄ***********************************************************************************************/
 		// if (qh < 0x80) //ASCII
 		// {
-		// 	i--; //åˆšåˆš+1äº†,å†å‡å›å»
+		// 	i--; //¸Õ¸Õ+1ÁË,ÔÙ¼õ»ØÈ¥
 		// 	tmp[pos + i -1]  = ((qh < 32) || (qh == 127)) ? '.' : qh;
 		// }
-		// /*ä¸­æ–‡***********************************************************************************************/
+		// /*ÖĞÎÄ***********************************************************************************************/
 		// else
 		// {
 		// 	tmp[pos + i -2] = qh;
@@ -3818,47 +3821,47 @@ static void print_logs(uint16_t n, uint8_t *d) {
 
 typedef struct
 {
-	unsigned char Entry;   //æ¡ç›®ä»£ç 
-	unsigned char str[64]; //é‡Šä¹‰
+	unsigned char Entry;   //ÌõÄ¿´úÂë
+	unsigned char str[64]; //ÊÍÒå
 }LOG_INFO;
 
 LOG_INFO logInfo[] = {
 /* Generic */
-{LOG_INFO_GENERIC                        /*0x10*/,_ANSI_RED_BR_(   "éç‰¹å®šæ—¥å¿—æ¡ç›®.                  !!!      | ")},
-{LOG_INFO_CONFIG_SET                     /*0x11*/,_ANSI_GREEN_BR_( "é…ç½®æ›´æ”¹.                        [+]      | ")},
-{LOG_INFO_SETTING_SET                    /*0x12*/,_ANSI_GREEN_BR_( "å¡æ§½æ›´æ”¹.                        [+]      | ")},
-{LOG_INFO_UID_SET                        /*0x13*/,_ANSI_GREEN_BR_( "å¡å·æ›´æ”¹.                        [+]      | ")},
-{LOG_INFO_RESET_APP                      /*0x20*/,_ANSI_RED_BR_(   "ç¨‹åºé‡ç½®.                        !!!      | ")},
+{LOG_INFO_GENERIC                        /*0x10*/,_ANSI_RED_BR_(   "·ÇÌØ¶¨ÈÕÖ¾ÌõÄ¿.                  !!!      | ")},
+{LOG_INFO_CONFIG_SET                     /*0x11*/,_ANSI_GREEN_BR_( "ÅäÖÃ¸ü¸Ä.                        [+]      | ")},
+{LOG_INFO_SETTING_SET                    /*0x12*/,_ANSI_GREEN_BR_( "¿¨²Û¸ü¸Ä.                        [+]      | ")},
+{LOG_INFO_UID_SET                        /*0x13*/,_ANSI_GREEN_BR_( "¿¨ºÅ¸ü¸Ä.                        [+]      | ")},
+{LOG_INFO_RESET_APP                      /*0x20*/,_ANSI_RED_BR_(   "³ÌĞòÖØÖÃ.                        !!!      | ")},
 
 /* Codec */
-{LOG_INFO_CODEC_RX_DATA                  /*0x40*/,_ANSI_WHITE_( "è°ƒåˆ¶è§£è°ƒå™¨æ¥æ”¶æ•°æ®               <<<      | ")},
-{LOG_INFO_CODEC_TX_DATA                  /*0x41*/,_ANSI_WHITE_( "è°ƒåˆ¶è§£è°ƒå™¨å‘é€æ•°æ®               >>>      | ")},
-{LOG_INFO_CODEC_RX_DATA_W_PARITY         /*0x42*/,_ANSI_WHITE_( "è°ƒåˆ¶è§£è°ƒå™¨æ¥æ”¶æ•°æ®(å¥‡å¶æ ¡éªŒ)     <<<      | ")},
-{LOG_INFO_CODEC_TX_DATA_W_PARITY         /*0x43*/,_ANSI_WHITE_( "è°ƒåˆ¶è§£è°ƒå™¨å‘é€æ•°æ®(å¥‡å¶æ ¡éªŒ)     >>>      | ")},
-{LOG_INFO_CODEC_SNI_READER_DATA          /*0x44*/,_ANSI_YELLOW_BR_( "ä»è¯»å¡å™¨å—…æ¢æ¥æ”¶çš„æ•°æ®           [#]      | ")},
-{LOG_INFO_CODEC_SNI_READER_DATA_W_PARITY /*0x45*/,_ANSI_YELLOW_BR_( "ä»è¯»å¡å™¨å—…æ¢æ¥æ”¶çš„æ•°æ®(å¥‡å¶æ ¡éªŒ) [#]      | ")},
-{LOG_INFO_CODEC_SNI_CARD_DATA            /*0x46*/,_ANSI_WHITE_( "ä»å°„é¢‘å¡å—…æ¢æ¥æ”¶çš„æ•°æ®           [-]      | ")},
-{LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY   /*0x47*/,_ANSI_WHITE_( "ä»å°„é¢‘å¡å—…æ¢æ¥æ”¶çš„æ•°æ®(å¥‡å¶æ ¡éªŒ) [-]      | ")},
-{LOG_INFO_CODEC_READER_FIELD_DETECTED    /*0x48*/,_ANSI_CYAN_(     "æ£€æµ‹åˆ°è¯»å¡å™¨åœºå¼º                 <<<      | ")},
+{LOG_INFO_CODEC_RX_DATA                  /*0x40*/,_ANSI_WHITE_( "µ÷ÖÆ½âµ÷Æ÷½ÓÊÕÊı¾İ               <<<      | ")},
+{LOG_INFO_CODEC_TX_DATA                  /*0x41*/,_ANSI_WHITE_( "µ÷ÖÆ½âµ÷Æ÷·¢ËÍÊı¾İ               >>>      | ")},
+{LOG_INFO_CODEC_RX_DATA_W_PARITY         /*0x42*/,_ANSI_WHITE_( "µ÷ÖÆ½âµ÷Æ÷½ÓÊÕÊı¾İ(ÆæÅ¼Ğ£Ñé)     <<<      | ")},
+{LOG_INFO_CODEC_TX_DATA_W_PARITY         /*0x43*/,_ANSI_WHITE_( "µ÷ÖÆ½âµ÷Æ÷·¢ËÍÊı¾İ(ÆæÅ¼Ğ£Ñé)     >>>      | ")},
+{LOG_INFO_CODEC_SNI_READER_DATA          /*0x44*/,_ANSI_YELLOW_BR_( "´Ó¶Á¿¨Æ÷ĞáÌ½½ÓÊÕµÄÊı¾İ           [#]      | ")},
+{LOG_INFO_CODEC_SNI_READER_DATA_W_PARITY /*0x45*/,_ANSI_YELLOW_BR_( "´Ó¶Á¿¨Æ÷ĞáÌ½½ÓÊÕµÄÊı¾İ(ÆæÅ¼Ğ£Ñé) [#]      | ")},
+{LOG_INFO_CODEC_SNI_CARD_DATA            /*0x46*/,_ANSI_WHITE_( "´ÓÉäÆµ¿¨ĞáÌ½½ÓÊÕµÄÊı¾İ           [-]      | ")},
+{LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY   /*0x47*/,_ANSI_WHITE_( "´ÓÉäÆµ¿¨ĞáÌ½½ÓÊÕµÄÊı¾İ(ÆæÅ¼Ğ£Ñé) [-]      | ")},
+{LOG_INFO_CODEC_READER_FIELD_DETECTED    /*0x48*/,_ANSI_CYAN_(     "¼ì²âµ½¶Á¿¨Æ÷³¡Ç¿                 <<<      | ")},
 
 /* App */
-{LOG_INFO_APP_CMD_READ                  /*0x80*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†è¯»å–å‘½ä»¤.          ---      | ")},
-{LOG_INFO_APP_CMD_WRITE                 /*0x81*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†å†™å…¥å‘½ä»¤.          ---      | ")},
-{LOG_INFO_APP_CMD_INC                   /*0x84*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†å¡å·åŠ å‘½ä»¤.        ---      | ")},
-{LOG_INFO_APP_CMD_DEC                   /*0x85*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†å¡å·å‡å‘½ä»¤.        ---      | ")},
-{LOG_INFO_APP_CMD_TRANSFER              /*0x86*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†ä¼ è¾“å‘½ä»¤.          ---      | ")},
-{LOG_INFO_APP_CMD_RESTORE               /*0x87*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†æ¢å¤å‘½ä»¤.          ---      | ")},
-{LOG_INFO_APP_CMD_AUTH                  /*0x90*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†èº«ä»½éªŒè¯å‘½ä»¤.      ---      | ")},
-{LOG_INFO_APP_CMD_HALT                  /*0x91*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå·²å¤„ç†ä¼‘çœ å¡å‘½ä»¤.        ---      | ")},
-{LOG_INFO_APP_CMD_UNKNOWN               /*0x92*/,_ANSI_RED_BR_(   "åº”ç”¨ç¨‹åºå¤„ç†äº†æœªçŸ¥å‘½ä»¤.          !!!      | ")},
-{LOG_INFO_APP_CMD_REQA                  /*0x93*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åº(ISO14443Aå¤„ç†ç¨‹åº)å·²å¤„ç†REQA.    | ")},
-{LOG_INFO_APP_CMD_WUPA                  /*0x94*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åº(ISO14443Aå¤„ç†ç¨‹åº)å·²å¤„ç†WUPA.    | ")},
-{LOG_INFO_APP_CMD_DESELECT              /*0x95*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åº(ISO14443Aå¤„ç†ç¨‹åº)å·²å¤„ç†DESELECT.| ")},
-{LOG_INFO_APP_AUTHING                   /*0xA0*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå¤„äº[èº«ä»½éªŒè¯è¿›è¡Œ]çŠ¶æ€.  ---      | ")},
-{LOG_INFO_APP_AUTHED                    /*0xA1*/,_ANSI_YELLOW_BR_("åº”ç”¨ç¨‹åºå¤„äº[èº«ä»½éªŒè¯æˆåŠŸ]çŠ¶æ€.  ---      | ")},
-{LOG_ERR_APP_AUTH_FAIL                  /*0xC0*/,_ANSI_RED_BR_(   "åº”ç”¨ç¨‹åºèº«ä»½éªŒè¯å¤±è´¥.            !!!      | ")},
-{LOG_ERR_APP_CHECKSUM_FAIL              /*0xC1*/,_ANSI_RED_BR_(   "åº”ç”¨ç¨‹åºæ ¡éªŒå’Œå¤±è´¥.              !!!      | ")},
-{LOG_ERR_APP_NOT_AUTHED                 /*0xC2*/,_ANSI_RED_BR_(   "åº”ç”¨ç¨‹åºæœªé€šè¿‡èº«ä»½éªŒè¯.          !!!      | ")},
+{LOG_INFO_APP_CMD_READ                  /*0x80*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦Àí¶ÁÈ¡ÃüÁî.          ---      | ")},
+{LOG_INFO_APP_CMD_WRITE                 /*0x81*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦ÀíĞ´ÈëÃüÁî.          ---      | ")},
+{LOG_INFO_APP_CMD_INC                   /*0x84*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦Àí¿¨ºÅ¼ÓÃüÁî.        ---      | ")},
+{LOG_INFO_APP_CMD_DEC                   /*0x85*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦Àí¿¨ºÅ¼õÃüÁî.        ---      | ")},
+{LOG_INFO_APP_CMD_TRANSFER              /*0x86*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦Àí´«ÊäÃüÁî.          ---      | ")},
+{LOG_INFO_APP_CMD_RESTORE               /*0x87*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦Àí»Ö¸´ÃüÁî.          ---      | ")},
+{LOG_INFO_APP_CMD_AUTH                  /*0x90*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦ÀíÉí·İÑéÖ¤ÃüÁî.      ---      | ")},
+{LOG_INFO_APP_CMD_HALT                  /*0x91*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞòÒÑ´¦ÀíĞİÃß¿¨ÃüÁî.        ---      | ")},
+{LOG_INFO_APP_CMD_UNKNOWN               /*0x92*/,_ANSI_RED_BR_(   "Ó¦ÓÃ³ÌĞò´¦ÀíÁËÎ´ÖªÃüÁî.          !!!      | ")},
+{LOG_INFO_APP_CMD_REQA                  /*0x93*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞò(ISO14443A´¦Àí³ÌĞò)ÒÑ´¦ÀíREQA.    | ")},
+{LOG_INFO_APP_CMD_WUPA                  /*0x94*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞò(ISO14443A´¦Àí³ÌĞò)ÒÑ´¦ÀíWUPA.    | ")},
+{LOG_INFO_APP_CMD_DESELECT              /*0x95*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞò(ISO14443A´¦Àí³ÌĞò)ÒÑ´¦ÀíDESELECT.| ")},
+{LOG_INFO_APP_AUTHING                   /*0xA0*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞò´¦ÓÚ[Éí·İÑéÖ¤½øĞĞ]×´Ì¬.  ---      | ")},
+{LOG_INFO_APP_AUTHED                    /*0xA1*/,_ANSI_YELLOW_BR_("Ó¦ÓÃ³ÌĞò´¦ÓÚ[Éí·İÑéÖ¤³É¹¦]×´Ì¬.  ---      | ")},
+{LOG_ERR_APP_AUTH_FAIL                  /*0xC0*/,_ANSI_RED_BR_(   "Ó¦ÓÃ³ÌĞòÉí·İÑéÖ¤Ê§°Ü.            !!!      | ")},
+{LOG_ERR_APP_CHECKSUM_FAIL              /*0xC1*/,_ANSI_RED_BR_(   "Ó¦ÓÃ³ÌĞòĞ£ÑéºÍÊ§°Ü.              !!!      | ")},
+{LOG_ERR_APP_NOT_AUTHED                 /*0xC2*/,_ANSI_RED_BR_(   "Ó¦ÓÃ³ÌĞòÎ´Í¨¹ıÉí·İÑéÖ¤.          !!!      | ")},
 
 };
 
@@ -3877,14 +3880,14 @@ static char logExplainFind(unsigned char Entry,unsigned char * BUFFER)
 
 int checkParityBit(uint8_t *data,int byteCount,uint8_t* out)
 {
-    // çŸ­å¸§ï¼Œæ— å¥‡å¶ä½
+    // ¶ÌÖ¡£¬ÎŞÆæÅ¼Î»
     if (byteCount == 1)
     {
         out[0]=data[0];
         return true;
     }
 
-    // 9ä½æ˜¯ä¸€ä¸ªç»„ï¼ŒéªŒè¯ä½è®¡æ•°è®¡ç®—å¦‚ä¸‹
+    // 9Î»ÊÇÒ»¸ö×é£¬ÑéÖ¤Î»¼ÆÊı¼ÆËãÈçÏÂ
     int bitCount = byteCount*8;
     uint8_t *parsedData = (uint8_t*)malloc((bitCount/9)*sizeof(uint8_t));
     memset(parsedData,0,(bitCount/9)*sizeof(uint8_t));
@@ -3893,28 +3896,28 @@ int checkParityBit(uint8_t *data,int byteCount,uint8_t* out)
     int i;
     for (i=0;i<bitCount;i++)
     {
-        // è·å–æœ¬bitæ•°æ®
+        // »ñÈ¡±¾bitÊı¾İ
         int byteIndex = i/8;
         int bitIndex  = i%8;
         uint8_t bit = (data[byteIndex] >> bitIndex) & 0x01 ;
 
-        // æ£€æŸ¥å¥‡å¶æ ¡éªŒä½
-        // å½“å‰ä½ä¸ºå¥‡å¶ä½
+        // ¼ì²éÆæÅ¼Ğ£ÑéÎ»
+        // µ±Ç°Î»ÎªÆæÅ¼Î»
         if(i % 9 == 8)
         {
             /*
-            // å½“å‰å­—èŠ‚ä¸­çš„å¶æ•°
+            // µ±Ç°×Ö½ÚÖĞµÄÅ¼Êı
             if((oneCounter % 2) && (bit == 1))
             {
-                printf("å¤±è´¥");
+                printf("Ê§°Ü");
                 free(parsedData);
                 return false;
                 goto end;
             }
-            // å½“å‰å­—èŠ‚ä¸­å¥‡æ•°ä¸ª1
+            // µ±Ç°×Ö½ÚÖĞÆæÊı¸ö1
             else if((!(oneCounter % 2)) && (bit == 0))
             {
-                printf("å¤±è´¥");
+                printf("Ê§°Ü");
                 free(parsedData);
                 return false;
                 goto end;
@@ -3922,7 +3925,7 @@ int checkParityBit(uint8_t *data,int byteCount,uint8_t* out)
             oneCounter = 0;
             */
         }
-        // å½“å‰ä½ä¸ºæ­£å¸¸ä½
+        // µ±Ç°Î»ÎªÕı³£Î»
         else
         {
             oneCounter += bit;
@@ -3930,7 +3933,7 @@ int checkParityBit(uint8_t *data,int byteCount,uint8_t* out)
         }
     }
 
-    //printf("æˆåŠŸ");
+    //printf("³É¹¦");
 
     end:
     for(int j=0;j<i/9;j++)
@@ -3952,18 +3955,18 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
 	unsigned char outStr[64]={0};
 	unsigned char * srartArr=BUFFER;
 
-    //BUFFER+=2;  //+2æ˜¯è§£æå†°äººçš„å—…æ¢æ•°æ®
+    //BUFFER+=2;  //+2ÊÇ½âÎö±ùÈËµÄĞáÌ½Êı¾İ
     int authnum=0;
 	while((uint32_t)(BUFFER-srartArr)<loglength)
 	{
 		if(logExplainFind(*BUFFER++,outStr))
 		{   
 			printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr-1));
-			char datasize = *BUFFER++; //æœ‰æ•ˆæ•°æ®é•¿åº¦
+			char datasize = *BUFFER++; //ÓĞĞ§Êı¾İ³¤¶È
 			unsigned int time = (*BUFFER++)<<8 ;
-			time |= (*BUFFER++); //æ—¶é—´æˆ³
-			printf("æ—¶é—´æˆ³:%05d | ",time);
-			printf("%s",outStr); //äº‹ä»¶
+			time |= (*BUFFER++); //Ê±¼ä´Á
+			printf("Ê±¼ä´Á:%05d | ",time);
+			printf("%s",outStr); //ÊÂ¼ş
             if(*(BUFFER-4)==LOG_INFO_CONFIG_SET)
             {
                 for(char j=0;j<datasize;j++)
@@ -4004,21 +4007,21 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
 		{
 			printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr-1));
 			unsigned char error_event=*(BUFFER-1);
-			char datasize = *BUFFER++; //æœ‰æ•ˆæ•°æ®é•¿åº¦
-			unsigned int time = (*BUFFER++)<<8 ; //æ—¶é—´æˆ³
-			time |= (*BUFFER++); //æ—¶é—´æˆ³
-			printf("æ—¶é—´æˆ³:%05d | ",time);
-			//printf("%s ",outStr); //äº‹ä»¶
+			char datasize = *BUFFER++; //ÓĞĞ§Êı¾İ³¤¶È
+			unsigned int time = (*BUFFER++)<<8 ; //Ê±¼ä´Á
+			time |= (*BUFFER++); //Ê±¼ä´Á
+			printf("Ê±¼ä´Á:%05d | ",time);
+			//printf("%s ",outStr); //ÊÂ¼ş
 			if(error_event!=0)
             {
                 if(error_event==0xff)
-                    printf(_ANSI_RED_BR_("[!] è®¾å¤‡å·²é‡å¯.                  !!!      | "));
+                    printf(_ANSI_RED_BR_("[!] Éè±¸ÒÑÖØÆô.                  !!!      | "));
                 else
-				    printf(_ANSI_RED_BR_("[!] æœªçŸ¥äº‹ä»¶.äº‹ä»¶ä»£ç [%02x]        ???      | "),error_event);
+				    printf(_ANSI_RED_BR_("[!] Î´ÖªÊÂ¼ş.ÊÂ¼ş´úÂë[%02x]        ???      | "),error_event);
             }
 			else
             {
-                printf(_ANSI_CYAN_("æ•°æ®ç©ºé—²åŒºåŸŸ.                    [=]      | "));
+                printf(_ANSI_CYAN_("Êı¾İ¿ÕÏĞÇøÓò.                    [=]      | "));
             }
 			for(char j=0;j<datasize;j++)
 			{
@@ -4028,7 +4031,7 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
 		}
 	}
 	printf(_WHITE_BR_("-------+--------------+-------------------------------------------+-------------------------------------------------------\r\n"));
-    printf("å·²å¤„ç†çš„éªŒè¯è¯·æ±‚æ¬¡æ•°:%d\r\n",authnum);
+    printf("ÒÑ´¦ÀíµÄÑéÖ¤ÇëÇó´ÎÊı:%d\r\n",authnum);
 }
 
 uint8_t mfkey32v2[22];
@@ -4036,11 +4039,11 @@ uint8_t mfkey64[22];
 
 static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
 {
-    memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //ä¸Šä¸€æ¬¡æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•
-    autoMfkey32srcNum=0;                             //ä¸Šä¸€æ¬¡æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
-    autoMfkey64srcNum=0;                             //ä¸Šä¸€æ¬¡æ‰§è¡ŒlogProcessAuthå‡½æ•°æ—¶è·å–çš„ç²¾ç®€è®°å½•æ¡ç›®æ•°é‡
+    memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //ÉÏÒ»´ÎÖ´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼
+    autoMfkey32srcNum=0;                             //ÉÏÒ»´ÎÖ´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
+    autoMfkey64srcNum=0;                             //ÉÏÒ»´ÎÖ´ĞĞlogProcessAuthº¯ÊıÊ±»ñÈ¡µÄ¾«¼ò¼ÇÂ¼ÌõÄ¿ÊıÁ¿
 
-    printf("ä»ä¸Šè¿°æ—¥å¿—åˆ—è¡¨æå–çš„å¯†é’¥æµ,é”®å…¥automfkey32/automfkey64å‘½ä»¤ä»¥æ¢å¤å¯†é’¥\r\n");
+    printf("´ÓÉÏÊöÈÕÖ¾ÁĞ±íÌáÈ¡µÄÃÜÔ¿Á÷,¼üÈëautomfkey32/automfkey64ÃüÁîÒÔ»Ö¸´ÃÜÔ¿\r\n");
 	printf(_WHITE_BR_("-----+--------+--------------+------------------------------------+-------------------------------------------------------------------\r\n"));
 	printf(_WHITE_BR_("numb | offset | time         | event                              |  <keyAB/blk>[2] <uid>[4] <nt>[4] <{nr}>[4] <{ar}>[4] <{at}>[4]    \r\n"));
 	printf(_WHITE_BR_("-----+--------+--------------+------------------------------------+-------------------------------------------------------------------\r\n"));
@@ -4076,31 +4079,31 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
     int authnumerror=0;
 	while((uint32_t)(BUFFER-srartArr)<loglength)
 	{
-        event=logExplainFind(*BUFFER++,outStr); //æ‰¾äº‹ä»¶,æ²¡æœ‰æ‰¾åˆ°ç…§æ ·åç§»(ç»§ç»­è¿è¡Œ)
+        event=logExplainFind(*BUFFER++,outStr); //ÕÒÊÂ¼ş,Ã»ÓĞÕÒµ½ÕÕÑùÆ«ÒÆ(¼ÌĞøÔËĞĞ)
 
-        addr=(uint32_t)(BUFFER-srartArr-1);     //äº‹ä»¶åœ°å€
-        datasize = *BUFFER++;                   //äº‹ä»¶é™„åŠ æ•°æ®é•¿åº¦
+        addr=(uint32_t)(BUFFER-srartArr-1);     //ÊÂ¼şµØÖ·
+        datasize = *BUFFER++;                   //ÊÂ¼ş¸½¼ÓÊı¾İ³¤¶È
         time = (*BUFFER++)<<8 ;
-        time |= (*BUFFER++);                    //äº‹ä»¶æ—¶é—´
+        time |= (*BUFFER++);                    //ÊÂ¼şÊ±¼ä
 
-        switch (event)                          //åŒ¹é…
+        switch (event)                          //Æ¥Åä
         {
         case LOG_INFO_CODEC_RX_DATA:
-            if((*(BUFFER)==0x93 || *(BUFFER)==0x95) && datasize==9)  //é˜²å†²æ’ æ›´æ–°uid
+            if((*(BUFFER)==0x93 || *(BUFFER)==0x95) && datasize==9)  //·À³å×² ¸üĞÂuid
             {
                 uid[0]=*(BUFFER+2);
                 uid[1]=*(BUFFER+3);
                 uid[2]=*(BUFFER+4);
                 uid[3]=*(BUFFER+5);
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             }
             else
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             break;
         
         case LOG_INFO_APP_CMD_AUTH:
             authnum++;printf(_WHITE_BR_("%04d | "),authnum);
-            if((*(BUFFER+datasize)==LOG_INFO_CODEC_TX_DATA) && *(BUFFER+datasize+1)==4)//ä¸‹ä¸€ä¸ªäº‹ä»¶æ˜¯å‘é€æ•°æ®ä¸”å‘é€äº†4å­—èŠ‚ é‚£å°±æ˜¯nt
+            if((*(BUFFER+datasize)==LOG_INFO_CODEC_TX_DATA) && *(BUFFER+datasize+1)==4)//ÏÂÒ»¸öÊÂ¼şÊÇ·¢ËÍÊı¾İÇÒ·¢ËÍÁË4×Ö½Ú ÄÇ¾ÍÊÇnt
             {
                 keyType=*BUFFER;
                 keysec=*(BUFFER+1);
@@ -4139,8 +4142,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                         BUFFER+=8;
 
                         printf(AEND "0x%04X | " ,(uint32_t)(BUFFER-srartArr));
-                        printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                        printf(_ANSI_YELLOW_BR_("[+]æ— å¡å—…æ¢:èº«ä»½éªŒè¯æˆåŠŸ!          | "));
+                        printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                        printf(_ANSI_YELLOW_BR_("[+]ÎŞ¿¨ĞáÌ½:Éí·İÑéÖ¤³É¹¦!          | "));
                         mfkey32v2[0]=keyType;
                         mfkey32v2[1]=keysec;
                         for(uint8_t i=0;i<4;i++)
@@ -4164,8 +4167,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
 
                         BUFFER+=8;
                         printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                        printf("æ—¶é—´æˆ³:%05d | ",time);
-                        printf(_ANSI_CYAN_("[+]æ— å¡å—…æ¢.                       | "));
+                        printf("Ê±¼ä´Á:%05d | ",time);
+                        printf(_ANSI_CYAN_("[+]ÎŞ¿¨ĞáÌ½.                       | "));
                         mfkey32v2[0]=keyType;
                         mfkey32v2[1]=keysec;
                         for(uint8_t i=0;i<4;i++)
@@ -4182,8 +4185,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                         }
                         printf("\r\n");
 
-                        //è½¬å‚¨åˆ°å¯†æµè¡¨
-                        if(autoMfkey32srcNum<255) //å¯†æµè¡¨æœ€å¤šå­˜å‚¨256æ¡å¯†æµ
+                        //×ª´¢µ½ÃÜÁ÷±í
+                        if(autoMfkey32srcNum<255) //ÃÜÁ÷±í×î¶à´æ´¢256ÌõÃÜÁ÷
                         {
                             for(uint8_t i=0;i<18;i++)
                             {
@@ -4196,8 +4199,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                     {
                         authnumerror++;
                         printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                        printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                        printf(_ANSI_RED_BR_("[!]æ— å¡å—…æ¢:ä¸ç¬¦åˆè¦æ±‚.            | "));
+                        printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                        printf(_ANSI_RED_BR_("[!]ÎŞ¿¨ĞáÌ½:²»·ûºÏÒªÇó.            | "));
                         for(uint8_t i=0;i<22;i++)
                         {
                             printf("-- ");
@@ -4209,8 +4212,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                 {
                     authnumerror++;
                     printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                    printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                    printf(_ANSI_RED_BR_("[!]æ— å¡å—…æ¢:nr/aræ¥æ”¶é”™è¯¯.         | "));
+                    printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                    printf(_ANSI_RED_BR_("[!]ÎŞ¿¨ĞáÌ½:nr/ar½ÓÊÕ´íÎó.         | "));
                     for(uint8_t i=0;i<22;i++)
                     {
                         printf("-- ");
@@ -4222,40 +4225,40 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
             {
                 authnumerror++;
                 printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                printf(_ANSI_RED_BR_("[!]æ— å¡å—…æ¢:ä¸ç¬¦åˆè¦æ±‚.            | "));
+                printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                printf(_ANSI_RED_BR_("[!]ÎŞ¿¨ĞáÌ½:²»·ûºÏÒªÇó.            | "));
                 for(uint8_t i=0;i<22;i++)
                 {
                     printf("-- ");
                 }
                 printf("\r\n");
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             }
             break;
         case LOG_INFO_CODEC_SNI_READER_DATA:
-            if(datasize==9 && *BUFFER==0x93 && *(BUFFER+1)==0x70)  //é€‰å¡å‘½ä»¤
+            if(datasize==9 && *BUFFER==0x93 && *(BUFFER+1)==0x70)  //Ñ¡¿¨ÃüÁî
             {
-                //printf("é€‰å¡å‘½ä»¤\r\n");
+                //printf("Ñ¡¿¨ÃüÁî\r\n");
                 uid[0]=*(BUFFER+2);
                 uid[1]=*(BUFFER+3);
                 uid[2]=*(BUFFER+4);
                 uid[3]=*(BUFFER+5);
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             }
-            else if(datasize==4 && (*BUFFER==0x60 || *BUFFER==0x61) && *(BUFFER+datasize)==LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY && *(BUFFER+datasize+1)==5)  //èº«ä»½éªŒè¯è¯·æ±‚
+            else if(datasize==4 && (*BUFFER==0x60 || *BUFFER==0x61) && *(BUFFER+datasize)==LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY && *(BUFFER+datasize+1)==5)  //Éí·İÑéÖ¤ÇëÇó
             {
-                authnum++;printf(_WHITE_BR_("%04d | "),authnum);//éªŒè¯è®°å½•
+                authnum++;printf(_WHITE_BR_("%04d | "),authnum);//ÑéÖ¤¼ÇÂ¼
 
-                //printf("èº«ä»½éªŒè¯è¯·æ±‚\r\n");
+                //printf("Éí·İÑéÖ¤ÇëÇó\r\n");
                 keyType=*BUFFER;
                 keysec=*(BUFFER+1);
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
                 if(*BUFFER==LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY && *(BUFFER+1)==5)  //nt
                 {
                     //printf("nt\r\n");
                     BUFFER+=4;
                     checkParityBit(BUFFER,5,nt0);
-                    BUFFER+=5;  //ç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                    BUFFER+=5;  //ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
                     if(*BUFFER==LOG_INFO_CODEC_SNI_READER_DATA && *(BUFFER+1)==8)  //nr+ar
                     {
                         //printf("nr+ar\r\n");
@@ -4269,19 +4272,19 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                         ar0[2]=*(BUFFER+10);
                         ar0[3]=*(BUFFER+11);
 
-                        BUFFER+=12; //ç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                        BUFFER+=12; //ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
 
                         if(*BUFFER==LOG_INFO_CODEC_SNI_CARD_DATA_W_PARITY && *(BUFFER+1)==5)  //at
                         {
                             //printf("at\r\n");
                             BUFFER+=4;
                             checkParityBit(BUFFER,5,at0);
-                            BUFFER+=5;  //ç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                            BUFFER+=5;  //ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
 
                             authnumsuccess++;
                             printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                            printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                            printf(_ANSI_GREEN_BR_("[+]æœ‰å¡å—…æ¢.                       | "));
+                            printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                            printf(_ANSI_GREEN_BR_("[+]ÓĞ¿¨ĞáÌ½.                       | "));
                             mfkey64[0]=keyType;
                             mfkey64[1]=keysec;
                             for(uint8_t i=0;i<4;i++)
@@ -4298,8 +4301,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                             }
                             printf("\r\n");
 
-                            //è½¬å‚¨åˆ°å¯†æµè¡¨
-                            if(autoMfkey64srcNum<255) //å¯†æµè¡¨æœ€å¤šå­˜å‚¨256æ¡å¯†æµ
+                            //×ª´¢µ½ÃÜÁ÷±í
+                            if(autoMfkey64srcNum<255) //ÃÜÁ÷±í×î¶à´æ´¢256ÌõÃÜÁ÷
                             {
                                 for(uint8_t i=0;i<22;i++)
                                 {
@@ -4312,8 +4315,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                         {
                             authnumerror++;
                             printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                            printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                            printf(_ANSI_RED_BR_("[!]æœ‰å¡å—…æ¢:atæ¥æ”¶é”™è¯¯.            | "));
+                            printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                            printf(_ANSI_RED_BR_("[!]ÓĞ¿¨ĞáÌ½:at½ÓÊÕ´íÎó.            | "));
                             for(uint8_t i=0;i<22;i++)
                             {
                                 printf("-- ");
@@ -4325,8 +4328,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                     {
                         authnumerror++;
                         printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                        printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                        printf(_ANSI_RED_BR_("[!]æœ‰å¡å—…æ¢:nr+aræ¥æ”¶é”™è¯¯.         | "));
+                        printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                        printf(_ANSI_RED_BR_("[!]ÓĞ¿¨ĞáÌ½:nr+ar½ÓÊÕ´íÎó.         | "));
                         for(uint8_t i=0;i<22;i++)
                         {
                             printf("-- ");
@@ -4338,8 +4341,8 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                 {
                     authnumerror++;
                     printf(AEND "0x%04X | ",(uint32_t)(BUFFER-srartArr));
-                    printf(AEND "æ—¶é—´æˆ³:%05d | ",time);
-                    printf(_ANSI_RED_BR_("[!]æœ‰å¡å—…æ¢:ntæ¥æ”¶é”™è¯¯.            | "));
+                    printf(AEND "Ê±¼ä´Á:%05d | ",time);
+                    printf(_ANSI_RED_BR_("[!]ÓĞ¿¨ĞáÌ½:nt½ÓÊÕ´íÎó.            | "));
                     for(uint8_t i=0;i<22;i++)
                     {
                         printf("-- ");
@@ -4348,21 +4351,21 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
                 }
             }
             else
-                BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+                BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             break;
         case LOG_INFO_CODEC_SNI_READER_DATA_W_PARITY:
             break;
 
         default:
-            BUFFER+=datasize;   //åç§»è‡³ä¸‹ä¸€ä¸ªäº‹ä»¶
+            BUFFER+=datasize;   //Æ«ÒÆÖÁÏÂÒ»¸öÊÂ¼ş
             break;
         
         }
 	}
 	printf(_WHITE_BR_("-----+--------+--------------+------------------------------------+-------------------------------------------------------------------\r\n"));
-    printf("å·²å¤„ç†çš„éªŒè¯è¯·æ±‚æ¬¡æ•°:%d\r\n",authnum);
-    printf("æˆåŠŸ:%dæ¬¡,å¤±è´¥:%dæ¬¡\r\n",authnumsuccess,authnumfault);
-    printf("åŒ…å«%dæ¬¡æ¥å—æ•°æ®æœ‰è¯¯æˆ–ä¸ç¬¦åˆè¦æ±‚\r\n\r\n",authnumerror);
+    printf("ÒÑ´¦ÀíµÄÑéÖ¤ÇëÇó´ÎÊı:%d\r\n",authnum);
+    printf("³É¹¦:%d´Î,Ê§°Ü:%d´Î\r\n",authnumsuccess,authnumfault);
+    printf("°üº¬%d´Î½ÓÊÜÊı¾İÓĞÎó»ò²»·ûºÏÒªÇó\r\n\r\n",authnumerror);
     
     
 }
@@ -4373,7 +4376,7 @@ static void logProcessAuth(unsigned char * BUFFER,uint32_t loglength)
 #define MEMORY_SIZE_PER_SETTING		8192
 char XmodeSendStr[MEMORY_SIZE_PER_SETTING];
 
-#define RECEIVE_BUF_SIZE	          1024*18+20 /*æœ€å¤§ä¸‹è½½é‡å³æ—¥å¿—æ–‡ä»¶,å˜è‰²é¾™ä¸€æ¬¡æœ€å¤§è¿”å›18kbçš„æ—¥å¿—æ–‡ä»¶,ç•™å‡º20byteç©ºé—´*/
+#define RECEIVE_BUF_SIZE	          1024*18+20 /*×î´óÏÂÔØÁ¿¼´ÈÕÖ¾ÎÄ¼ş,±äÉ«ÁúÒ»´Î×î´ó·µ»Ø18kbµÄÈÕÖ¾ÎÄ¼ş,Áô³ö20byte¿Õ¼ä*/
 char XmodeReceiveStr[RECEIVE_BUF_SIZE]={0};
 
 void TerminalSendChar(char c) {
@@ -4497,7 +4500,7 @@ bool XModemProcessByte(uint8_t Byte) {
                 TerminalSendByte(BYTE_ACK);
                 State = STATE_OFF;
 				XmodeFlag=0;  
-				/*è¯»å–æ•´å¡æ•°æ®*****************************************************/
+				/*¶ÁÈ¡Õû¿¨Êı¾İ*****************************************************/
 				FILE *fp;
 				fp = fopen(receiveFile, "wb");
 				fwrite((const void *)XmodeReceiveStr, sizeof(unsigned char), BlockAddress, fp);
@@ -4507,18 +4510,18 @@ bool XModemProcessByte(uint8_t Byte) {
 
 				if(downloadtype==1)
 				{
-					for(int addr=0;addr<BlockAddress/16;addr++)                                    //å¯»å€èŒƒå›´0~3f(16æ‰‡åŒº*4å—=64å—)
+					for(int addr=0;addr<BlockAddress/16;addr++)                                    //Ñ°Ö··¶Î§0~3f(16ÉÈÇø*4¿é=64¿é)
 					{
-						if(addr%4==0)                                                          //å››å—ä¸ºä¸€ä¸ªæ‰‡åŒº,æ˜¾ç¤ºåˆ†å‰²
-							printf(_YELLOW_BR_("\r\n%02dæ‰‡åŒº\r\n") 
+						if(addr%4==0)                                                          //ËÄ¿éÎªÒ»¸öÉÈÇø,ÏÔÊ¾·Ö¸î
+							printf(_YELLOW_BR_("\r\n%02dÉÈÇø\r\n") 
 							"-----------------------------------------------\r\n",addr/4);
-						unsigned char data[16];                                                //æ•°æ®ç¼“å­˜
+						unsigned char data[16];                                                //Êı¾İ»º´æ
 						memcpy(data,(const void *)(XmodeReceiveStr+addr*16),16);
-						for(unsigned char i=0;i<16;i++)                                                 //ä¸€å—16ä¸ªå­—èŠ‚
+						for(unsigned char i=0;i<16;i++)                                                 //Ò»¿é16¸ö×Ö½Ú
 						{
-							printf("%02X ",data[i]);                                           //æ‰“å°ä¸€ä¸ªå­—èŠ‚
+							printf("%02X ",data[i]);                                           //´òÓ¡Ò»¸ö×Ö½Ú
 						}
-						printf("\r\n");                                                        //ä¸€å—æ•°æ®æ‰“å°å®Œæ¯•æ¢è¡Œ
+						printf("\r\n");                                                        //Ò»¿éÊı¾İ´òÓ¡Íê±Ï»»ĞĞ
 					}
 					printf("\r\n");  
 				}
@@ -4527,19 +4530,19 @@ bool XModemProcessByte(uint8_t Byte) {
 				{
                     if(BlockAddress==2048)
                     {
-                        printf(_RED_BR_("æ—¥å¿—ä¸ºç©º.æ²¡æœ‰ä»»ä½•å¯ä»¥è§£æçš„æ•°æ®è®°å½•."));
+                        printf(_RED_BR_("ÈÕÖ¾Îª¿Õ.Ã»ÓĞÈÎºÎ¿ÉÒÔ½âÎöµÄÊı¾İ¼ÇÂ¼."));
                         goto LOGNULL;
                     }
-					printf("\r\næ—¥å¿—é¢„è§ˆ\r\n");
+					printf("\r\nÈÕÖ¾Ô¤ÀÀ\r\n");
                     if(BlockAddress==18432)
 					    print_logs((BlockAddress)/0x10,(uint8_t*)XmodeReceiveStr);
                     else
-                        print_logs((BlockAddress-1024*2)/0x10,(uint8_t*)XmodeReceiveStr); //æ—¥å¿—æ²¡æ»¡æ€»ä¼šå¤šä¼ è¾“2Kçš„ç©ºæ•°æ®ï¼Œä¸æ˜¾ç¤ºå®ƒ
-					printf("\r\næ—¥å¿—æ•°æ®è§£æç»“æœ\r\n");
+                        print_logs((BlockAddress-1024*2)/0x10,(uint8_t*)XmodeReceiveStr); //ÈÕÖ¾Ã»Âú×Ü»á¶à´«Êä2KµÄ¿ÕÊı¾İ£¬²»ÏÔÊ¾Ëü
+					printf("\r\nÈÕÖ¾Êı¾İ½âÎö½á¹û\r\n");
                     if(BlockAddress==18432)
 					    logProcess((uint8_t*)XmodeReceiveStr,BlockAddress);
                     else
-                        logProcess((uint8_t*)XmodeReceiveStr,BlockAddress-1024*2); //æ—¥å¿—æ²¡æ»¡æ€»ä¼šå¤šä¼ è¾“2Kçš„ç©ºæ•°æ®ï¼Œä¸æ˜¾ç¤ºå®ƒ
+                        logProcess((uint8_t*)XmodeReceiveStr,BlockAddress-1024*2); //ÈÕÖ¾Ã»Âú×Ü»á¶à´«Êä2KµÄ¿ÕÊı¾İ£¬²»ÏÔÊ¾Ëü
 					printf("\r\n");
                     /***/
                     logProcessAuth((uint8_t*)XmodeReceiveStr,BlockAddress);
@@ -4551,17 +4554,17 @@ bool XModemProcessByte(uint8_t Byte) {
                     /***/
 					
 				}
-				printf(_GREEN_BR_("[=] æ¥æ”¶å®Œæ¯•.\r\n"));
+				printf(_GREEN_BR_("[=] ½ÓÊÕÍê±Ï.\r\n"));
                 if(BlockAddress==18432)
-                    printf(_RED_BR_("[!] æ³¨æ„:å˜è‰²é¾™æ—¥å¿—å­˜å‚¨ç©ºé—´å·²æ»¡,è¯·åŠæ—¶æ¸…ç† [æ—¥å¿—å­˜å‚¨å™¨ç°å·²å…³é—­].\r\n"));
+                    printf(_RED_BR_("[!] ×¢Òâ:±äÉ«ÁúÈÕÖ¾´æ´¢¿Õ¼äÒÑÂú,Çë¼°Ê±ÇåÀí [ÈÕÖ¾´æ´¢Æ÷ÏÖÒÑ¹Ø±Õ].\r\n"));
                 else
-                    printf(_CYAN_("[!] æ³¨æ„:å˜è‰²é¾™ä¼ è¾“é™„åŠ çš„2kbç©ºç™½æ—¥å¿—æ•°æ®å·²è‡ªåŠ¨å¿½ç•¥.\r\n"));
-				printf(_YELLOW_BR_("[=] å·²å†™å…¥æ–‡ä»¶:%s å…±è®¡%d byte.\r\n"),receiveFile,BlockAddress);
+                    printf(_CYAN_("[!] ×¢Òâ:±äÉ«Áú´«Êä¸½¼ÓµÄ2kb¿Õ°×ÈÕÖ¾Êı¾İÒÑ×Ô¶¯ºöÂÔ.\r\n"));
+				printf(_YELLOW_BR_("[=] ÒÑĞ´ÈëÎÄ¼ş:%s ¹²¼Æ%d byte.\r\n"),receiveFile,BlockAddress);
                 if(downloadtype==2)
-                    printf(_YELLOW_BR_("[?] è‹¥è¦ä»ä¸Šè¿°æ—¥å¿—æ–‡ä»¶æå–å¯†æµè§£ç®—ç§˜é’¥,è¯·é”®å…¥<automfkey32>/<automfkey64>å‘½ä»¤.å¹¶è€å¿ƒç­‰å¾…ç¨‹åºè¿è¡Œç»“æŸ."));
+                    printf(_YELLOW_BR_("[?] ÈôÒª´ÓÉÏÊöÈÕÖ¾ÎÄ¼şÌáÈ¡ÃÜÁ÷½âËãÃØÔ¿,Çë¼üÈë<automfkey32>/<automfkey64>ÃüÁî.²¢ÄÍĞÄµÈ´ı³ÌĞòÔËĞĞ½áÊø."));
                 LOGNULL:
                 downloadtype=0;
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(receiveFile,0,sizeof(receiveFile));
 				memset(XmodeReceiveStr,0,RECEIVE_BUF_SIZE);
 
@@ -4688,8 +4691,8 @@ bool XModemProcessByte(uint8_t Byte) {
             State = STATE_OFF;
 			XmodeFlag=0;
 			memset(XmodeSendStr,0,MEMORY_SIZE_PER_SETTING);
-			printf(_GREEN_BR_("\r\n[=] ä¸Šä¼ æˆåŠŸ."));
-			printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+			printf(_GREEN_BR_("\r\n[=] ÉÏ´«³É¹¦."));
+			printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
             break;
 
         default:
@@ -4714,8 +4717,8 @@ void XModemTick(void) {
                     /* Just shut off after some time. */
                     State = STATE_OFF;
 					XmodeFlag=0;
-					printf(_RED_BR_("[!] å˜è‰²é¾™æ— å“åº”.ç­‰å¾…å·²è¶…æ—¶."));
-					printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+					printf(_RED_BR_("[!] ±äÉ«ÁúÎŞÏìÓ¦.µÈ´ıÒÑ³¬Ê±."));
+					printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
                 }
 
                 RetryTimeout = RECV_INIT_TIMEOUT;
@@ -4727,21 +4730,21 @@ void XModemTick(void) {
                 /* Abort */
                 State = STATE_OFF;
 				XmodeFlag=0;
-				printf(_RED_BR_("[!] å˜è‰²é¾™æ— å“åº”.ç­‰å¾…å·²è¶…æ—¶."));
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+				printf(_RED_BR_("[!] ±äÉ«ÁúÎŞÏìÓ¦.µÈ´ıÒÑ³¬Ê±."));
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
             }
             break;
 
 /**************************************************************************/
-/*                      é’ˆå¯¹æ•°æ®çº¿æ¾åŠ¨é€ æˆçš„ä¸¢åŒ…é—®é¢˜                           */
+/*                      Õë¶ÔÊı¾İÏßËÉ¶¯Ôì³ÉµÄ¶ª°üÎÊÌâ                           */
 /**************************************************************************/
         case STATE_SEND_WAIT:
             if (RetryTimeout-- == 0) {
                 /* Abort */
                 State = STATE_OFF;
 				XmodeFlag=0;
-				printf(_RED_BR_("\r\n[!] å‘é€å¤±è´¥,è¯·é‡æ–°å¯åŠ¨ä¼ è¾“."));
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+				printf(_RED_BR_("\r\n[!] ·¢ËÍÊ§°Ü,ÇëÖØĞÂÆô¶¯´«Êä."));
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
             }
             break;
 
@@ -4752,8 +4755,8 @@ void XModemTick(void) {
                 /* Abort */
                 State = STATE_OFF;
 				XmodeFlag=0;
-				printf(_RED_BR_("\r\n[!] æœªçŸ¥é”™è¯¯,è¯·é‡æ–°å¯åŠ¨ä¼ è¾“."));
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+				printf(_RED_BR_("\r\n[!] Î´Öª´íÎó,ÇëÖØĞÂÆô¶¯´«Êä."));
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
             }
             break;
 
@@ -4764,8 +4767,9 @@ void XModemTick(void) {
     }
 }
 
-void *XModemTickProcess(void)
+void *XModemTickProcess(void* arg)
 {
+    UNUSED(arg);
 	while(1)
 	{
         #ifdef _WIN32
@@ -4817,40 +4821,40 @@ bool MemoryUploadBlock(void *Buffer, uint32_t BlockAddress_1, uint16_t ByteCount
 
 #ifdef _WIN32
 
-/* è®¾ç½®ä¸²å£å‚æ•°
- * å¯æ”¹ä¸ºä¼ å‚ç»™å®š
- * è¶…æ—¶æŒ‰æœ€å¿«å“åº”è®¾ç½®
+/* ÉèÖÃ´®¿Ú²ÎÊı
+ * ¿É¸ÄÎª´«²Î¸ø¶¨
+ * ³¬Ê±°´×î¿ìÏìÓ¦ÉèÖÃ
  */
 int setUart(HANDLE hCom_1)
 {
 	COMMTIMEOUTS timeouts;
 	DCB dcb;
 
-	// è¯»è¶…æ—¶
-	timeouts.ReadIntervalTimeout         = 1/*MAXDWORD*/; // è¯»æ“ä½œæ—¶ä¸¤ä¸ªå­—ç¬¦é—´çš„é—´éš”è¶…æ—¶
-	timeouts.ReadTotalTimeoutMultiplier  = 0; // è¯»æ“ä½œåœ¨è¯»å–æ¯ä¸ªå­—ç¬¦æ—¶çš„è¶…æ—¶
-	timeouts.ReadTotalTimeoutConstant    = 1/*0*/; // è¯»æ“ä½œçš„å›ºå®šè¶…æ—¶
-	// å†™è¶…æ—¶
-	timeouts.WriteTotalTimeoutMultiplier = 0/*0*/; // å†™æ“ä½œåœ¨å†™æ¯ä¸ªå­—ç¬¦æ—¶çš„è¶…æ—¶
-	timeouts.WriteTotalTimeoutConstant   = 0; // å†™æ“ä½œçš„å›ºå®šè¶…æ—¶
+	// ¶Á³¬Ê±
+	timeouts.ReadIntervalTimeout         = 1/*MAXDWORD*/; // ¶Á²Ù×÷Ê±Á½¸ö×Ö·û¼äµÄ¼ä¸ô³¬Ê±
+	timeouts.ReadTotalTimeoutMultiplier  = 0; // ¶Á²Ù×÷ÔÚ¶ÁÈ¡Ã¿¸ö×Ö·ûÊ±µÄ³¬Ê±
+	timeouts.ReadTotalTimeoutConstant    = 1/*0*/; // ¶Á²Ù×÷µÄ¹Ì¶¨³¬Ê±
+	// Ğ´³¬Ê±
+	timeouts.WriteTotalTimeoutMultiplier = 0/*0*/; // Ğ´²Ù×÷ÔÚĞ´Ã¿¸ö×Ö·ûÊ±µÄ³¬Ê±
+	timeouts.WriteTotalTimeoutConstant   = 0; // Ğ´²Ù×÷µÄ¹Ì¶¨³¬Ê±
 
-	// è®¾ç½®è¶…æ—¶
+	// ÉèÖÃ³¬Ê±
 	SetCommTimeouts(hCom_1, &timeouts);
 
-	// è®¾ç½®è¾“å…¥è¾“å‡ºç¼“å†²åŒºå¤§å°
+	// ÉèÖÃÊäÈëÊä³ö»º³åÇø´óĞ¡
 	SetupComm(hCom_1, INBUFLEN, OUTBUFLEN);
 
-	// è·å–ä¸²å£å‚æ•°
+	// »ñÈ¡´®¿Ú²ÎÊı
 	if (GetCommState(hCom_1, &dcb) == 0)
 	{
 		return -1;
 	}
 
-	// è®¾ç½®ä¸²å£å‚æ•°
-	dcb.BaudRate = CBR_115200; // æ³¢ç‰¹ç‡
-	dcb.ByteSize = 8;          // æ•°æ®ä½æ•°
-	dcb.Parity   = NOPARITY;   // æ ¡éªŒä½
-	dcb.StopBits = ONESTOPBIT; // åœæ­¢ä½
+	// ÉèÖÃ´®¿Ú²ÎÊı
+	dcb.BaudRate = CBR_115200; // ²¨ÌØÂÊ
+	dcb.ByteSize = 8;          // Êı¾İÎ»Êı
+	dcb.Parity   = NOPARITY;   // Ğ£ÑéÎ»
+	dcb.StopBits = ONESTOPBIT; // Í£Ö¹Î»
 	if (SetCommState(hCom_1, &dcb) == 0)
 	{
 		return -1;
@@ -4868,21 +4872,21 @@ void initUart(void)
     START:
     for(int i = 1; i<=iCOM; i++)
     {
-        HANDLE hCom; //å…¨å±€å˜é‡ï¼Œä¸²å£å¥æŸ„ 
+        HANDLE hCom; //È«¾Ö±äÁ¿£¬´®¿Ú¾ä±ú 
         char cTemp[MAX_PATH]; 
         char cTempFull[MAX_PATH]; 
         sprintf(cTemp, "COM%d", i);
         sprintf(cTempFull, "\\\\.\\COM%d", i);
-        hCom=CreateFile(cTempFull,//COM1å£ 
-            GENERIC_READ|GENERIC_WRITE, //å…è®¸è¯»å’Œå†™ 
-            0, //ç‹¬å æ–¹å¼ 
+        hCom=CreateFile(cTempFull,//COM1¿Ú 
+            GENERIC_READ|GENERIC_WRITE, //ÔÊĞí¶ÁºÍĞ´ 
+            0, //¶ÀÕ¼·½Ê½ 
             NULL, 
-            OPEN_EXISTING, //æ‰“å¼€è€Œä¸æ˜¯åˆ›å»º 
-            0, //åŒæ­¥æ–¹å¼ 
+            OPEN_EXISTING, //´ò¿ª¶ø²»ÊÇ´´½¨ 
+            0, //Í¬²½·½Ê½ 
             NULL); 
         if(hCom==(HANDLE)-1) 
         { 
-            //printf("æ‰“å¼€COM%då¤±è´¥!\r\n",i); 
+            //printf("´ò¿ªCOM%dÊ§°Ü!\r\n",i); 
         } 
         else
         {
@@ -4901,73 +4905,73 @@ void initUart(void)
 
     if(bFirstTime)
     {
-        // printf("æ— å¯ç”¨ä¸²å£,è¯·ç¡®ä¿å½“å‰è®¡ç®—æœºå·²æ­£ç¡®å®‰è£…ChameleonMinié©±åŠ¨ç¨‹åº.\r\n");
+        // printf("ÎŞ¿ÉÓÃ´®¿Ú,ÇëÈ·±£µ±Ç°¼ÆËã»úÒÑÕıÈ·°²×°ChameleonMiniÇı¶¯³ÌĞò.\r\n");
         // getch();
         // exit(0);
 
-        int userSelect = MessageBoxA(0, "æœªæ£€æµ‹åˆ°å¯ç”¨ä¸²å£ï¼\r\nè¯·ç¡®ä¿å½“å‰è®¡ç®—æœºå·²æ­£ç¡®å®‰è£…ChameleonMinié©±åŠ¨ç¨‹åºå¹¶æœªè¢«å…¶ä»–ç¨‹åºå ç”¨", "é”™è¯¯", MB_ABORTRETRYIGNORE|MB_ICONERROR);
+        int userSelect = MessageBoxA(0, "Î´¼ì²âµ½¿ÉÓÃ´®¿Ú£¡\r\nÇëÈ·±£µ±Ç°¼ÆËã»úÒÑÕıÈ·°²×°ChameleonMiniÇı¶¯³ÌĞò²¢Î´±»ÆäËû³ÌĞòÕ¼ÓÃ", "´íÎó", MB_ABORTRETRYIGNORE|MB_ICONERROR);
 
-        if(userSelect == IDABORT) //ä¸­æ­¢ 
+        if(userSelect == IDABORT) //ÖĞÖ¹ 
             exit(0);
-        else if(userSelect == IDRETRY)//é‡è¯•
+        else if(userSelect == IDRETRY)//ÖØÊÔ
             goto START;
-        else if(userSelect == IDIGNORE)//å¿½ç•¥
+        else if(userSelect == IDIGNORE)//ºöÂÔ
         {
-            userSelect = MessageBoxA(0, "æ˜¯å¦è·³è¿‡ä¸²å£æ£€æŸ¥?\r\næ˜¯: è·³è¿‡ä¸²å£åˆå§‹åŒ–,ç›´æ¥è¿›å…¥ä¸»ç¨‹åº(ç”¨äºåŠŸèƒ½æµ‹è¯•)\r\nå¦: é”®å…¥å¯ç”¨ä¸²å£å·(å¯èƒ½æœªè¢«æšä¸¾çš„å€¼)", "ä¸²å£æ£€æŸ¥é¡¹", MB_YESNO|MB_ICONQUESTION);
+            userSelect = MessageBoxA(0, "ÊÇ·ñÌø¹ı´®¿Ú¼ì²é?\r\nÊÇ: Ìø¹ı´®¿Ú³õÊ¼»¯,Ö±½Ó½øÈëÖ÷³ÌĞò(ÓÃÓÚ¹¦ÄÜ²âÊÔ)\r\n·ñ: ¼üÈë¿ÉÓÃ´®¿ÚºÅ(¿ÉÄÜÎ´±»Ã¶¾ÙµÄÖµ)", "´®¿Ú¼ì²éÏî", MB_YESNO|MB_ICONQUESTION);
             if(userSelect == IDYES)
             {
-                return; /* ç›´æ¥é€€å‡º */
+                return; /* Ö±½ÓÍË³ö */
             }
             else if(userSelect == IDNO)
             {
-                /* æ— éœ€åšä»»ä½•äº‹ */
+                /* ÎŞĞè×öÈÎºÎÊÂ */
             }
         }
     }
     else
-        printf("å¯ç”¨ä¸²å£: %s\r\n",cCom);
+        printf("¿ÉÓÃ´®¿Ú: %s\r\n",cCom);
 
 	OPEN:
 	//printf(logo);
-	printf("\r\né€‰æ‹©ChameleonMiniä¸²å£å·(ä¾‹å¦‚\"5\"):");
+	printf("\r\nÑ¡ÔñChameleonMini´®¿ÚºÅ(ÀıÈç\"5\"):");
 
 	char com[32]={0};
 	int num=0;
 	scanf("%d",&num);
-	getc(stdin); //åƒæ‰è¾“å…¥çš„å›è½¦
+	getc(stdin); //³ÔµôÊäÈëµÄ»Ø³µ
 
 	if(num<10)
 		sprintf(com,"COM%d",num);
 	else
 		sprintf(com,"\\\\.\\COM%d",num);
 	
-	// æ‰“å¼€ä¸²å£
+	// ´ò¿ª´®¿Ú
 	hCom = CreateFile(com, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 	if (hCom != INVALID_HANDLE_VALUE)
 	{
-		printf("ä¸²å£æ‰“å¼€æˆåŠŸ\n");
+		printf("´®¿Ú´ò¿ª³É¹¦\n");
 	}
 	else
 	{
-		printf("ä¸²å£æ‰“å¼€å¤±è´¥ï¼Œé‡æ–°æ’æ‹”è®¾å¤‡å¯èƒ½ä¼šè§£å†³é—®é¢˜\n\n");
+		printf("´®¿Ú´ò¿ªÊ§°Ü£¬ÖØĞÂ²å°ÎÉè±¸¿ÉÄÜ»á½â¾öÎÊÌâ\n\n");
 		goto OPEN;
 	}
 
-	// é…ç½®ä¸²å£
+	// ÅäÖÃ´®¿Ú
 	if (setUart(hCom) == -1)
 	{
 		if (INVALID_HANDLE_VALUE != hCom)
-			CloseHandle(hCom); // å…³é—­ä¸²å£
+			CloseHandle(hCom); // ¹Ø±Õ´®¿Ú
 	}
 
     // sprintf(com,"COM%d",num);
     // sp1 = uart_open(com,115200);
     // if(sp1 == INVALID_SERIAL_PORT)
     // {
-    //     printf("ä¸²å£æ‰“å¼€å¤±è´¥ï¼Œé‡æ–°æ’æ‹”è®¾å¤‡å¯èƒ½ä¼šè§£å†³é—®é¢˜\n\n");
+    //     printf("´®¿Ú´ò¿ªÊ§°Ü£¬ÖØĞÂ²å°ÎÉè±¸¿ÉÄÜ»á½â¾öÎÊÌâ\n\n");
 	// 	goto OPEN;
     // }
-    printf("ä¸²å£æ‰“å¼€æˆåŠŸ\n");
+    printf("´®¿Ú´ò¿ª³É¹¦\n");
 }
 
 #endif
@@ -4983,7 +4987,7 @@ void deInitUart(void)
 
 
 
-/* ç”¨äºå…³é—­ä¸²å£è¯»å–çº¿ç¨‹ */
+/* ÓÃÓÚ¹Ø±Õ´®¿Ú¶ÁÈ¡Ïß³Ì */
 uint8_t shutdowmread = 0;
 
 #ifdef _WIN32
@@ -5001,35 +5005,35 @@ void readUart(void)
 
 		if (INVALID_HANDLE_VALUE != hCom)
 		{
-			//printf(_RED_BR_("[+] æ­£åœ¨æ¥æ”¶...\r\n"));
+			//printf(_RED_BR_("[+] ÕıÔÚ½ÓÊÕ...\r\n"));
 			ReadFile(hCom, rbuf, sizeof(rbuf), &rsize, NULL);
-            // å¤„ç†è¯»å–åˆ°çš„æ•°æ®
+            // ´¦Àí¶ÁÈ¡µ½µÄÊı¾İ
             if (rsize > 0) {
                 //printf("Received: %.*s\n", rsize, rbuf);
                 for(int i=0;i<rsize;i++)
                 {
                     static int arr=0;
-                    if(XmodeFlag==1)  //ä¸Šä¼ 
+                    if(XmodeFlag==1)  //ÉÏ´«
                     {
                         //printf("%02x ", rbuf[i]);
                         //printf(".");
                         receive++;
                         char buf[128]={0};
-                        double rate = (receive*60/66);  //å‘é€8KB(8*128byte)ï¼Œä¸€ä¸ªåŒ…128byteï¼Œå…±å¯æ”¶åˆ°64æ¬¡åŒ…æ¥æ”¶å®Œæ¯•ç¡®è®¤ä¿¡å·ï¼ŒåŠ ä¸Šå¼€å§‹å’Œç»“æŸä¿¡å·ï¼Œå…±66æ¬¡
+                        double rate = (receive*60/66);  //·¢ËÍ8KB(8*128byte)£¬Ò»¸ö°ü128byte£¬¹²¿ÉÊÕµ½64´Î°ü½ÓÊÕÍê±ÏÈ·ÈÏĞÅºÅ£¬¼ÓÉÏ¿ªÊ¼ºÍ½áÊøĞÅºÅ£¬¹²66´Î
 
                         static uint8_t color=1,colorLen=0;
                         for(int j = 0; j < 60; j++)
                         {
-                            if(j >= rate) //é¢œè‰²åˆ†ç•Œå¤„
+                            if(j >= rate) //ÑÕÉ«·Ö½ç´¦
                             {
                                 if(color)
                                 {
-                                    colorLen=strlen("\x1b[92m");  //ç»¿è‰²
+                                    colorLen=strlen("\x1b[92m");  //ÂÌÉ«
                                     memcpy(buf+j*2,"\x1b[92m",colorLen);
                                     color=0;
                                 }
                             }
-                            memcpy(buf+j*2+colorLen,"â–ˆ",2);
+                            memcpy(buf+j*2+colorLen,"¨€",2);
                         }
                         color=1,colorLen=0;
                         printf(_YELLOW_BR_("\r[+] %s [%02d%%] "),buf,receive*100/66);
@@ -5038,7 +5042,7 @@ void readUart(void)
 
                         XModemProcessByte(rbuf[i]);
                     }
-                    else if(XmodeFlag==2)  //æ¥æ”¶
+                    else if(XmodeFlag==2)  //½ÓÊÕ
                     {
                         int len = downloadtype==1 ? strlen(loadlogo) : strlen(loglogo);
                         const char *pictureBuf = downloadtype==1 ? loadlogo : loglogo;
@@ -5053,12 +5057,12 @@ void readUart(void)
                             double rate = (BlockAddress*50/(uint32_t)(RECEIVE_BUF_SIZE-20));
                             for(int j = 0; j < 50; j++)
                             {
-                                if(j < rate) //è¾“å‡ºnumä¸ª">"
-                                    memcpy(buf+j*2,"â–ˆ",2);
+                                if(j < rate) //Êä³önum¸ö">"
+                                    memcpy(buf+j*2,"¨€",2);
                                 else
-                                    memcpy(buf+j*2,"â”€",2);
+                                    memcpy(buf+j*2,"©¤",2);
                             }
-                            printf(_YELLOW_BR_("\r[+] ç©ºé—´ä½¿ç”¨ç‡: %sâ–[%02d%%] "),buf,BlockAddress*100/(uint32_t)(RECEIVE_BUF_SIZE-20));
+                            printf(_YELLOW_BR_("\r[+] ¿Õ¼äÊ¹ÓÃÂÊ: %s¨‡[%02d%%] "),buf,BlockAddress*100/(uint32_t)(RECEIVE_BUF_SIZE-20));
                             printf("%d/%d byte",BlockAddress,RECEIVE_BUF_SIZE-20);
                         }
                         
@@ -5072,7 +5076,7 @@ void readUart(void)
                     }
                 }
                 //printf("\n");
-                //printf(_RED_BR_("[+] æ¥æ”¶å·²å®Œæ¯•...\r\n"));
+                //printf(_RED_BR_("[+] ½ÓÊÕÒÑÍê±Ï...\r\n"));
             }
 		}
 	}
@@ -5081,8 +5085,9 @@ void readUart(void)
 #else
 
 
-void *readUartPM3(void)
+void *readUartPM3(void* arg)
 {
+    UNUSED(arg);
     while(1)
     {
         do{
@@ -5094,35 +5099,35 @@ void *readUartPM3(void)
             }
         }while(!rsize);
 
-        //printf("é•¿åº¦ï¼š%ld,æ•°æ®ï¼š%s",rsize,rbuf);
+        //printf("³¤¶È£º%ld,Êı¾İ£º%s",rsize,rbuf);
 
-        // å¤„ç†è¯»å–åˆ°çš„æ•°æ®
+        // ´¦Àí¶ÁÈ¡µ½µÄÊı¾İ
         if (rsize > 0) {
             //printf("Received: %.*s\n", rsize, rbuf);
             for(int i=0;i<rsize;i++)
             {
                 static int arr=0;
-                if(XmodeFlag==1)  //ä¸Šä¼ 
+                if(XmodeFlag==1)  //ÉÏ´«
                 {
                     //printf("%02x ", rbuf[i]);
                     //printf(".");
                     receive++;
                     char buf[128]={0};
-                    double rate = (receive*60/66);  //å‘é€8KB(8*128byte)ï¼Œä¸€ä¸ªåŒ…128byteï¼Œå…±å¯æ”¶åˆ°64æ¬¡åŒ…æ¥æ”¶å®Œæ¯•ç¡®è®¤ä¿¡å·ï¼ŒåŠ ä¸Šå¼€å§‹å’Œç»“æŸä¿¡å·ï¼Œå…±66æ¬¡
+                    double rate = (receive*60/66);  //·¢ËÍ8KB(8*128byte)£¬Ò»¸ö°ü128byte£¬¹²¿ÉÊÕµ½64´Î°ü½ÓÊÕÍê±ÏÈ·ÈÏĞÅºÅ£¬¼ÓÉÏ¿ªÊ¼ºÍ½áÊøĞÅºÅ£¬¹²66´Î
 
                     static uint8_t color=1,colorLen=0;
                     for(int j = 0; j < 60; j++)
                     {
-                        if(j >= rate) //é¢œè‰²åˆ†ç•Œå¤„
+                        if(j >= rate) //ÑÕÉ«·Ö½ç´¦
                         {
                             if(color)
                             {
-                                colorLen=strlen("\x1b[92m");  //ç»¿è‰²
+                                colorLen=strlen("\x1b[92m");  //ÂÌÉ«
                                 memcpy(buf+j*2,"\x1b[92m",colorLen);
                                 color=0;
                             }
                         }
-                        memcpy(buf+j*2+colorLen,"â–ˆ",2);
+                        memcpy(buf+j*2+colorLen,"¨€",2);
                     }
                     color=1,colorLen=0;
                     printf(_YELLOW_BR_("\r[+] %s [%02d%%] "),buf,receive*100/66);
@@ -5131,7 +5136,7 @@ void *readUartPM3(void)
 
                     XModemProcessByte(rbuf[i]);
                 }
-                else if(XmodeFlag==2)  //æ¥æ”¶
+                else if(XmodeFlag==2)  //½ÓÊÕ
                 {
                     int len = downloadtype==1 ? strlen(loadlogo) : strlen(loglogo);
                     const char *pictureBuf = downloadtype==1 ? loadlogo : loglogo;
@@ -5146,12 +5151,12 @@ void *readUartPM3(void)
                         double rate = (BlockAddress*50/(uint32_t)(RECEIVE_BUF_SIZE-20));
                         for(int j = 0; j < 50; j++)
                         {
-                            if(j < rate) //è¾“å‡ºnumä¸ª">"
-                                memcpy(buf+j*2,"â–ˆ",2);
+                            if(j < rate) //Êä³önum¸ö">"
+                                memcpy(buf+j*2,"¨€",2);
                             else
-                                memcpy(buf+j*2,"â”€",2);
+                                memcpy(buf+j*2,"©¤",2);
                         }
-                        printf(_YELLOW_BR_("\r[+] ç©ºé—´ä½¿ç”¨ç‡: %sâ–[%02d%%] "),buf,BlockAddress*100/(uint32_t)(RECEIVE_BUF_SIZE-20));
+                        printf(_YELLOW_BR_("\r[+] ¿Õ¼äÊ¹ÓÃÂÊ: %s¨‡[%02d%%] "),buf,BlockAddress*100/(uint32_t)(RECEIVE_BUF_SIZE-20));
                         printf("%d/%d byte",BlockAddress,RECEIVE_BUF_SIZE-20);
                     }
                     
@@ -5165,7 +5170,7 @@ void *readUartPM3(void)
                 }
             }
             //printf("\n");
-            //printf(_RED_BR_("[+] æ¥æ”¶å·²å®Œæ¯•...\r\n"));
+            //printf(_RED_BR_("[+] ½ÓÊÕÒÑÍê±Ï...\r\n"));
         }
     }
 }
@@ -5184,9 +5189,9 @@ int main(int argc,char *argv[])
 
 #ifdef _WIN32
 
-	MessageBoxA(0, "å˜è‰²é¾™WIN32å‘½ä»¤è¡Œç»ˆç«¯åº”ç”¨ï¼Œæœªç»å‘å¸ƒçš„æµ‹è¯•ç‰ˆæœ¬ï¼\r\nè¯¦æƒ…å¯è®¿é—® https://www.PM3_SE_hub.com", "è­¦å‘Š!", MB_OK|MB_ICONWARNING);
+	MessageBoxA(0, "±äÉ«ÁúWIN32ÃüÁîĞĞÖÕ¶ËÓ¦ÓÃ£¬Î´¾­·¢²¼µÄ²âÊÔ°æ±¾£¡\r\nÏêÇé¿É·ÃÎÊ https://www.PM3_SE_hub.com", "¾¯¸æ!", MB_OK|MB_ICONWARNING);
 
-    int mcu = MessageBoxA(0, "æ‚¨ä½¿ç”¨çš„æ˜¯STM32è®¾å¤‡å—?\r\n\r\næ˜¯: é€‰æ‹©STM32å¼€å§‹\r\nå¦: ä»¥å®˜æ–¹AVRç‰ˆæœ¬å¼€å§‹", "è®¾å¤‡é€‰æ‹©", MB_YESNO|MB_ICONQUESTION);
+    int mcu = MessageBoxA(0, "ÄúÊ¹ÓÃµÄÊÇSTM32Éè±¸Âğ?\r\n\r\nÊÇ: Ñ¡ÔñSTM32¿ªÊ¼\r\n·ñ: ÒÔ¹Ù·½AVR°æ±¾¿ªÊ¼", "Éè±¸Ñ¡Ôñ", MB_YESNO|MB_ICONQUESTION);
     if(mcu == IDYES)
     {
         mcu=stm32;
@@ -5198,21 +5203,21 @@ int main(int argc,char *argv[])
 
     start:
 
-	initUart(); //åˆå§‹åŒ–ä¸²å£
+	initUart(); //³õÊ¼»¯´®¿Ú
 
-	printf(SCREEN_CLEAR); //æ¸…å±
+	printf(SCREEN_CLEAR); //ÇåÆÁ
 
-	//è°ƒç”¨çº¿ç¨‹è¯»ä¸²å£
+	//µ÷ÓÃÏß³Ì¶Á´®¿Ú
 	_beginthread((void *)readUart, 0, NULL);
 
-    //è°ƒç”¨çº¿ç¨‹è¯»ä¸²å£
+    //µ÷ÓÃÏß³Ì¶Á´®¿Ú
 	//_beginthread((void *)readUartPM3, 0, NULL);
 
 #else
 
-    printf("è­¦å‘Š!å˜è‰²é¾™WIN32å‘½ä»¤è¡Œç»ˆç«¯åº”ç”¨ï¼Œæœªç»å‘å¸ƒçš„æµ‹è¯•ç‰ˆæœ¬ï¼\r\nè¯¦æƒ…å¯è®¿é—® https://www.PM3_SE_hub.com");
+    printf("¾¯¸æ!±äÉ«ÁúWIN32ÃüÁîĞĞÖÕ¶ËÓ¦ÓÃ£¬Î´¾­·¢²¼µÄ²âÊÔ°æ±¾£¡\r\nÏêÇé¿É·ÃÎÊ https://www.PM3_SE_hub.com");
     char mcu;
-    printf("è®¾å¤‡é€‰æ‹© - æ‚¨ä½¿ç”¨çš„æ˜¯STM32è®¾å¤‡å—?\r\n\r\nY: é€‰æ‹©STM32å¼€å§‹\r\nN: ä»¥å®˜æ–¹AVRç‰ˆæœ¬å¼€å§‹");
+    printf("Éè±¸Ñ¡Ôñ - ÄúÊ¹ÓÃµÄÊÇSTM32Éè±¸Âğ?\r\n\r\nY: Ñ¡ÔñSTM32¿ªÊ¼\r\nN: ÒÔ¹Ù·½AVR°æ±¾¿ªÊ¼");
     scanf("%s",&mcu);
     if(mcu == 'Y')
     {
@@ -5225,26 +5230,26 @@ int main(int argc,char *argv[])
 
     start:
 
-    // printf("%s",argv[1]);
-    // if (argv[1] == NULL) {
-    //     printf("ERROR!\n");
-    // }
-    // sp1 = uart_open(argv[1]);
+    printf("%s",argv[1]);
+    if (argv[1] == NULL) {
+        printf("ERROR!\n");
+    }
+    sp1 = uart_open(argv[1]);
 
-    sp1 = uart_open("tcp:localhost:4321");
+    //sp1 = uart_open("tcp:localhost:4321");
 
     if(sp1 == INVALID_SERIAL_PORT) {
-        printf("ä¸²å£æ‰“å¼€å¤±è´¥ï¼Œé‡æ–°æ’æ‹”è®¾å¤‡å¯èƒ½ä¼šè§£å†³é—®é¢˜\n\n");
+        printf("´®¿Ú´ò¿ªÊ§°Ü£¬ÖØĞÂ²å°ÎÉè±¸¿ÉÄÜ»á½â¾öÎÊÌâ\n\n");
     }
     else {
-        printf("ä¸²å£æ‰“å¼€æˆåŠŸ\n");
+        printf("´®¿Ú´ò¿ª³É¹¦\n");
     }
 
-    getc(stdin); //åƒæ‰è¾“å…¥çš„å›è½¦
+    getc(stdin); //³ÔµôÊäÈëµÄ»Ø³µ
 
-    printf(SCREEN_CLEAR); //æ¸…å±
+    printf(SCREEN_CLEAR); //ÇåÆÁ
 
-    //è°ƒç”¨çº¿ç¨‹è¯»ä¸²å£
+    //µ÷ÓÃÏß³Ì¶Á´®¿Ú
     pthread_t thread;
     int ret = pthread_create(&thread, NULL, readUartPM3, NULL);
     if (ret != 0) {
@@ -5257,14 +5262,14 @@ int main(int argc,char *argv[])
 
 #endif
 
-	//ä¸»çº¿ç¨‹å†™ä¸²å£
+	//Ö÷Ïß³ÌĞ´´®¿Ú
 	while(1)
 	{
         #ifdef _WIN32
 		if (INVALID_HANDLE_VALUE != hCom)
 		{
         #endif
-			//printf(_RED_BR_("[+] ç­‰å¾…è¾“å…¥...\r\n"));
+			//printf(_RED_BR_("[+] µÈ´ıÊäÈë...\r\n"));
 			char c ;
 			uint8_t len=0;
 			while((c=getc(stdin)) !='\n')
@@ -5273,34 +5278,34 @@ int main(int argc,char *argv[])
 			}
             if(strlen(wbuf)==0)
             {
-                printf(_RED_BR_("[!] æ— æ•ˆçš„æ•°æ®è¾“å…¥.é”®å…¥[help]ä»¥è·å–å¸®åŠ©ä¿¡æ¯.\r\n"));
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+                printf(_RED_BR_("[!] ÎŞĞ§µÄÊı¾İÊäÈë.¼üÈë[help]ÒÔ»ñÈ¡°ïÖúĞÅÏ¢.\r\n"));
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
                 
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
             }
-            //printf(_RED_BR_("[+] è¾“å…¥å®Œæ¯•...\r\n"));
+            //printf(_RED_BR_("[+] ÊäÈëÍê±Ï...\r\n"));
 			wbuf[len++]='\r';
 			wbuf[len++]='\n';
 			if(strcasecmp((const char *)wbuf,"cls\r\n")==0)
 			{
-				printf(SCREEN_CLEAR); //æ¸…å±
+				printf(SCREEN_CLEAR); //ÇåÆÁ
                 #ifdef _WIN32
 				WriteFile(hCom, "ping\r\n", strlen("ping\r\n"), &wsize, NULL);
                 #else
                 uart_send(sp1,"ping\r\n", strlen("ping\r\n"));
                 #endif
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
 			}
             if(strcasecmp((const char *)wbuf,"make\r\n")==0)
 			{
-                /* ä½¿ç”¨ç»å¯¹è·¯å¾„------------------------------------------- */
+                /* Ê¹ÓÃ¾ø¶ÔÂ·¾¶------------------------------------------- */
                 /*
                 char path[PATH_MAX]; //PATH_MAX is defined in limits.h
-                char *p; // å­˜æ”¾æœ€åä¸€ä¸ªæ–œæ å­—ç¬¦çš„ä½ç½®
-                getcwd(path, sizeof(path)); // è·å–å½“å‰å·¥ä½œç›®å½•
+                char *p; // ´æ·Å×îºóÒ»¸öĞ±¸Ü×Ö·ûµÄÎ»ÖÃ
+                getcwd(path, sizeof(path)); // »ñÈ¡µ±Ç°¹¤×÷Ä¿Â¼
                 uint8_t i = 0;
                 while(path[i])
                 {
@@ -5308,9 +5313,9 @@ int main(int argc,char *argv[])
                         path[i]='/';
                     i++;
                 }
-                p = strrchr(path, '\\'); // æ‰¾åˆ°æœ€åä¸€ä¸ªæ–œæ å­—ç¬¦
+                p = strrchr(path, '\\'); // ÕÒµ½×îºóÒ»¸öĞ±¸Ü×Ö·û
                 if (p) {
-                    *p = '\0'; // å°†å…¶æ›¿æ¢ä¸º\0
+                    *p = '\0'; // ½«ÆäÌæ»»Îª\0
                 }
                 strcat(path,"/Make");
                 char pathMakeCMD[PATH_MAX];
@@ -5318,20 +5323,20 @@ int main(int argc,char *argv[])
 
                 system(pathMakeCMD);
                 */
-                /* ä½¿ç”¨ç›¸å¯¹è·¯å¾„------------------------------------------- */
+                /* Ê¹ÓÃÏà¶ÔÂ·¾¶------------------------------------------- */
 
                 system("make -C ../Make size -j8");
 
-                printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+                printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
 			}
 			// if(strcasecmp((const char *)wbuf,"reconnect\r\n")==0)
 			// {
             //     //deInitUart();
-            //     initUart(); //åˆå§‹åŒ–ä¸²å£
-            //     printf(SCREEN_CLEAR); //æ¸…å±
-            //     //è°ƒç”¨çº¿ç¨‹è¯»ä¸²å£
+            //     initUart(); //³õÊ¼»¯´®¿Ú
+            //     printf(SCREEN_CLEAR); //ÇåÆÁ
+            //     //µ÷ÓÃÏß³Ì¶Á´®¿Ú
             //     _beginthread((void *)readUart, 0, NULL);
 			// 	memset(wbuf,0,OUTBUFLEN);
 			// 	continue;
@@ -5341,26 +5346,26 @@ int main(int argc,char *argv[])
                 //logProcessAuth((uint8_t*)XmodeReceiveStr,BlockAddress);
                 mfkey();
                 //crapto1();
-                getc(stdin); //åƒæ‰å›è½¦
-				printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+                getc(stdin); //³Ôµô»Ø³µ
+				printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
 			}
 			if(strcasecmp((const char *)wbuf,"autoMfkey32\r\n")==0)
 			{
-                printf(_RED_BR_("[!] æ‰§è¡Œæ­¤ä»»åŠ¡å‰è¯·å…³é—­å…¶ä»–åº”ç”¨ç¨‹åº,å¹¶ç¡®ä¿è®¡ç®—æœºæ•£çƒ­æƒ…å†µè‰¯å¥½.\r\n"));
-                printf(_YELLOW_BR_("[+] é€‰æ‹©è§£å¯†æ–¹å¼: \r\n"
-                                   "[+] 0 - å¿«é€Ÿè§£ (é«˜å¹¶å‘æ‰§è¡Œç›¸é‚»ä¸¤æ¬¡çš„å¯†æµè®¡ç®—,é€‚ç”¨äºå¤§å¤šæ•°æƒ…å†µ)\r\n"
-                                   "[+] 1 - å¯é è§£ (å¹¶å‘æ‰§è¡Œç›¸é‚»çš„å¤šæ¡å¯†æµè®¡ç®—,å½“å¿«é€Ÿè§£ä¸èƒ½æ»¡è¶³è¦æ±‚æ—¶åº”é€‰ç”¨æ­¤æ–¹å¼)\r\n"
-                                   "[+] 2 - å®Œå…¨è§£ (å¯¹å¯†æµæ•°æ®è¿›è¡Œå®Œå…¨åŒ¹é…åˆ†æ,æ‰€å¾—ç»“æœæ›´ç²¾ç¡®,ä½†è€—æ—¶æ›´é•¿)\r\n"
+                printf(_RED_BR_("[!] Ö´ĞĞ´ËÈÎÎñÇ°Çë¹Ø±ÕÆäËûÓ¦ÓÃ³ÌĞò,²¢È·±£¼ÆËã»úÉ¢ÈÈÇé¿öÁ¼ºÃ.\r\n"));
+                printf(_YELLOW_BR_("[+] Ñ¡Ôñ½âÃÜ·½Ê½: \r\n"
+                                   "[+] 0 - ¿ìËÙ½â (¸ß²¢·¢Ö´ĞĞÏàÁÚÁ½´ÎµÄÃÜÁ÷¼ÆËã,ÊÊÓÃÓÚ´ó¶àÊıÇé¿ö)\r\n"
+                                   "[+] 1 - ¿É¿¿½â (²¢·¢Ö´ĞĞÏàÁÚµÄ¶àÌõÃÜÁ÷¼ÆËã,µ±¿ìËÙ½â²»ÄÜÂú×ãÒªÇóÊ±Ó¦Ñ¡ÓÃ´Ë·½Ê½)\r\n"
+                                   "[+] 2 - ÍêÈ«½â (¶ÔÃÜÁ÷Êı¾İ½øĞĞÍêÈ«Æ¥Åä·ÖÎö,ËùµÃ½á¹û¸ü¾«È·,µ«ºÄÊ±¸ü³¤)\r\n"
                                    "[+] "));
                 scanf("%d",&decryptionLevel);
-                getc(stdin); //åƒæ‰è¾“å…¥çš„å›è½¦
+                getc(stdin); //³ÔµôÊäÈëµÄ»Ø³µ
                 if(decryptionLevel)
                     autoMfkey32();
                 else
                     autoMfkey32Fast();
-                printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+                printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
 			}
@@ -5368,7 +5373,7 @@ int main(int argc,char *argv[])
 			{
                 autoMfkey64();
 
-                printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+                printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
 			}
@@ -5376,32 +5381,32 @@ int main(int argc,char *argv[])
 			{
                 memset(wbuf,0,OUTBUFLEN);
                 
-                printf(_YELLOW_BR_("[+] é€‰æ‹©ä¸€ä¸ªé€‰é¡¹ä»¥å¼€å§‹æ›´æ–°æ‚¨çš„è®¾å¤‡\r\n"
-                                   "[+] 1 - ä»å½“å‰ç›®å½•æŸ¥æ‰¾ Chameleon-Mini.elf ä»¥æ›´æ–°è®¾å¤‡\r\n"
-                                   "[+] 2 - æˆ‘æœ‰è‡ªå·±çš„å›ºä»¶ç¨‹åºæ–‡ä»¶åŠä¿å­˜è·¯å¾„\r\n"
+                printf(_YELLOW_BR_("[+] Ñ¡ÔñÒ»¸öÑ¡ÏîÒÔ¿ªÊ¼¸üĞÂÄúµÄÉè±¸\r\n"
+                                   "[+] 1 - ´Óµ±Ç°Ä¿Â¼²éÕÒ Chameleon-Mini.elf ÒÔ¸üĞÂÉè±¸\r\n"
+                                   "[+] 2 - ÎÒÓĞ×Ô¼ºµÄ¹Ì¼ş³ÌĞòÎÄ¼ş¼°±£´æÂ·¾¶\r\n"
                 ));
 
                 scanf("%d",&decryptionLevel);
-                getc(stdin); //åƒæ‰è¾“å…¥çš„å›è½¦
+                getc(stdin); //³ÔµôÊäÈëµÄ»Ø³µ
 
                 #ifdef _WIN32
-                WriteFile(hCom, "upgrade\r\n", strlen("upgrade\r\n"), &wsize, NULL);  //å‘é€æ›´æ–°
+                WriteFile(hCom, "upgrade\r\n", strlen("upgrade\r\n"), &wsize, NULL);  //·¢ËÍ¸üĞÂ
                 #else
                 uart_send(sp1,"upgrade\r\n", strlen("upgrade\r\n"));
                 #endif
 
-                //uart_close(sp1);//å…³é—­ä¸²å£
+                //uart_close(sp1);//¹Ø±Õ´®¿Ú
                 deInitUart();
-                shutdowmread=1; //å…³é—­æ¥æ”¶çº¿ç¨‹
+                shutdowmread=1; //¹Ø±Õ½ÓÊÕÏß³Ì
 
-                printf(_GREEN_BR_("[+] STM32åŠ è½½å¼•å¯¼ç¨‹åº...\r\n"));
-                printf(_GREEN_BR_("[+] STM32å·²è¿›å…¥BootLoader\r\n"));
+                printf(_GREEN_BR_("[+] STM32¼ÓÔØÒıµ¼³ÌĞò...\r\n"));
+                printf(_GREEN_BR_("[+] STM32ÒÑ½øÈëBootLoader\r\n"));
 
                 if(decryptionLevel == 1)
                 {
                     char path[PATH_MAX]; //PATH_MAX is defined in limits.h
                     getcwd(path,sizeof(path));
-                    strcat(path,"\\å›ºä»¶æ›´æ–°.exe");
+                    strcat(path,"\\¹Ì¼ş¸üĞÂ.exe");
                     system(path);
 
                     printf("\r\n\r\n");
@@ -5411,7 +5416,7 @@ int main(int argc,char *argv[])
                     {
                         if(ing==4)
                             ing=0;
-                        printf(_YELLOW_BR_("\r[%c] æ­£åœ¨æ›´æ–°å¯ç”¨ç«¯å£...."),state[ing++]);
+                        printf(_YELLOW_BR_("\r[%c] ÕıÔÚ¸üĞÂ¿ÉÓÃ¶Ë¿Ú...."),state[ing++]);
                         #ifdef _WIN32
                         Sleep(100);
                         #else
@@ -5423,8 +5428,8 @@ int main(int argc,char *argv[])
                     return 0;
                 }
                 
-                //æ­¤æ—¶å·²æ–­å¼€è¿æ¥
-				printf(_YELLOW_BR_("[+] æŒ‡å®šå›ºä»¶æ‰€åœ¨è·¯å¾„å’Œå›ºä»¶åç§°,ç¦æ­¢åŒ…å«ä¸­æ–‡å­—ç¬¦,ç”¨ä¾‹ D:/MyFiles/Chameleon-Mini.elf\r\n[+] "));
+                //´ËÊ±ÒÑ¶Ï¿ªÁ¬½Ó
+				printf(_YELLOW_BR_("[+] Ö¸¶¨¹Ì¼şËùÔÚÂ·¾¶ºÍ¹Ì¼şÃû³Æ,½ûÖ¹°üº¬ÖĞÎÄ×Ö·û,ÓÃÀı D:/MyFiles/Chameleon-Mini.elf\r\n[+] "));
 				upgradeflag=1;
                 
 				continue;
@@ -5435,32 +5440,32 @@ int main(int argc,char *argv[])
 				wbuf[len-2]='\0';
 				FILE *fp;
 				//char XmodeSendStr[1024];
-				//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦æ‰“å¼€å¤±è´¥
-				if ( (fp = fopen((const char *)wbuf, "rb")) == NULL ) //rt è¯»txt rb è¯»bin wb å†™bin 
+				//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´ò¿ªÊ§°Ü
+				if ( (fp = fopen((const char *)wbuf, "rb")) == NULL ) //rt ¶Átxt rb ¶Ábin wb Ğ´bin 
 				{
-					printf(_RED_BR_("[!] æ‰¾ä¸åˆ°æ–‡ä»¶.æŒ‡å®šçš„æ–‡ä»¶æˆ–æ–‡ä»¶è·¯å¾„ä¸å­˜åœ¨.\r\n"));
+					printf(_RED_BR_("[!] ÕÒ²»µ½ÎÄ¼ş.Ö¸¶¨µÄÎÄ¼ş»òÎÄ¼şÂ·¾¶²»´æÔÚ.\r\n"));
                     printf(_RED_BR_("[!] %s"),wbuf);
-					printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+					printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 					memset(wbuf,0,OUTBUFLEN);
 					continue;
 				}
 
                 printf("\r\n");
-                printf(_YELLOW_BR_("[+] ç¡®è®¤æ˜¯å¦æ“¦é™¤ç”¨æˆ·æ•°æ®\r\n"
+                printf(_YELLOW_BR_("[+] È·ÈÏÊÇ·ñ²Á³ıÓÃ»§Êı¾İ\r\n"
                                    "[+] ----------------------------\r\n"
-                                   "[+] 1- æ“¦é™¤ç”¨æˆ·å­˜å‚¨çš„å¡ç‰‡åŠé…ç½®ä¿¡æ¯\r\n"
-                                   "[+] 2- ä¿ç•™ç”¨æˆ·å­˜å‚¨çš„å¡ç‰‡åŠé…ç½®ä¿¡æ¯\r\n"
+                                   "[+] 1- ²Á³ıÓÃ»§´æ´¢µÄ¿¨Æ¬¼°ÅäÖÃĞÅÏ¢\r\n"
+                                   "[+] 2- ±£ÁôÓÃ»§´æ´¢µÄ¿¨Æ¬¼°ÅäÖÃĞÅÏ¢\r\n"
                                    "[+] "
                 ));
 
                 scanf("%d",&decryptionLevel);
-                getc(stdin); //åƒæ‰è¾“å…¥çš„å›è½¦
+                getc(stdin); //³ÔµôÊäÈëµÄ»Ø³µ
 
-                //è°ƒç”¨å¤–éƒ¨æ¥å£ä¸‹è½½
+                //µ÷ÓÃÍâ²¿½Ó¿ÚÏÂÔØ
                 char path[PATH_MAX]; //PATH_MAX is defined in limits.h
                 getcwd(path,sizeof(path));
                 strcat(path,"/FlashDownload/STM32CubeProgrammer/STM32_Programmer_CLI.exe");
-                printf("çƒ§å½•ç¨‹åºè·¯å¾„ï¼š%s\r\n",path);
+                printf("ÉÕÂ¼³ÌĞòÂ·¾¶£º%s\r\n",path);
 
                 char pathDownload[PATH_MAX];
                 char pathEarse[PATH_MAX];
@@ -5473,13 +5478,13 @@ int main(int argc,char *argv[])
                 strcat(pathDownload," -c port=usb1 -w ");
                 strcat(pathDownload,wbuf);
                 strcat(pathDownload," 0x08000000");
-                printf("çƒ§å½•å‘½ä»¤ï¼š%s\r\n",pathDownload);
+                printf("ÉÕÂ¼ÃüÁî£º%s\r\n",pathDownload);
 
                 
                 strcat(pathEarse," -c port=usb1 -e all");
-                printf("æ“¦é™¤å‘½ä»¤ï¼š%s\r\n",pathEarse);
+                printf("²Á³ıÃüÁî£º%s\r\n",pathEarse);
                 strcat(pathStart," -c port=usb1 -s");
-                printf("å¯åŠ¨å‘½ä»¤ï¼š%s\r\n",pathStart);
+                printf("Æô¶¯ÃüÁî£º%s\r\n",pathStart);
 
                 if(decryptionLevel == 1)
                 {
@@ -5496,13 +5501,13 @@ int main(int argc,char *argv[])
 
                 printf(_WHITE_BR_("                                                                         \r\n"
                                   "      -------------------------------------------------------------------\r\n"
-                                  "                   å®Œæ¯•,ç°åœ¨å¯ä½¿ç”¨ç»ˆç«¯è½¯ä»¶è¿æ¥STM32,æˆ–å®‰å…¨æ‹”å‡º.                \r\n"
+                                  "                   Íê±Ï,ÏÖÔÚ¿ÉÊ¹ÓÃÖÕ¶ËÈí¼şÁ¬½ÓSTM32,»ò°²È«°Î³ö.                \r\n"
                                   "      -------------------------------------------------------------------\r\n"
                                   "                                                                         \r\n"
-                                  "STM32å˜è‰²é¾™è¿·ä½ .ç‰ˆæƒæ‰€æœ‰,ç›—ç‰ˆå¿…ç©¶!                                           \r\n"
+                                  "STM32±äÉ«ÁúÃÔÄã.°æÈ¨ËùÓĞ,µÁ°æ±Ø¾¿!                                           \r\n"
                 ));
 
-                // é‡å¯ç¨‹åº
+                // ÖØÆô³ÌĞò
                 // Sleep(1000);
                 // execl(argv[0], NULL, NULL);
                 printf("\r\n\r\n");
@@ -5512,7 +5517,7 @@ int main(int argc,char *argv[])
                 {
                     if(ing==4)
                         ing=0;
-                    printf(_YELLOW_BR_("\r[%c] æ­£åœ¨æ›´æ–°å¯ç”¨ç«¯å£...."),state[ing++]);
+                    printf(_YELLOW_BR_("\r[%c] ÕıÔÚ¸üĞÂ¿ÉÓÃ¶Ë¿Ú...."),state[ing++]);
                     #ifdef _WIN32
                     Sleep(100);
                     #else
@@ -5526,8 +5531,8 @@ int main(int argc,char *argv[])
 			}
 			if(strcasecmp((const char *)wbuf,"upload\r\n")==0)
 			{
-                receive=0; /*è¿›åº¦æ¡å½’é›¶*/
-				printf(_YELLOW_BR_("[+] æŒ‡å®šæ–‡ä»¶è·¯å¾„å’Œæ–‡ä»¶å,å¦‚ D:/æˆ‘çš„æ–‡æ¡£/é—¨å¡.dump\r\n[+] "));
+                receive=0; /*½ø¶ÈÌõ¹éÁã*/
+				printf(_YELLOW_BR_("[+] Ö¸¶¨ÎÄ¼şÂ·¾¶ºÍÎÄ¼şÃû,Èç D:/ÎÒµÄÎÄµµ/ÃÅ¿¨.dump\r\n[+] "));
 				uploadflag=1;
 				memset(wbuf,0,OUTBUFLEN);
 				continue;
@@ -5537,13 +5542,13 @@ int main(int argc,char *argv[])
 				memset(XmodeReceiveStr,0,RECEIVE_BUF_SIZE);
 				if(strcasecmp((const char *)wbuf,"download\r\n")==0)
 				{
-					printf(_YELLOW_BR_("[+] æŒ‡å®šä¿å­˜çš„æ–‡ä»¶å,å¦‚:é—¨å¡1.dump\r\n[+] "));
+					printf(_YELLOW_BR_("[+] Ö¸¶¨±£´æµÄÎÄ¼şÃû,Èç:ÃÅ¿¨1.dump\r\n[+] "));
 					downloadflag=1;
 					downloadtype=1;
 				}
 				else
 				{
-					printf(_YELLOW_BR_("[+] æŒ‡å®šä¿å­˜çš„æ–‡ä»¶å,å¦‚:log.bin\r\n[+] "));
+					printf(_YELLOW_BR_("[+] Ö¸¶¨±£´æµÄÎÄ¼şÃû,Èç:log.bin\r\n[+] "));
 					downloadflag=2;
 					downloadtype=2;
 				}
@@ -5556,34 +5561,34 @@ int main(int argc,char *argv[])
 				wbuf[len-2]='\0';
 				FILE *fp;
 				//char XmodeSendStr[1024];
-				//åˆ¤æ–­æ–‡ä»¶æ˜¯å¦æ‰“å¼€å¤±è´¥
-				if ( (fp = fopen((const char *)wbuf, "rb")) == NULL ) //rt è¯»txt rb è¯»bin wb å†™bin 
+				//ÅĞ¶ÏÎÄ¼şÊÇ·ñ´ò¿ªÊ§°Ü
+				if ( (fp = fopen((const char *)wbuf, "rb")) == NULL ) //rt ¶Átxt rb ¶Ábin wb Ğ´bin 
 				{
-					printf(_RED_BR_("[!] æ‰¾ä¸åˆ°æ–‡ä»¶.æŒ‡å®šçš„æ–‡ä»¶æˆ–æ–‡ä»¶è·¯å¾„ä¸å­˜åœ¨.\r\n"));
+					printf(_RED_BR_("[!] ÕÒ²»µ½ÎÄ¼ş.Ö¸¶¨µÄÎÄ¼ş»òÎÄ¼şÂ·¾¶²»´æÔÚ.\r\n"));
                     printf(_RED_BR_("[!] %s"),wbuf);
-					printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+					printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 					memset(wbuf,0,OUTBUFLEN);
 					continue;
 				}
 				memset(wbuf,0,OUTBUFLEN);
 
-				//è·å–æ–‡ä»¶å¤§å°
-				fseek(fp, 0, SEEK_END);//å®šä½æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å°¾ã€‚
-				long int size=ftell(fp);//è·å–æ–‡ä»¶æŒ‡é’ˆåç§»é‡ï¼Œå³æ–‡ä»¶å¤§å°ã€‚
+				//»ñÈ¡ÎÄ¼ş´óĞ¡
+				fseek(fp, 0, SEEK_END);//¶¨Î»ÎÄ¼şÖ¸Õëµ½ÎÄ¼şÎ²¡£
+				long int size=ftell(fp);//»ñÈ¡ÎÄ¼şÖ¸ÕëÆ«ÒÆÁ¿£¬¼´ÎÄ¼ş´óĞ¡¡£
 				if(size>1024*8)
 				{
-					printf(_RED_BR_("[!] æ–‡ä»¶å¤§å°è¶…å‡ºèŒƒå›´:%ld byte æœ€å¤§ %d byte."),size,MEMORY_SIZE_PER_SETTING);
-					printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+					printf(_RED_BR_("[!] ÎÄ¼ş´óĞ¡³¬³ö·¶Î§:%ld byte ×î´ó %d byte."),size,MEMORY_SIZE_PER_SETTING);
+					printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 					memset(wbuf,0,OUTBUFLEN);
 					continue;
 				}
-				printf(_YELLOW_BR_("[=] æ–‡ä»¶å¤§å°:%ld byte.\r\n"),size);
+				printf(_YELLOW_BR_("[=] ÎÄ¼ş´óĞ¡:%ld byte.\r\n"),size);
 
-				//å¾ªç¯è¯»å–æ–‡ä»¶çš„æ¯ä¸€è¡Œæ•°æ®
-				fseek(fp, 0, SEEK_SET);//å®šä½æ–‡ä»¶æŒ‡é’ˆåˆ°æ–‡ä»¶å¤´ã€‚
-				fread(XmodeSendStr, size, 1, fp); // äºŒè¿›åˆ¶è¯» != NULL )
+				//Ñ­»·¶ÁÈ¡ÎÄ¼şµÄÃ¿Ò»ĞĞÊı¾İ
+				fseek(fp, 0, SEEK_SET);//¶¨Î»ÎÄ¼şÖ¸Õëµ½ÎÄ¼şÍ·¡£
+				fread(XmodeSendStr, size, 1, fp); // ¶ş½øÖÆ¶Á != NULL )
 				fclose(fp);
-				/*è¯»å–æ•´å¡æ•°æ®*****************************************************/
+				/*¶ÁÈ¡Õû¿¨Êı¾İ*****************************************************/
 				mf_print_blocks(size/16,(uint8_t *)XmodeSendStr);
 				printf("\r\n");
 				//WriteFile(hCom, str, 1024, &wsize, NULL);
@@ -5598,7 +5603,7 @@ int main(int argc,char *argv[])
                 pthread_t thread;
                 pthread_create(&thread, NULL, XModemTickProcess, NULL);
                 #endif
-				printf(_YELLOW_BR_("[!] å¼€å§‹ä¸Šä¼ .\r\n"));
+				printf(_YELLOW_BR_("[!] ¿ªÊ¼ÉÏ´«.\r\n"));
 				XmodeFlag=1;
 				continue;
 			}
@@ -5606,14 +5611,14 @@ int main(int argc,char *argv[])
 			{
 				wbuf[len-2]='\0';
 				FILE *fp;
-				if ( (fp = fopen((const char *)wbuf, "w+")) == NULL ) //æ–°å»ºå¯è¯»å¯å†™çš„æ–‡ä»¶
+				if ( (fp = fopen((const char *)wbuf, "w+")) == NULL ) //ĞÂ½¨¿É¶Á¿ÉĞ´µÄÎÄ¼ş
 				{
-					printf(_RED_BR_("[!] åˆ›å»ºæ–‡ä»¶æ—¶å‡ºé”™.æ–‡ä»¶è¢«å ç”¨æˆ–åªè¯»æ–‡ä»¶"));
-					printf(OPTIONAL_ANSWER_TRAILER);//åŠ ä¸Šusb->
+					printf(_RED_BR_("[!] ´´½¨ÎÄ¼şÊ±³ö´í.ÎÄ¼ş±»Õ¼ÓÃ»òÖ»¶ÁÎÄ¼ş"));
+					printf(OPTIONAL_ANSWER_TRAILER);//¼ÓÉÏusb->
 					memset(wbuf,0,OUTBUFLEN);
 					continue;
 				}
-				printf(_GREEN_BR_("[=] åˆ›å»ºæ–‡ä»¶:%s\r\n"),wbuf);
+				printf(_GREEN_BR_("[=] ´´½¨ÎÄ¼ş:%s\r\n"),wbuf);
 				strcpy(receiveFile,(const char *)wbuf);
 				memset(wbuf,0,OUTBUFLEN);
 				fclose(fp);
@@ -5636,25 +5641,25 @@ int main(int argc,char *argv[])
                 }
 				downloadflag=0;
                 #ifdef _WIN32
-				Sleep(500);  //ç­‰å¾…æ¥æ”¶è¿›ç¨‹å¤„ç†å®Œæœ€åä¸€åˆ™æ¶ˆæ¯
+				Sleep(500);  //µÈ´ı½ÓÊÕ½ø³Ì´¦ÀíÍê×îºóÒ»ÔòÏûÏ¢
 				_beginthread((void *)XModemTickProcess, 0, NULL);
                 #else
-                sleep(1);  //ç­‰å¾…æ¥æ”¶è¿›ç¨‹å¤„ç†å®Œæœ€åä¸€åˆ™æ¶ˆæ¯
+                sleep(1);  //µÈ´ı½ÓÊÕ½ø³Ì´¦ÀíÍê×îºóÒ»ÔòÏûÏ¢
                 pthread_t thread;
 				pthread_create(&thread, NULL, XModemTickProcess, NULL);
                 #endif
-				printf(_YELLOW_BR_("[!] å¼€å§‹æ¥æ”¶.\r\n"));
+				printf(_YELLOW_BR_("[!] ¿ªÊ¼½ÓÊÕ.\r\n"));
 				XmodeFlag=2;
 				continue;
 			}
-			//printf(_RED_BR_("[+] æ­£åœ¨å‘é€...\r\n"));
+			//printf(_RED_BR_("[+] ÕıÔÚ·¢ËÍ...\r\n"));
             #ifdef _WIN32
 			WriteFile(hCom, wbuf, strlen((const char *)wbuf), &wsize, NULL);
             #else
             uart_send(sp1, wbuf, strlen((const char *)wbuf));
             #endif
 			memset(wbuf,0,OUTBUFLEN);
-			//printf(_RED_BR_("[+] å‘é€å·²å®Œæ¯•...\r\n"));
+			//printf(_RED_BR_("[+] ·¢ËÍÒÑÍê±Ï...\r\n"));
         #ifdef _WIN32
 		}
         #endif
@@ -5668,7 +5673,7 @@ int main(int argc,char *argv[])
 1E 5C FB EB
 60 2C 0F D2 8F 50 C6 10 D8 E3 35 D8 12 50
 60 2C DF 6E 18 8C BC B0 F8 5A 80 70 CA 23
-è¯»å¤´éªŒè¯åœ°å€(å—):44 ç§˜é’¥ç±»å‹:KeyA æˆªè·çš„ç§˜é’¥(1) = 111111111111
+¶ÁÍ·ÑéÖ¤µØÖ·(¿é):44 ÃØÔ¿ÀàĞÍ:KeyA ½Ø»ñµÄÃØÔ¿(1) = 111111111111
 */
 
 
