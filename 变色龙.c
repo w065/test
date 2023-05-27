@@ -2901,7 +2901,7 @@ typedef struct ArgList
     uint8_t a;
 }ArgList_t;
 
-#ifdef _WIM32
+#ifdef _WIN32
 void Mfkey32Process(LPVOID p)
 {
 #else
@@ -2936,7 +2936,7 @@ uint8_t secKeyFindSuccess;
 uint16_t keyFindSuccessNum;
 uint8_t scheduleNum;
 
-#ifdef _WIM32
+#ifdef _WIN32
 void Mfkey32ProcessFast(LPVOID p)
 {
 #else
@@ -3113,7 +3113,7 @@ void autoMfkey32Fast()
                 argList_t.even=even;
                 argList_t.block=block;
                 argList_t.a=0;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[0] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[0], NULL, Mfkey32ProcessFast, &argList_t);
@@ -3126,7 +3126,7 @@ void autoMfkey32Fast()
                 argList_t1.even=even1;
                 argList_t1.block=block;
                 argList_t1.a=2;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[1] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t1, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[1], NULL, Mfkey32ProcessFast, &argList_t1);
@@ -3139,7 +3139,7 @@ void autoMfkey32Fast()
                 argList_t2.even=even2;
                 argList_t2.block=block;
                 argList_t2.a=4;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[2] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t2, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[2], NULL, Mfkey32ProcessFast, &argList_t2);
@@ -3152,7 +3152,7 @@ void autoMfkey32Fast()
                 argList_t3.even=even3;
                 argList_t3.block=block;
                 argList_t3.a=6;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[3] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t3, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[3], NULL, Mfkey32ProcessFast, &argList_t3);
@@ -3165,7 +3165,7 @@ void autoMfkey32Fast()
                 argList_t4.even=even4;
                 argList_t4.block=block;
                 argList_t4.a=8;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[4] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t4, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[4], NULL, Mfkey32ProcessFast, &argList_t4);
@@ -3178,13 +3178,13 @@ void autoMfkey32Fast()
                 argList_t5.even=even5;
                 argList_t5.block=block;
                 argList_t5.a=10;
-                #ifdef _win32
+                #ifdef _WIN32
                 hThread[5] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t5, 0, NULL); // 创建线程
                 #else
                 pthread_create(&thread[5], NULL, Mfkey32ProcessFast, &argList_t5);
                 #endif
 
-                #ifdef _win32
+                #ifdef _WIN32
                 WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
                 #else
                 int iRet = 0;
@@ -3224,7 +3224,7 @@ void autoMfkey32Fast()
 
     stop = clock();     /*  停止计时  */
 
-    #ifdef _WIM32
+    #ifdef _WIN32
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
     #else
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
@@ -3391,7 +3391,7 @@ void autoMfkey32()
                                 pthread_create(&thread[4], NULL, Mfkey32Process, &argList_t4);
                                 #endif
                                 
-                                #ifdef _WIM32
+                                #ifdef _WIN32
                                 WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
                                 #else
                                 int iRet = 0;
@@ -3448,7 +3448,7 @@ void autoMfkey32()
     }
 
     stop = clock();     /*  停止计时  */
-    #ifdef _WIM32
+    #ifdef _WIN32
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
     #else
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
@@ -3542,7 +3542,7 @@ void autoMfkey64()
     }
     stop = clock();     /*  停止计时  */
     printf("\r%*s",54," ");//输出54个空格
-    #ifdef _WIM32
+    #ifdef _WIN32
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
     #else
     printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
@@ -4046,7 +4046,7 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
 	printf(_WHITE_BR_("offset | time         | event                                     | data                                                  \r\n"));
 	printf(_WHITE_BR_("-------+--------------+-------------------------------------------+-------------------------------------------------------\r\n"));
 
-	unsigned char outStr[64]={0};
+	unsigned char outStr[128]={0};
 	unsigned char * srartArr=BUFFER;
 
     //BUFFER+=2;  //+2是解析冰人的嗅探数据
@@ -4060,7 +4060,7 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
 			unsigned int time = (*BUFFER++)<<8 ;
 			time |= (*BUFFER++); //时间戳
 			printf("时间戳:%05d | ",time);
-			printf("%s",outStr); //事件
+			printf(outStr); //事件
             if(*(BUFFER-4)==LOG_INFO_CONFIG_SET)
             {
                 for(char j=0;j<datasize;j++)
@@ -4075,7 +4075,7 @@ static void logProcess(unsigned char * BUFFER,uint32_t loglength)
             {
                 uint8_t out[128];
                 checkParityBit(BUFFER,datasize,out);
-                for(int num=0;num<datasize*8/9;num++)
+                for(uint8_t num=0;num<(uint8_t)(datasize*8/9);num++)
                 {
                     printf("%02X ",out[num]);
                 }
