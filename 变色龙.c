@@ -2901,132 +2901,143 @@ typedef struct ArgList
     uint8_t a;
 }ArgList_t;
 
-// void Mfkey32Process(LPVOID p)
-// {
-//     // ArgList_t *argList_t=(ArgList_t*)p;
+#ifdef _WIM32
+void Mfkey32Process(LPVOID p)
+{
+#else
+void *Mfkey32Process(void *p)
+{
+#endif
+    // ArgList_t *argList_t=(ArgList_t*)p;
 
-//     // if(mfKey32(argList_t->UID,argList_t->one+1,argList_t->two+1)) //比对成功
-//     // {
-//     //     argList_t->one[13]=1; //已处理
-//     //     argList_t->two[13]=1; //已处理
-//     //     argList_t->status=1;
-//     // }
-
-
-
-//     /***********************************/
-
-//     ArgList_t *argList_t=(ArgList_t*)p;
-//     if(mfKey32v2(argList_t->UID,argList_t->one+1,argList_t->two+1,argList_t->statelist,argList_t->odd,argList_t->even)) //比对成功
-//     {
-//         argList_t->one[13]=1; //已处理
-//         argList_t->two[13]=1; //已处理
-//         argList_t->status=1;
-//     }
+    // if(mfKey32(argList_t->UID,argList_t->one+1,argList_t->two+1)) //比对成功
+    // {
+    //     argList_t->one[13]=1; //已处理
+    //     argList_t->two[13]=1; //已处理
+    //     argList_t->status=1;
+    // }
 
 
-// }
+
+    /***********************************/
+
+    ArgList_t *argList_t=(ArgList_t*)p;
+    if(mfKey32v2(argList_t->UID,argList_t->one+1,argList_t->two+1,argList_t->statelist,argList_t->odd,argList_t->even)) //比对成功
+    {
+        argList_t->one[13]=1; //已处理
+        argList_t->two[13]=1; //已处理
+        argList_t->status=1;
+    }
+
+
+}
 
 uint8_t secKeyFindSuccess;
 uint16_t keyFindSuccessNum;
 uint8_t scheduleNum;
 
-// void Mfkey32ProcessFast(LPVOID p)
-// {
-//     ArgList_t *argList_t=(ArgList_t*)p;
+#ifdef _WIM32
+void Mfkey32ProcessFast(LPVOID p)
+{
+#else
+void *Mfkey32ProcessFast(void *p)
+{
+#endif
+    ArgList_t *argList_t=(ArgList_t*)p;
 
-//     uint8_t block=argList_t->block;
+    uint8_t block=argList_t->block;
 
-//     for(uint8_t a=argList_t->a;a<128;a++)  //前级指针
-//     {
-//         if(secKey[block][a][0] && !secKey[block][a][13])  //存在未处理的数据
-//         {
-//             uint8_t b=a+1;//后级指针
+    for(uint8_t a=argList_t->a;a<128;a++)  //前级指针
+    {
+        if(secKey[block][a][0] && !secKey[block][a][13])  //存在未处理的数据
+        {
+            uint8_t b=a+1;//后级指针
 
-//             secKey[block][a][13]++;     //瞄定
-//             secKey[block][b][13]++;     //瞄定
-//             if(secKey[block][a][13]==1) //判断有没有被其他线程瞄定,先到先得
-//             {
-//                 if(secKey[block][b][0])  //存在未处理的数据
-//                 {
+            secKey[block][a][13]++;     //瞄定
+            secKey[block][b][13]++;     //瞄定
+            if(secKey[block][a][13]==1) //判断有没有被其他线程瞄定,先到先得
+            {
+                if(secKey[block][b][0])  //存在未处理的数据
+                {
 
 
-//                     /*************************************************************************************************************************/
-//                     if(mfKey32v2(argList_t->UID,secKey[block][a]+1,secKey[block][b]+1,argList_t->statelist,argList_t->odd,argList_t->even))
-//                     {
-//                         secKey[block][a][13]=2; //已处理
-//                         secKey[block][b][13]=2; //已处理
+                    /*************************************************************************************************************************/
+                    if(mfKey32v2(argList_t->UID,secKey[block][a]+1,secKey[block][b]+1,argList_t->statelist,argList_t->odd,argList_t->even))
+                    {
+                        secKey[block][a][13]=2; //已处理
+                        secKey[block][b][13]=2; //已处理
 
-//                         secKeyFindSuccess=1;
-//                         keyFindSuccessNum++;
-//                     }
-//                     else
-//                     {
-//                         secKey[block][a][13]=3; //错误数据
-//                         secKey[block][b][13]=0; //继续使用
-//                     }
-//                     /*************************************************************************************************************************/
+                        secKeyFindSuccess=1;
+                        keyFindSuccessNum++;
+                    }
+                    else
+                    {
+                        secKey[block][a][13]=3; //错误数据
+                        secKey[block][b][13]=0; //继续使用
+                    }
+                    /*************************************************************************************************************************/
 
-//                     uint8_t state[4]={'-','\\','|','/'};
-//                     static char ing=0;
-//                     if(ing==4)
-//                         ing=0;
+                    uint8_t state[4]={'-','\\','|','/'};
+                    static char ing=0;
+                    if(ing==4)
+                        ing=0;
 
-//                     //printf("\r[%c] (%02d,%02d) ",state[ing++],a,b);
+                    //printf("\r[%c] (%02d,%02d) ",state[ing++],a,b);
 
-//                     uint16_t cardScheduleNum=0;
-//                     for(uint8_t i=0;i<block;i++)
-//                     {
-//                         cardScheduleNum+=secKey[i][0][0];//之前扇区的密流总数
-//                     }
-//                     if(a>scheduleNum)
-//                     {
-//                         scheduleNum=a;
-//                     }
-//                     cardScheduleNum+=scheduleNum;
-//                     //printf("\r %03d %03d %03d",scheduleNum,cardScheduleNum,cardStreamNum);
-//                     //printf("\r[%c] 进度: %02d %% 当前扇区进度: %02d %%",state[ing++],cardScheduleNum*100/cardStreamNum,scheduleNum*100/secKey[block][0][0]);
+                    uint16_t cardScheduleNum=0;
+                    for(uint8_t i=0;i<block;i++)
+                    {
+                        cardScheduleNum+=secKey[i][0][0];//之前扇区的密流总数
+                    }
+                    if(a>scheduleNum)
+                    {
+                        scheduleNum=a;
+                    }
+                    cardScheduleNum+=scheduleNum;
+                    //printf("\r %03d %03d %03d",scheduleNum,cardScheduleNum,cardStreamNum);
+                    //printf("\r[%c] 进度: %02d %% 当前扇区进度: %02d %%",state[ing++],cardScheduleNum*100/cardStreamNum,scheduleNum*100/secKey[block][0][0]);
 
-//                     char buf[128]={0};
-//                     double num = ((double)cardScheduleNum/(double)cardStreamNum)*34;
+                    char buf[128]={0};
+                    double num = ((double)cardScheduleNum/(double)cardStreamNum)*34;
 
-//                     // for(int i = 0; i < 33; i++)
-//                     // {
-//                     //     if(i < num) //输出num个">"
-//                     //         memcpy(buf+i*2,"█",2);
-//                     //     else
-//                     //         memcpy(buf+i*2,"─",2);
-//                     // }
-//                     // printf(_YELLOW_BR_("\r[%c] %s▏[%02d%%]"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
+                    // for(int i = 0; i < 33; i++)
+                    // {
+                    //     if(i < num) //输出num个">"
+                    //         memcpy(buf+i*2,"█",2);
+                    //     else
+                    //         memcpy(buf+i*2,"─",2);
+                    // }
+                    // printf(_YELLOW_BR_("\r[%c] %s▏[%02d%%]"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
 
-//                     static uint8_t color=1,colorLen=0;
-//                     for(int i = 0; i < 34; i++)
-//                     {
-//                         if(i >= num) //颜色分界处
-//                         {
-//                             if(color)
-//                             {
-//                                 colorLen=strlen(AEND);  //白色
-//                                 memcpy(buf+i*2,AEND,colorLen);
-//                                 color=0;
-//                             }
-//                             memcpy(buf+i*2+colorLen,"▓",2);
-//                         }
-//                         else
-//                         {
-//                             memcpy(buf+i*2+colorLen,"█",2);
-//                         }
+                    static uint8_t color=1,colorLen=0;
+                    for(int i = 0; i < 34; i++)
+                    {
+                        if(i >= num) //颜色分界处
+                        {
+                            if(color)
+                            {
+                                // colorLen=strlen(AEND);  //白色
+                                // memcpy(buf+i*2,AEND,colorLen);
+                                strcat(buf,AEND);
+                                color=0;
+                            }
+                            strcat(buf,"▓");//memcpy(buf+i*2+colorLen,"▓",2);
+                        }
+                        else
+                        {
+                            strcat(buf,"█");//memcpy(buf+i*2+colorLen,"█",2);
+                        }
                         
-//                     }
-//                     color=1,colorLen=0;
-//                     printf(_YELLOW_BR_("\r[%c] %s(%02d%%)"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
+                    }
+                    color=1,colorLen=0;
+                    printf(_YELLOW_BR_("\r[%c] %s(%02d%%)"),state[ing++],buf,cardScheduleNum*100/cardStreamNum);
 
 
-//                 }
-//             }
-//         }
-//     }
-// }
+                }
+            }
+        }
+    }
+}
 
 
 
@@ -3034,344 +3045,422 @@ uint8_t decryptionLevel=1; //解密级别 0快速解 1普通解 2完全解析
 
 void autoMfkey32Fast()
 {
-    // autoMfkey32srcPrint();//密流缓存打印,仅做打印...
-    // kardClass();          //换成获取卡片数量及偏移地址
+    autoMfkey32srcPrint();//密流缓存打印,仅做打印...
+    kardClass();          //换成获取卡片数量及偏移地址
 
-    // clock_t start,stop;
-    // start = clock();        /*  开始计时  */
+    clock_t start,stop;
+    start = clock();        /*  开始计时  */
 
-    // keyFindSuccessNum=0;
+    keyFindSuccessNum=0;
 
-    // for(uint8_t card=0;card<kardClassNumber;card++)
-    // {
-    //     printf(_YELLOW_BR_("\r\n[+] 开始解算第%d张卡片秘钥,共%d张.\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] 并发解密 请注意计算机散热."));
-    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //获取已整理的密流表
+    for(uint8_t card=0;card<kardClassNumber;card++)
+    {
+        printf(_YELLOW_BR_("\r\n[+] 开始解算第%d张卡片秘钥,共%d张.\r\n"),card+1,kardClassNumber);
+        printf(_RED_BR_("[!] 并发解密 请注意计算机散热."));
+        autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //获取已整理的密流表
 
-    //     uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
-    //     printf(_YELLOW_BR_("\r\n[+] 并发解密开始.第%d张,共%d张.\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] 请注意计算机散热."));
-    //     printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
-    //     printf(_YELLOW_BR_("[+] 正在解算秘钥...\r\n"));
+        uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
+        printf(_YELLOW_BR_("\r\n[+] 并发解密开始.第%d张,共%d张.\r\n"),card+1,kardClassNumber);
+        printf(_RED_BR_("[!] 请注意计算机散热."));
+        printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
+        printf(_YELLOW_BR_("[+] 正在解算秘钥...\r\n"));
 
 
-    //     Crypto1State *statelist =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist1 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd1  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even1 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist2 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd2  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even2 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist3 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd3  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even3 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist4 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd4  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even4 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist5 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd5  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even5 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist1 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd1  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even1 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist2 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd2  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even2 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist3 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd3  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even3 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist4 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd4  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even4 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist5 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd5  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even5 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
 
-    //     const unsigned int THREAD_NUM = 6;
-    //     HANDLE hThread[THREAD_NUM];
+        const unsigned int THREAD_NUM = 6;
+        #ifdef _WIN32
+        HANDLE hThread[THREAD_NUM];
+        #else
+        pthread_t thread[THREAD_NUM];
+        #endif
 
         
+        for(uint8_t block=0;block<16;block++)  //16个扇区逐次恢复
+        {
+            printf(_WHITE_BR_("\r扇区%02d-------------------------------------\r\n"),block);
 
-    //     for(uint8_t block=0;block<16;block++)  //16个扇区逐次恢复
-    //     {
-    //         printf(_WHITE_BR_("\r扇区%02d-------------------------------------\r\n"),block);
+            if(!secKey[block][0][0]) //此扇区不存在数据
+            {
+                printf(_RED_BR_("[!] 不存在密流数据.\r\n"));
+            }
+            else  //此扇区存在数据
+            {
+                secKeyFindSuccess=0;
+                scheduleNum=0;
 
-    //         if(!secKey[block][0][0]) //此扇区不存在数据
-    //         {
-    //             printf(_RED_BR_("[!] 不存在密流数据.\r\n"));
-    //         }
-    //         else  //此扇区存在数据
-    //         {
-    //             secKeyFindSuccess=0;
-    //             scheduleNum=0;
+                ArgList_t argList_t={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t.UID=uid;
+                argList_t.statelist=statelist;
+                argList_t.odd=odd;
+                argList_t.even=even;
+                argList_t.block=block;
+                argList_t.a=0;
+                #ifdef _win32
+                hThread[0] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[0], NULL, Mfkey32ProcessFast, &argList_t);
+                #endif
 
-    //             ArgList_t argList_t={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t.UID=uid;
-    //             argList_t.statelist=statelist;
-    //             argList_t.odd=odd;
-    //             argList_t.even=even;
-    //             argList_t.block=block;
-    //             argList_t.a=0;
-    //             hThread[0] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t, 0, NULL); // 创建线程
+                ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t1.UID=uid;
+                argList_t1.statelist=statelist1;
+                argList_t1.odd=odd1;
+                argList_t1.even=even1;
+                argList_t1.block=block;
+                argList_t1.a=2;
+                #ifdef _win32
+                hThread[1] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t1, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[1], NULL, Mfkey32ProcessFast, &argList_t1);
+                #endif
 
-    //             ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t1.UID=uid;
-    //             argList_t1.statelist=statelist1;
-    //             argList_t1.odd=odd1;
-    //             argList_t1.even=even1;
-    //             argList_t1.block=block;
-    //             argList_t1.a=2;
-    //             hThread[1] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t1, 0, NULL); // 创建线程
+                ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t2.UID=uid;
+                argList_t2.statelist=statelist2;
+                argList_t2.odd=odd2;
+                argList_t2.even=even2;
+                argList_t2.block=block;
+                argList_t2.a=4;
+                #ifdef _win32
+                hThread[2] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t2, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[2], NULL, Mfkey32ProcessFast, &argList_t2);
+                #endif
 
-    //             ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t2.UID=uid;
-    //             argList_t2.statelist=statelist2;
-    //             argList_t2.odd=odd2;
-    //             argList_t2.even=even2;
-    //             argList_t2.block=block;
-    //             argList_t2.a=4;
-    //             hThread[2] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t2, 0, NULL); // 创建线程
+                ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t3.UID=uid;
+                argList_t3.statelist=statelist3;
+                argList_t3.odd=odd3;
+                argList_t3.even=even3;
+                argList_t3.block=block;
+                argList_t3.a=6;
+                #ifdef _win32
+                hThread[3] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t3, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[3], NULL, Mfkey32ProcessFast, &argList_t3);
+                #endif
 
-    //             ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t3.UID=uid;
-    //             argList_t3.statelist=statelist3;
-    //             argList_t3.odd=odd3;
-    //             argList_t3.even=even3;
-    //             argList_t3.block=block;
-    //             argList_t3.a=6;
-    //             hThread[3] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t3, 0, NULL); // 创建线程
+                ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t4.UID=uid;
+                argList_t4.statelist=statelist4;
+                argList_t4.odd=odd4;
+                argList_t4.even=even4;
+                argList_t4.block=block;
+                argList_t4.a=8;
+                #ifdef _win32
+                hThread[4] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t4, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[4], NULL, Mfkey32ProcessFast, &argList_t4);
+                #endif
 
-    //             ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t4.UID=uid;
-    //             argList_t4.statelist=statelist4;
-    //             argList_t4.odd=odd4;
-    //             argList_t4.even=even4;
-    //             argList_t4.block=block;
-    //             argList_t4.a=8;
-    //             hThread[4] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t4, 0, NULL); // 创建线程
+                ArgList_t argList_t5={0,NULL,NULL,0,NULL,NULL,NULL};
+                argList_t5.UID=uid;
+                argList_t5.statelist=statelist5;
+                argList_t5.odd=odd5;
+                argList_t5.even=even5;
+                argList_t5.block=block;
+                argList_t5.a=10;
+                #ifdef _win32
+                hThread[5] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t5, 0, NULL); // 创建线程
+                #else
+                pthread_create(&thread[5], NULL, Mfkey32ProcessFast, &argList_t5);
+                #endif
 
-    //             ArgList_t argList_t5={0,NULL,NULL,0,NULL,NULL,NULL};
-    //             argList_t5.UID=uid;
-    //             argList_t5.statelist=statelist5;
-    //             argList_t5.odd=odd5;
-    //             argList_t5.even=even5;
-    //             argList_t5.block=block;
-    //             argList_t5.a=10;
-    //             hThread[5] = CreateThread(NULL, 0, Mfkey32ProcessFast, &argList_t5, 0, NULL); // 创建线程
+                #ifdef _win32
+                WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
+                #else
+                int iRet = 0;
+                pthread_join(thread[0],(void **)&iRet); //接收子线程的返回值
+                pthread_join(thread[1],(void **)&iRet); //接收子线程的返回值
+                pthread_join(thread[2],(void **)&iRet); //接收子线程的返回值
+                pthread_join(thread[3],(void **)&iRet); //接收子线程的返回值
+                pthread_join(thread[4],(void **)&iRet); //接收子线程的返回值
+                pthread_join(thread[5],(void **)&iRet); //接收子线程的返回值
+                #endif
 
-    //             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
-
-    //             if(!secKeyFindSuccess)
-    //                 printf(_RED_BR_("\r[!] 未找到秘钥.                             \r\n"));
-    //         }
-    //     }
-    //     printf("\r%*s",43," ");//输出43个空格
+                if(!secKeyFindSuccess)
+                    printf(_RED_BR_("\r[!] 未找到秘钥.                             \r\n"));
+            }
+        }
+        printf("\r%*s",43," ");//输出43个空格
         
-    //     free(statelist);
-    //     free(odd);
-    //     free(even);
-    //     free(statelist1);
-    //     free(odd1);
-    //     free(even1);
-    //     free(statelist2);
-    //     free(odd2);
-    //     free(even2);
-    //     free(statelist3);
-    //     free(odd3);
-    //     free(even3);
-    //     free(statelist4);
-    //     free(odd4);
-    //     free(even4);
-    //     free(statelist5);
-    //     free(odd5);
-    //     free(even5);
-    // }
+        free(statelist);
+        free(odd);
+        free(even);
+        free(statelist1);
+        free(odd1);
+        free(even1);
+        free(statelist2);
+        free(odd2);
+        free(even2);
+        free(statelist3);
+        free(odd3);
+        free(even3);
+        free(statelist4);
+        free(odd4);
+        free(even4);
+        free(statelist5);
+        free(odd5);
+        free(even5);
+    }
 
-    // stop = clock();     /*  停止计时  */
+    stop = clock();     /*  停止计时  */
 
-    // printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("共解得%d个秘钥数据\r\n",keyFindSuccessNum);
-    // printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
+    #ifdef _WIM32
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
+    #else
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
+    #endif
+    printf("共解得%d个秘钥数据\r\n",keyFindSuccessNum);
+    printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
 
-    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //执行logProcessAuth函数时获取的精简记录
-    // // autoMfkey32srcNum=0;                             //执行logProcessAuth函数时获取的精简记录条目数量
-    // kardClassNumber=1;                               //卡片数量
-    // memset(offset,0,sizeof(offset));                 //记录密流表卡号更改的偏移地址,最多256个偏移地址
-    // memset(secKey,0,sizeof(secKey));
+    // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //执行logProcessAuth函数时获取的精简记录
+    // autoMfkey32srcNum=0;                             //执行logProcessAuth函数时获取的精简记录条目数量
+    kardClassNumber=1;                               //卡片数量
+    memset(offset,0,sizeof(offset));                 //记录密流表卡号更改的偏移地址,最多256个偏移地址
+    memset(secKey,0,sizeof(secKey));
 }
 
 void autoMfkey32()
 {
-    // autoMfkey32srcPrint();//密流缓存打印,仅做打印...
-    // kardClass();          //换成获取卡片数量及偏移地址
+    autoMfkey32srcPrint();//密流缓存打印,仅做打印...
+    kardClass();          //换成获取卡片数量及偏移地址
 
-    // clock_t start,stop;
-    // start = clock();        /*  开始计时  */
+    clock_t start,stop;
+    start = clock();        /*  开始计时  */
 
-    // uint16_t keyFindSuccessNum=0;
+    uint16_t keyFindSuccessNum=0;
 
-    // for(uint8_t card=0;card<kardClassNumber;card++)
-    // {
-    //     printf(_YELLOW_BR_("\r\n[+] 开始解算第%d张卡片秘钥,共%d张.\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] 并发解密 请注意计算机散热."));
-    //     autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //获取已整理的密流表
+    for(uint8_t card=0;card<kardClassNumber;card++)
+    {
+        printf(_YELLOW_BR_("\r\n[+] 开始解算第%d张卡片秘钥,共%d张.\r\n"),card+1,kardClassNumber);
+        printf(_RED_BR_("[!] 并发解密 请注意计算机散热."));
+        autoMfkey32cardSecArrangement(offset[card],offset[card+1]); //获取已整理的密流表
 
-    //     uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
-    //     printf(_YELLOW_BR_("\r\n[+] 并发解密开始.第%d张,共%d张.\r\n"),card+1,kardClassNumber);
-    //     printf(_RED_BR_("[!] 请注意计算机散热."));
-    //     printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
-    //     printf(_YELLOW_BR_("[+] 正在解算秘钥...\r\n"));
+        uint32_t uid=(uint32_t )ByteArrayToInt(autoMfkey32src[offset[card]],2);
+        printf(_YELLOW_BR_("\r\n[+] 并发解密开始.第%d张,共%d张.\r\n"),card+1,kardClassNumber);
+        printf(_RED_BR_("[!] 请注意计算机散热."));
+        printf(_YELLOW_BR_("\r\n[+] UID:%08X\r\n"),uid);
+        printf(_YELLOW_BR_("[+] 正在解算秘钥...\r\n"));
 
 
 
-    //     Crypto1State *statelist =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist1 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd1  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even1 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist2 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd2  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even2 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist3 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd3  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even3 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
-    //     Crypto1State *statelist4 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
-    //     int *odd4  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
-    //     int *even4 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist1 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd1  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even1 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist2 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd2  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even2 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist3 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd3  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even3 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
+        Crypto1State *statelist4 =(Crypto1State*)malloc((1 << 18)*sizeof(Crypto1State));    //static Crypto1State statelist[1 << 18];
+        int *odd4  =(int*)malloc((1 << 21)*sizeof(int));   //static int odd[1 << 21];
+        int *even4 =(int*)malloc((1 << 21)*sizeof(int));   //static int even[1 << 21];
 
-    //     const unsigned int THREAD_NUM = 5;
-    //     HANDLE hThread[THREAD_NUM];
+        const unsigned int THREAD_NUM = 5;
+        #ifdef _WIN32
+        HANDLE hThread[THREAD_NUM];
+        #else
+        pthread_t thread[THREAD_NUM];
+        #endif
 
-    //     uint8_t secKeyFindSuccess;
+        uint8_t secKeyFindSuccess;
 
-    //     for(uint8_t block=0;block<16;block++)  //16个扇区逐次恢复
-    //     {
-    //         printf(_WHITE_BR_("扇区%02d-------------------------------------\r\n"),block);
-    //         secKeyFindSuccess=0;
+        for(uint8_t block=0;block<16;block++)  //16个扇区逐次恢复
+        {
+            printf(_WHITE_BR_("扇区%02d-------------------------------------\r\n"),block);
+            secKeyFindSuccess=0;
 
-    //         if(!secKey[block][0][0]) //此扇区不存在数据
-    //         {
-    //             printf(_RED_BR_("[!] 不存在密流数据.\r\n"));
-    //         }
-    //         else  //此扇区存在数据
-    //         {
+            if(!secKey[block][0][0]) //此扇区不存在数据
+            {
+                printf(_RED_BR_("[!] 不存在密流数据.\r\n"));
+            }
+            else  //此扇区存在数据
+            {
 
-    //             for(uint8_t a=0;a<128;a++)           //前级指针
-    //             {
-    //                 if(secKey[block][a][0] && !secKey[block][a][13])          //存在未处理的数据
-    //                 {
-    //                     for(uint8_t b=a+1;b<128;b++) //后级指针
-    //                     {
-    //                         if(secKey[block][b][0] && !secKey[block][b][13])  //存在未处理的数据
-    //                         {
-    //                             uint8_t state[4]={'-','\\','|','/'};
-    //                             static char ing=0;
-    //                             if(ing==4)
-    //                                 ing=0;
-    //                             printf("\r[%c] (%02d,%02d) ",state[ing++],a,b);
+                for(uint8_t a=0;a<128;a++)           //前级指针
+                {
+                    if(secKey[block][a][0] && !secKey[block][a][13])          //存在未处理的数据
+                    {
+                        for(uint8_t b=a+1;b<128;b++) //后级指针
+                        {
+                            if(secKey[block][b][0] && !secKey[block][b][13])  //存在未处理的数据
+                            {
+                                uint8_t state[4]={'-','\\','|','/'};
+                                static char ing=0;
+                                if(ing==4)
+                                    ing=0;
+                                printf("\r[%c] (%02d,%02d) ",state[ing++],a,b);
 
-    //                             ArgList_t argList_t={0,NULL,NULL,0,NULL,NULL,NULL};
-    //                             argList_t.UID=uid;
-    //                             argList_t.one=secKey[block][a];
-    //                             argList_t.two=secKey[block][b];
-    //                             argList_t.statelist=statelist;
-    //                             argList_t.odd=odd;
-    //                             argList_t.even=even;
-    //                             hThread[0] = CreateThread(NULL, 0, Mfkey32Process, &argList_t, 0, NULL); // 创建线程
+                                ArgList_t argList_t={0,NULL,NULL,0,NULL,NULL,NULL};
+                                argList_t.UID=uid;
+                                argList_t.one=secKey[block][a];
+                                argList_t.two=secKey[block][b];
+                                argList_t.statelist=statelist;
+                                argList_t.odd=odd;
+                                argList_t.even=even;
+                                #ifdef _WIN32
+                                hThread[0] = CreateThread(NULL, 0, Mfkey32Process, &argList_t, 0, NULL); // 创建线程
+                                #else
+                                pthread_create(&thread[0], NULL, Mfkey32Process, &argList_t);
+                                #endif
 
-    //                             while(secKey[block][++b][13]);//存在未处理的数据
-    //                             printf("(%02d,%02d) ",a,b);
+                                while(secKey[block][++b][13]);//存在未处理的数据
+                                printf("(%02d,%02d) ",a,b);
 
-    //                             ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
-    //                             argList_t1.UID=uid;
-    //                             argList_t1.one=secKey[block][a];
-    //                             argList_t1.two=secKey[block][b];
-    //                             argList_t1.statelist=statelist1;
-    //                             argList_t1.odd=odd1;
-    //                             argList_t1.even=even1;
-    //                             hThread[1] = CreateThread(NULL, 0, Mfkey32Process, &argList_t1, 0, NULL); // 创建线程
+                                ArgList_t argList_t1={0,NULL,NULL,0,NULL,NULL,NULL};
+                                argList_t1.UID=uid;
+                                argList_t1.one=secKey[block][a];
+                                argList_t1.two=secKey[block][b];
+                                argList_t1.statelist=statelist1;
+                                argList_t1.odd=odd1;
+                                argList_t1.even=even1;
+                                #ifdef _WIN32
+                                hThread[1] = CreateThread(NULL, 0, Mfkey32Process, &argList_t1, 0, NULL); // 创建线程
+                                #else
+                                pthread_create(&thread[1], NULL, Mfkey32Process, &argList_t1);
+                                #endif
 
-    //                             while(secKey[block][++b][13]);//下一个未处理的数据
-    //                             printf("(%02d,%02d) ",a,b);
+                                while(secKey[block][++b][13]);//下一个未处理的数据
+                                printf("(%02d,%02d) ",a,b);
 
-    //                             ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
-    //                             argList_t2.UID=uid;
-    //                             argList_t2.one=secKey[block][a];
-    //                             argList_t2.two=secKey[block][b];
-    //                             argList_t2.statelist=statelist2;
-    //                             argList_t2.odd=odd2;
-    //                             argList_t2.even=even2;
-    //                             hThread[2] = CreateThread(NULL, 0, Mfkey32Process, &argList_t2, 0, NULL); // 创建线程
+                                ArgList_t argList_t2={0,NULL,NULL,0,NULL,NULL,NULL};
+                                argList_t2.UID=uid;
+                                argList_t2.one=secKey[block][a];
+                                argList_t2.two=secKey[block][b];
+                                argList_t2.statelist=statelist2;
+                                argList_t2.odd=odd2;
+                                argList_t2.even=even2;
+                                #ifdef _WIN32
+                                hThread[2] = CreateThread(NULL, 0, Mfkey32Process, &argList_t2, 0, NULL); // 创建线程
+                                #else
+                                pthread_create(&thread[2], NULL, Mfkey32Process, &argList_t2);
+                                #endif
 
-    //                             while(secKey[block][++b][13]);//下一个未处理的数据
-    //                             printf("(%02d,%02d) ",a,b);
+                                while(secKey[block][++b][13]);//下一个未处理的数据
+                                printf("(%02d,%02d) ",a,b);
 
-    //                             ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
-    //                             argList_t3.UID=uid;
-    //                             argList_t3.one=secKey[block][a];
-    //                             argList_t3.two=secKey[block][b];
-    //                             argList_t3.statelist=statelist3;
-    //                             argList_t3.odd=odd3;
-    //                             argList_t3.even=even3;
-    //                             hThread[3] = CreateThread(NULL, 0, Mfkey32Process, &argList_t3, 0, NULL); // 创建线程
+                                ArgList_t argList_t3={0,NULL,NULL,0,NULL,NULL,NULL};
+                                argList_t3.UID=uid;
+                                argList_t3.one=secKey[block][a];
+                                argList_t3.two=secKey[block][b];
+                                argList_t3.statelist=statelist3;
+                                argList_t3.odd=odd3;
+                                argList_t3.even=even3;
+                                #ifdef _WIN32
+                                hThread[3] = CreateThread(NULL, 0, Mfkey32Process, &argList_t3, 0, NULL); // 创建线程
+                                #else
+                                pthread_create(&thread[3], NULL, Mfkey32Process, &argList_t3);
+                                #endif
 
-    //                             while(secKey[block][++b][13]);//下一个未处理的数据
-    //                             printf("(%02d,%02d) ",a,b);
+                                while(secKey[block][++b][13]);//下一个未处理的数据
+                                printf("(%02d,%02d) ",a,b);
 
-    //                             ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
-    //                             argList_t4.UID=uid;
-    //                             argList_t4.one=secKey[block][a];
-    //                             argList_t4.two=secKey[block][b];
-    //                             argList_t4.statelist=statelist4;
-    //                             argList_t4.odd=odd4;
-    //                             argList_t4.even=even4;
-    //                             hThread[4] = CreateThread(NULL, 0, Mfkey32Process, &argList_t4, 0, NULL); // 创建线程
+                                ArgList_t argList_t4={0,NULL,NULL,0,NULL,NULL,NULL};
+                                argList_t4.UID=uid;
+                                argList_t4.one=secKey[block][a];
+                                argList_t4.two=secKey[block][b];
+                                argList_t4.statelist=statelist4;
+                                argList_t4.odd=odd4;
+                                argList_t4.even=even4;
+                                #ifdef _WIN32
+                                hThread[4] = CreateThread(NULL, 0, Mfkey32Process, &argList_t4, 0, NULL); // 创建线程
+                                #else
+                                pthread_create(&thread[4], NULL, Mfkey32Process, &argList_t4);
+                                #endif
                                 
-    //                             WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
+                                #ifdef _WIM32
+                                WaitForMultipleObjects(THREAD_NUM,hThread,true, INFINITE);  //一直等待，直到所有子线程全部返回
+                                #else
+                                int iRet = 0;
+                                pthread_join(thread[0],(void **)&iRet); //接收子线程的返回值
+                                pthread_join(thread[1],(void **)&iRet); //接收子线程的返回值
+                                pthread_join(thread[2],(void **)&iRet); //接收子线程的返回值
+                                pthread_join(thread[3],(void **)&iRet); //接收子线程的返回值
+                                pthread_join(thread[4],(void **)&iRet); //接收子线程的返回值
+                                pthread_join(thread[5],(void **)&iRet); //接收子线程的返回值
+                                #endif
 
-    //                             printf("\r");
+                                printf("\r");
                                 
-    //                             uint8_t find = argList_t.status + argList_t1.status + argList_t2.status + argList_t3.status + argList_t4.status;
-    //                             if(find)
-    //                             {
-    //                                 secKeyFindSuccess=1;
-    //                                 keyFindSuccessNum+=find;
-    //                                 break;
-    //                             }
+                                uint8_t find = argList_t.status + argList_t1.status + argList_t2.status + argList_t3.status + argList_t4.status;
+                                if(find)
+                                {
+                                    secKeyFindSuccess=1;
+                                    keyFindSuccessNum+=find;
+                                    break;
+                                }
 
-    //                             if(decryptionLevel==1) //普通解
-    //                                 break;//对比5组就强制退出,不再对比
+                                if(decryptionLevel==1) //普通解
+                                    break;//对比5组就强制退出,不再对比
                                 
-    //                             // if(mfKey32(uid,secKey[block][a]+1,secKey[block][b]+1)) //比对成功
-    //                             // {
-    //                             //     secKey[block][a][13]=1; //已处理
-    //                             //     secKey[block][b][13]=1; //已处理
-    //                             //     break;               //结束本次循环
-    //                             // }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //             if(!secKeyFindSuccess)
-    //                 printf(_RED_BR_("[!] 未找到秘钥.\r\n"));
-    //         }
-    //     }
-    //     free(statelist);
-    //     free(odd);
-    //     free(even);
-    //     free(statelist1);
-    //     free(odd1);
-    //     free(even1);
-    //     free(statelist2);
-    //     free(odd2);
-    //     free(even2);
-    //     free(statelist3);
-    //     free(odd3);
-    //     free(even3);
-    //     free(statelist4);
-    //     free(odd4);
-    //     free(even4);
-    // }
+                                // if(mfKey32(uid,secKey[block][a]+1,secKey[block][b]+1)) //比对成功
+                                // {
+                                //     secKey[block][a][13]=1; //已处理
+                                //     secKey[block][b][13]=1; //已处理
+                                //     break;               //结束本次循环
+                                // }
+                            }
+                        }
+                    }
+                }
+                if(!secKeyFindSuccess)
+                    printf(_RED_BR_("[!] 未找到秘钥.\r\n"));
+            }
+        }
+        free(statelist);
+        free(odd);
+        free(even);
+        free(statelist1);
+        free(odd1);
+        free(even1);
+        free(statelist2);
+        free(odd2);
+        free(even2);
+        free(statelist3);
+        free(odd3);
+        free(even3);
+        free(statelist4);
+        free(odd4);
+        free(even4);
+    }
 
-    // stop = clock();     /*  停止计时  */
+    stop = clock();     /*  停止计时  */
+    #ifdef _WIM32
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
+    #else
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
+    #endif
+    printf("共解得%d个秘钥数据\r\n",keyFindSuccessNum);
+    printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
 
-    // printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("共解得%d个秘钥数据\r\n",keyFindSuccessNum);
-    // printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
-
-    // // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //执行logProcessAuth函数时获取的精简记录
-    // // autoMfkey32srcNum=0;                             //执行logProcessAuth函数时获取的精简记录条目数量
-    // kardClassNumber=1;                               //卡片数量
-    // memset(offset,0,sizeof(offset));                 //记录密流表卡号更改的偏移地址,最多256个偏移地址
-    // memset(secKey,0,sizeof(secKey));
+    // memset(autoMfkey32src,0,sizeof(autoMfkey32src)); //执行logProcessAuth函数时获取的精简记录
+    // autoMfkey32srcNum=0;                             //执行logProcessAuth函数时获取的精简记录条目数量
+    kardClassNumber=1;                               //卡片数量
+    memset(offset,0,sizeof(offset));                 //记录密流表卡号更改的偏移地址,最多256个偏移地址
+    memset(secKey,0,sizeof(secKey));
 }
 
 
@@ -3383,80 +3472,85 @@ uint8_t autoMfkey64srcNum=0;         //执行logProcessAuth函数时获取的精
 
 void autoMfkey64()
 {
-    // Crypto1State *revstate;
+    Crypto1State *revstate;
 
-    // uint64_t key;     // recovered key
-    // uint32_t uid;     // serial number
-    // uint32_t nt;      // tag challenge
-    // uint32_t nr_enc;  // encrypted reader challenge
-    // uint32_t ar_enc;  // encrypted reader response
-    // uint32_t at_enc;  // encrypted tag response
-    // uint32_t ks2;     // keystream used to encrypt reader response
-    // uint32_t ks3;     // keystream used to encrypt tag response
+    uint64_t key;     // recovered key
+    uint32_t uid;     // serial number
+    uint32_t nt;      // tag challenge
+    uint32_t nr_enc;  // encrypted reader challenge
+    uint32_t ar_enc;  // encrypted reader response
+    uint32_t at_enc;  // encrypted tag response
+    uint32_t ks2;     // keystream used to encrypt reader response
+    uint32_t ks3;     // keystream used to encrypt tag response
 
-    // clock_t start,stop;
-    // start = clock();        /*  开始计时  */
-    // printf(AEND);
-    // for(uint8_t i=0;i<autoMfkey64srcNum;i++)
-    // {
-    //     uid    = ByteArrayToInt(autoMfkey64src[i],2);
-    //     nt     = ByteArrayToInt(autoMfkey64src[i],6);
-    //     nr_enc = ByteArrayToInt(autoMfkey64src[i],10);
-    //     ar_enc = ByteArrayToInt(autoMfkey64src[i],14);
-    //     at_enc = ByteArrayToInt(autoMfkey64src[i],18);
+    clock_t start,stop;
+    start = clock();        /*  开始计时  */
+    printf(AEND);
+    for(uint8_t i=0;i<autoMfkey64srcNum;i++)
+    {
+        uid    = ByteArrayToInt(autoMfkey64src[i],2);
+        nt     = ByteArrayToInt(autoMfkey64src[i],6);
+        nr_enc = ByteArrayToInt(autoMfkey64src[i],10);
+        ar_enc = ByteArrayToInt(autoMfkey64src[i],14);
+        at_enc = ByteArrayToInt(autoMfkey64src[i],18);
 
-    //     uint32_t p64 = prng_successor(nt, 64);
+        uint32_t p64 = prng_successor(nt, 64);
 
-    //     ks2 = ar_enc ^ p64;
-    //     ks3 = at_enc ^ prng_successor(p64, 32);
+        ks2 = ar_enc ^ p64;
+        ks3 = at_enc ^ prng_successor(p64, 32);
 
-    //     revstate = lfsr_recovery64(ks2, ks3);
+        revstate = lfsr_recovery64(ks2, ks3);
 
-    //     lfsr_rollback_word(revstate, 0, 0, 0);
-    //     lfsr_rollback_word(revstate, 0, 0, 0);
-    //     lfsr_rollback_word(revstate, 0, nr_enc, 1);
-    //     lfsr_rollback_word(revstate, 0, uid ^ nt, 0);
-    //     key = crypto1_get_lfsr(revstate, 0, key);
-    //     printf("\r[+] UID:%08X 扇区/块号:(%02d/%02d) key%c:[" _GREEN_BR_("%012" PRIx64 ) "]\r\n",uid,autoMfkey64src[i][1]/4,autoMfkey64src[i][1],autoMfkey64src[i][0]-31, key);
+        lfsr_rollback_word(revstate, 0, 0, 0);
+        lfsr_rollback_word(revstate, 0, 0, 0);
+        lfsr_rollback_word(revstate, 0, nr_enc, 1);
+        lfsr_rollback_word(revstate, 0, uid ^ nt, 0);
+        key = crypto1_get_lfsr(revstate, 0, key);
+        printf("\r[+] UID:%08X 扇区/块号:(%02d/%02d) key%c:[" _GREEN_BR_("%012" PRIx64 ) "]\r\n",uid,autoMfkey64src[i][1]/4,autoMfkey64src[i][1],autoMfkey64src[i][0]-31, key);
         
-    //     /***************************************************************/
-    //     uint8_t state[4]={'-','\\','|','/'};
-    //     static char ing=0;
-    //     if(ing==4)
-    //         ing=0;
+        /***************************************************************/
+        uint8_t state[4]={'-','\\','|','/'};
+        static char ing=0;
+        if(ing==4)
+            ing=0;
 
-    //     char buf[128]={0};
-    //     double num = ((double)i/(double)autoMfkey64srcNum)*44;
+        char buf[128]={0};
+        double num = ((double)i/(double)autoMfkey64srcNum)*44;
 
-    //     static uint8_t color=1,colorLen=0;
-    //     for(int i = 0; i < 44; i++)
-    //     {
-    //         if(i >= num) //颜色分界处
-    //         {
-    //             if(color)
-    //             {
-    //                 colorLen=strlen(AEND);  //白色
-    //                 memcpy(buf+i*2,AEND,colorLen);
-    //                 color=0;
-    //             }
-    //             memcpy(buf+i*2+colorLen,"─",2);
-    //         }
-    //         else
-    //         {
-    //             memcpy(buf+i*2+colorLen,"█",2);
-    //         }
+        static uint8_t color=1,colorLen=0;
+        for(int i = 0; i < 44; i++)
+        {
+            if(i >= num) //颜色分界处
+            {
+                if(color)
+                {
+                    // colorLen=strlen(AEND);  //白色
+                    // memcpy(buf+i*2,AEND,colorLen);
+                    strcat(buf,AEND);
+                    color=0;
+                }
+                strcat(buf,"─");//memcpy(buf+i*2+colorLen,"─",2);
+            }
+            else
+            {
+                strcat(buf,"█");//memcpy(buf+i*2+colorLen,"█",2);
+            }
             
-    //     }
-    //     color=1,colorLen=0;
-    //     printf(_YELLOW_BR_("\r[%c] %s▏(%02d%%)"),state[ing++],buf,i*100/autoMfkey64srcNum);
-    // }
-    // stop = clock();     /*  停止计时  */
-    // printf("\r%*s",54," ");//输出54个空格
-    // printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
-    // printf("共解得%d个秘钥数据\r\n",autoMfkey64srcNum);
-    // printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
+        }
+        color=1,colorLen=0;
+        printf(_YELLOW_BR_("\r[%c] %s▏(%02d%%)"),state[ing++],buf,i*100/autoMfkey64srcNum);
+    }
+    stop = clock();     /*  停止计时  */
+    printf("\r%*s",54," ");//输出54个空格
+    #ifdef _WIM32
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLK_TCK);
+    #else
+    printf("\r\n运行时间: %d s\r\n",(stop - start) / CLOCKS_PER_SEC);
+    #endif
+    printf("共解得%d个秘钥数据\r\n",autoMfkey64srcNum);
+    printf(_YELLOW_BR_("日志文件密流数据已解算结束.\r\n"));
 
-    // free(revstate);
+    free(revstate);
 }
 
 
