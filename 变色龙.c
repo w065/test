@@ -159,7 +159,7 @@ typedef struct {
 // Set time-out on 30 miliseconds
 struct timeval timeout = {
   .tv_sec  =     0, // 0 second
-  .tv_usec = 30000  // 30000 micro seconds
+  .tv_usec = 80000  // 30000 micro seconds
 };
 
 serial_port uart_open(const char* pcPortName)
